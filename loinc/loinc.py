@@ -69,14 +69,14 @@ class LoincMapper:
 
             elif "external_mapping" in kwargs.keys():
 
-                available_external_mappings = json.loads(
-                    requests.get(
-                        "https://raw.githubusercontent.com/CONDUITlab/CCDEF/master/loinc/mappings/external_mappings.json"
-                    ).text
+                print("Getting list of available mappings.")
+                url = (
+                    "https://raw.githubusercontent.com/CONDUITlab/CCDEF/master/"
+                    "loinc/mappings/external_mappings.json"
                 )
 
                 if kwargs["external_mapping"] in available_external_mappings.keys():
-                    print(f"Downloading mapping from: {kwargs['external_mapping']}")
+                    print(f"Downloading mapping for {kwargs['external_mapping']}")
                     response = json.loads(
                         requests.get(
                             available_external_mappings[kwargs["external_mapping"]]

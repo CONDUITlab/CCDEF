@@ -57,8 +57,8 @@ class LoincMapper:
         if set(kwargs.keys()).issubset(kwargs_set):
             if "local_mapping" in kwargs.keys() and "external_mapping" in kwargs.keys():
                 raise Exception(
-                    "Pass only local_mapping (dict) OR valid external_mapping (str) \
-                    using appropriate named arg"
+                    "Pass only local_mapping (dict) OR valid external_mapping (str) "
+                    "using appropriate named arg"
                 )
 
             elif "local_mapping" in kwargs.keys():
@@ -90,8 +90,8 @@ class LoincMapper:
                     )
         else:
             raise Exception(
-                "Pass local_mapping (dict) OR valid external_mapping (str) \
-                using appropriate named arg"
+                "Pass local_mapping (dict) OR valid external_mapping (str) "
+                "using appropriate named arg"
             )
 
         self.initialize_lookup_tables_()

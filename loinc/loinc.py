@@ -75,6 +75,8 @@ class LoincMapper:
                     "loinc/mappings/external_mappings.json"
                 )
 
+                available_external_mappings = json.loads(requests.get(url).text)
+
                 if kwargs["external_mapping"] in available_external_mappings.keys():
                     print(f"Downloading mapping for {kwargs['external_mapping']}")
                     response = json.loads(

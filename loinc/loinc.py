@@ -172,7 +172,7 @@ class LoincMapper:
 
 def main():
     # Local Example...
-    khsc = {
+    local_map = {
         "numeric": [[["HR"], ["8867-4"]], [["ABP-S"], ["76215-3"]]],
         "waveform": [[["PLETH"], ["76523-0"]]],
     }

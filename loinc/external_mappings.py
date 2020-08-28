@@ -21,9 +21,9 @@ MIMICIII = {
         [["PAP DIAS", "PAP Dias", "PAPDias"], ["8385-7", "8368-5", "8387-3"]],
         [["PAP MEAN", "PAP Mean", "PAPMean"], ["8414-5", "8415-2", "8416-0"]],
         [["PAWP"], ["75994-4"]],
-        [["AOBP Sys"], ["TBD"]],
-        [["AOBP Dias"], ["TBD"]],
-        [["AOBP Mean"], ["TBD"]]
+        [["AOBP Sys"], ["no_mapping"]],
+        [["AOBP Dias"], ["no_mapping"]],
+        [["AOBP Mean"], ["no_mapping"]]
     ],
     "waveform": [
         [["ART"], ["76212-0"]],
@@ -33,8 +33,30 @@ MIMICIII = {
 }
 
 KHSC = {
-    "numeric": [],
-    "waveform": []
+    # FIXME some channels vary depending on what is being transduced
+    #  (meaning channel label is wrong).
+
+    "numeric": [
+        [["HR"], ["8867-4"]],
+        [["SPO2-%"], ["76522-2"]],
+        [["NBP-S"], ["76534-7"]],
+        [["NBP-D"], ["76535-4"]],
+        [["NBP-M"], ["76536-2"]],
+        [["AR1-M", "AR2-M"], ["76214-6"]],
+        [["CVP1", "CVP2"], ["60985-9"]],
+        [["ICP1", "ICP2"], ["no_mapping"]],
+        [["PA1", "PA2"], ["no_mapping"]]
+    ],
+    "waveform": [
+        [["AR1", "AR2", "AR3"], ["76212-0"]],
+        [["I"], ["no_mapping"]],
+        [["II"], ["no_mapping"]],
+        [["III"], ["no_mapping"]],
+        [["V"], ["no_mapping"]],
+        [["SPO2"], ["no_mapping"]],
+        [["CVP1", "CVP2"], ["60985-9"]],
+        [["RR"], ["no_mapping"]]
+    ]
 }
 
 with open("./mappings/MIMICIII.json", "w") as write_file:

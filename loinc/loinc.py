@@ -178,10 +178,10 @@ def main():
     }
 
     local_loinc = LoincMapper(local_mapping=local_map)
-    print(f"LOINC code(s) for KHSC HR numeric: {local_loinc.numeric('HR')}")
-    print(f"KHSC label for 76215-3: {local_loinc.numeric_reverse('76215-3')}")
-    print(f"LOINC code(s) for KHSC PLETH waveform: {local_loinc.waveform('PLETH')}")
-    print(f"KHSC label for 76523-0: {local_loinc.waveform_reverse('76523-0')}")
+    print(f"LOINC code(s) for local HR numeric: {local_loinc.numeric('HR')}")
+    print(f"local label for 76215-3: {local_loinc.numeric_reverse('76215-3')}")
+    print(f"LOINC code(s) for local PLETH waveform: {local_loinc.waveform('PLETH')}")
+    print(f"local label for 76523-0: {local_loinc.waveform_reverse('76523-0')}")
 
     # External Example...
     MIMICIII_loinc = LoincMapper(external_mapping="MIMICIII")

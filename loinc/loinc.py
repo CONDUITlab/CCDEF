@@ -151,16 +151,6 @@ class LoincMapper:
         self.mimic_num, self.loinc_num = np.array(numerics[0]), np.array(numerics[1])
         self.mimic_wf, self.loinc_wf = np.array(waveforms[0]), np.array(waveforms[1])
 
-    @staticmethod
-    def process_return(mapped_values):
-        if len(mapped_values) == 1:
-            return mapped_values[0]
-        else:
-            if len(mapped_values) != 0:
-                return list(mapped_values)
-            else:
-                return "no_mapping"
-
     def numeric(self, value):
         mapped_values = np.unique(self.loinc_num[self.mimic_num == value])
         return self.process_return(mapped_values)

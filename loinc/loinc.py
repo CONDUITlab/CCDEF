@@ -10,7 +10,7 @@ import numpy as np
 import requests
 
 
-class Loinc:
+class LoincMapper:
     """
     Methods to match signal names to LOINC codes. Allows for lookup of either
     a waveform or numeric signal via a local mapping (dict) or an external mapping
@@ -185,14 +185,14 @@ def main():
         "waveform": [[["PLETH"], ["76523-0"]]],
     }
 
-    local_loinc = Loinc(local_mapping=khsc)
+    local_loinc = LoincMapper(local_mapping=local_map)
     print(f"LOINC code(s) for KHSC HR numeric: {local_loinc.numeric('HR')}")
     print(f"KHSC label for 76215-3: {local_loinc.numeric_reverse('76215-3')}")
     print(f"LOINC code(s) for KHSC PLETH waveform: {local_loinc.waveform('PLETH')}")
     print(f"KHSC label for 76523-0: {local_loinc.waveform_reverse('76523-0')}")
 
     # External Example...
-    MIMICIII_loinc = Loinc(external_mapping="MIMICIII")
+    MIMICIII_loinc = LoincMapper(external_mapping="MIMICIII")
     print(f"LOINC code(s) for M3 ABP SYS numeric: {MIMICIII_loinc.numeric('ABP SYS')}")
     print(f"MIMIC label for 76213-8: {MIMICIII_loinc.numeric_reverse('76213-8')}")
     print(f"LOINC code(s) for M3 ART waveform: {MIMICIII_loinc.waveform('ART')}")

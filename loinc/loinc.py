@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Author: Alex Hamilton - https://github.com/alexhamiltonRN
 # @Date: 2020-08-27
-# @Desc: LOINC mapping
+# @Desc: class for for mapping local chart events and signals to loinc
 
 import json
 from itertools import product
@@ -16,11 +16,14 @@ class Loinc:
     a waveform or numeric signal via a local mapping (dict) or an external mapping
     pre-specified and hosted by CCDEF organization.  
     
-    available external mappings: "MIMICIII"
+    see CCDEF.org and associated github repo for available external mappings.
     
     params:
         local_mapping: dict
         external_mapping: str
+    returns:
+        loinc_obj.numeric(list)
+        loinc_obj.waveform(list)
 
     Examples:
     
@@ -46,6 +49,8 @@ class Loinc:
         self.loinc_wf = None
 
         # Check named kwargs to set self.numeric_mappings and self.waveform_mappings
+        # Expectation is that user provides value for named parameter local_mapping
+        # or external_mapping (not both)
 
         kwargs_set = {"local_mapping", "external_mapping"}
 
@@ -122,6 +127,13 @@ class Loinc:
             return ["no_mapping"]
 
     def initialize_lookup_tables_(self):
+        """
+        Internal method to generate label-loinc pair (cartesian product) for 
+        items in adjacent label-code lists in mapping_dict. Zips (list of tuple pairs) 
+        and casts as 1D arrays to facilitate subset (boolean masking) and return 
+        of mapped values in method calls below. 
+        """
+
         num_products = []
         wf_products = []
 

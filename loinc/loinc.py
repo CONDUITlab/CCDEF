@@ -57,7 +57,8 @@ class Loinc:
                 )
 
             elif "local_mapping" in kwargs.keys():
-                # FIXME check that local_mapping schema (json) matches expected schema...
+                self.check_schema(kwargs["local_mapping"])
+
                 self.numeric_mappings = kwargs["local_mapping"]["numeric"]
                 self.waveform_mappings = kwargs["local_mapping"]["waveform"]
 
@@ -89,6 +90,36 @@ class Loinc:
             )
 
         self.initialize_lookup_tables_()
+
+    @staticmethod
+    def check_schema(mapping_dict):
+        """
+        Ugly/rough check that supplied mapping dict matches expected schema. 
+        Each value pair should be a list of lists where item[0] and item[1] 
+        are also lists. Ex: "numeric":[[["HR", "PULSE"], ["8867-4"]]]
+        """
+        is_correct_schema = False
+        for _, value in mapping_dict.items():
+            if isinstance(value, list):
+                for item in value:
+                    if isinstance(item, list):
+                        if isinstance(item[0], list) and isinstance(item[1], list):
+                            is_correct_schema = True
+        if not is_correct_schema:
+            raise Exception(
+                "Check schema of local mapping dict. "
+                "Example: 'numeric':[[['HR', 'PULSE'], ['8867-4']]]"
+            )
+
+    @staticmethod
+    def process_return(mapped_values):
+        """
+        Return results (numpy array) as list. 
+        """
+        if len(mapped_values) != 0:
+            return list(mapped_values)
+        else:
+            return ["no_mapping"]
 
     def initialize_lookup_tables_(self):
         num_products = []

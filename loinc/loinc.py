@@ -11,7 +11,7 @@ import pandas as pd
 import requests
 from dataclasses import dataclass
 
-# FIXME include loinc license in this code...
+# FIXME #10 include loinc license in LoincMapper code
 #   https://loinc.org/kb/license/
 
 @dataclass
@@ -126,7 +126,7 @@ class LoincMapper:
         )
         available_external_mappings = json.loads(requests.get(url).text)
         if encoding_table_name in available_external_mappings.keys():
-            # FIXME this needs to download a csv file
+            # FIXME #11 requests should download csv file
             print(f"Downloading mapping for {encoding_table_name}")
             encoding_table = requests.get(
                 available_external_mappings[encoding_table_name]
@@ -194,7 +194,7 @@ def main():
     
     # example lookup a loinc that doesn't exist
     print(mapper.loinc_code("54666-0"))
-    
+
     print("done")
 if __name__ == "__main__":
     main()

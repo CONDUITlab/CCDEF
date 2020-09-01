@@ -1,25 +1,36 @@
 # -*- coding: utf-8 -*-
 # @Author: Alex Hamilton - https://github.com/alexhamiltonRN
 # @Date: 2020-08-27
-# @Desc: class for for mapping local chart events and signals to loinc
+# @Desc: class for for mapping local chart events and signals to LOINC
 
 import json
 from itertools import product
 
 import numpy as np
+import pandas as pd
 import requests
+from dataclasses import dataclass
 
+# FIXME include loinc license in this code...
+#   https://loinc.org/kb/license/
+
+@dataclass
+class Mapping:
+    category: list
+    local: list
+    loinc: str
+    ccdef: str
 
 class LoincMapper:
     """
     Methods to match signal names to LOINC codes. Allows for lookup of either
-    a waveform or numeric signal via a local mapping (dict) or an external mapping
+    a waveform or numeric signal via a local mapping (path) or an external mapping
     pre-specified and hosted by CCDEF organization.  
     
     see CCDEF.org and associated github repo for available external mappings.
     
     params:
-        local_mapping: dict
+        local_mapping: path
         external_mapping: str
     returns:
         loinc_obj.numeric(list)
@@ -27,169 +38,163 @@ class LoincMapper:
 
     Examples:
     
-    # use a local mapping
+    ## Use a local mapping
+    ```
     loinc = LOINC(local_mapping={"numeric":[[[...],[...]]], "waveform"[[[...],[...]]]})
     loinc_code_for_numeric = loinc.numeric("numeric signal name")
     loinc_code_for_waveform = loinc.waveform("waveform signal name)
-
-    # use a pre-specified mapping
+    ```
+    
+    ## Use a pre-specified mapping
+    ```
     loinc = LOINC(external_mapping="MIMICIII")
     loinc_code_for_numeric = loinc.numeric('ABP SYS')
     loinc_code_for_waveform = loinc.waveform('ART')
-
+    ```
     Note: use loinc_numeric_reverse("LOINC_CODE") or loinc_waveform_reverse("LOINC_CODE")
     to retrieve the signal name in specified mapping.
     """
 
     def __init__(self, **kwargs):
 
-        self.mimic_num = None
-        self.loinc_num = None
-        self.mimic_wf = None
-        self.loinc_wf = None
+        self.encoding_table = None
+        self.local_labels = None
+        self.loinc_codes = None
+        self.ccdef_labels = None
 
-        # Check named kwargs to set self.numeric_mappings and self.waveform_mappings
-        # Expectation is that user provides value for named parameter local_mapping
-        # or external_mapping (not both)
+        # Check named kwargs. Expectation is that user provides value
+        # for named parameter local_encoding_csv or external_encoding
+        # (not both)
 
-        kwargs_set = {"local_mapping", "external_mapping"}
+        if len(kwargs.keys()) > 1:
+            raise Exception(
+                "Pass only local_encoding_csv (path) OR valid external encoding (str)"
+                "using named argument"
+            )
+        else:
+            if "local_encoding_csv" in kwargs.keys():
+                encoding_table = self.load_encoding_table(kwargs["local_encoding_csv"])
+                self.check_encoding_table_schema(encoding_table)
+                self.encoding_table = encoding_table
 
-        if set(kwargs.keys()).issubset(kwargs_set):
-            if "local_mapping" in kwargs.keys() and "external_mapping" in kwargs.keys():
+            elif "external_encoding" in kwargs.keys():
+                self.encoding_table = self.download_encoding_table(
+                    kwargs["external_encoding"]
+                )
+            else:
                 raise Exception(
-                    "Pass only local_mapping (dict) OR valid external_mapping (str) "
-                    "using appropriate named arg"
+                    "Pass value for argument local_encoding_csv (Path) OR "
+                    "external_encoding (str)"
                 )
 
-            elif "local_mapping" in kwargs.keys():
-                self.check_schema(kwargs["local_mapping"])
-
-                self.numeric_mappings = kwargs["local_mapping"]["numeric"]
-                self.waveform_mappings = kwargs["local_mapping"]["waveform"]
-
-            elif "external_mapping" in kwargs.keys():
-
-                print("Getting list of available mappings.")
-                url = (
-                    "https://raw.githubusercontent.com/CONDUITlab/CCDEF/master/"
-                    "loinc/mappings/external_mappings.json"
-                )
-
-                available_external_mappings = json.loads(requests.get(url).text)
-
-                if kwargs["external_mapping"] in available_external_mappings.keys():
-                    print(f"Downloading mapping for {kwargs['external_mapping']}")
-                    response = json.loads(
-                        requests.get(
-                            available_external_mappings[kwargs["external_mapping"]]
-                        ).text
-                    )
-                    self.numeric_mappings = response["numeric"]
-                    self.waveform_mappings = response["waveform"]
-                else:
-                    raise Exception(
-                        "Pass valid identifier (str) for external_mapping param"
-                    )
-        else:
-            raise Exception(
-                "Pass local_mapping (dict) OR valid external_mapping (str) "
-                "using appropriate named arg"
-            )
-
-        self.initialize_lookup_tables_()
+        self._initialize_arrays()
 
     @staticmethod
-    def check_schema(mapping_dict):
+    def load_encoding_table(csv_path):
+        encoding_table = pd.read_csv(csv_path)
+        return encoding_table
+
+    @staticmethod
+    def check_encoding_table_schema(encoding_table):
         """
-        Ugly/rough check that supplied mapping dict matches expected schema. 
-        Each value pair should be a list of lists where item[0] and item[1] 
-        are also lists. Ex: "numeric":[[["HR", "PULSE"], ["8867-4"]]]
+        Check that local csv mapping file contains local_label, loinc_code,
+        loinc_shortname, category, and ccdef_label cols. Raises an exception 
+        if this requirement is not met.
         """
-        is_correct_schema = False
-        for _, value in mapping_dict.items():
-            if isinstance(value, list):
-                for item in value:
-                    if isinstance(item, list):
-                        if isinstance(item[0], list) and isinstance(item[1], list):
-                            is_correct_schema = True
-        if not is_correct_schema:
+
+        req_cols = np.sort(np.array(
+            ["local_label", "loinc_code", "loinc_shortname", "category", "ccdef_label"]
+        ))
+
+        encoding_table_cols = np.sort(np.array(encoding_table.columns))
+        comparison = req_cols == encoding_table_cols
+
+        if not comparison.all():
             raise Exception(
-                "Check schema of local mapping dict. "
-                "Example: 'numeric':[[['HR', 'PULSE'], ['8867-4']]]"
+                "Check schema of local encoding table (csv). "
+                "Example: Must contain cols local_label (str), "
+                "loinc_code (str), loinc_shortname (str), "
+                "category (str), and ccdef_label (str)"
             )
 
     @staticmethod
-    def process_return(mapped_values):
-        """
-        Return results (numpy array) as list. 
-        """
-        if len(mapped_values) != 0:
-            return list(mapped_values)
+    def download_encoding_table(encoding_table_name):
+        print("Getting list of available mappings from CCDEF.org")
+        url = (
+            "https://raw.githubusercontent.com/CONDUITlab/CCDEF/master/"
+            "loinc/mappings/external_mappings.json"
+        )
+        available_external_mappings = json.loads(requests.get(url).text)
+        if encoding_table_name in available_external_mappings.keys():
+            # FIXME this needs to download a csv file
+            print(f"Downloading mapping for {encoding_table_name}")
+            encoding_table = requests.get(
+                available_external_mappings[encoding_table_name]
+            ).text
+            return encoding_table
         else:
-            return ["no_mapping"]
+            raise Exception(
+                "Pass valid identifier (str) for external_encoding parameter"
+            )
 
-    def initialize_lookup_tables_(self):
+    def _initialize_arrays(self):
+        # extract category,abbreviation, and loinc code cols
         """
-        Internal method to generate label-loinc pair (cartesian product) for 
-        items in adjacent label-code lists in mapping_dict. Zips (list of tuple pairs) 
-        and casts as 1D arrays to facilitate subset (boolean masking) and return 
-        of mapped values in method calls below. 
+        Internal method to extract encoding table cols as numpy 
+        arrays and store as instance variables on class. 
         """
+        self.categories = self.encoding_table["category"].to_numpy()
+        self.local_labels = self.encoding_table["local_label"].to_numpy()
+        self.loinc_codes = self.encoding_table["loinc_code"].to_numpy()
+        self.ccdef_labels = self.encoding_table["ccdef_label"].to_numpy()
 
-        num_products = []
-        wf_products = []
+    def _lookup(self, ref_col, value):
+        if ref_col == "local_label":
+            sel_rows = self.local_labels == value
+        elif ref_col == "loinc_code":
+            sel_rows = self.loinc_codes == value
+        else:
+            sel_rows = self.ccdef_labels == value
 
-        for mapping in self.numeric_mappings:
-            num_product = list(product(mapping[0], mapping[1]))
-            num_products.extend(num_product)
+        categories = np.unique(self.categories[sel_rows]).tolist()
+        local_labels = np.unique(self.local_labels[sel_rows]).tolist()
+        loinc_code = np.unique(self.loinc_codes[sel_rows])[0]
+        ccdef_label = np.unique(self.ccdef_labels[sel_rows])[0]
+        
+        return Mapping(
+            category=[str(category) for category in categories],
+            local=[str(local_label) for local_label in local_labels],
+            loinc=str(loinc_code),
+            ccdef=str(ccdef_label),
+        )
 
-        for mapping in self.waveform_mappings:
-            wf_product = list(product(mapping[0], mapping[1]))
-            wf_products.extend(wf_product)
+    def local_label(self, value):
+        mapped_values = self._lookup("local_label", value)
+        return mapped_values
 
-        numerics = list(zip(*num_products))
-        waveforms = list(zip(*wf_products))
+    def loinc_code(self, value):
+        mapped_values = self._lookup("loinc_code", value)
+        return mapped_values
 
-        self.mimic_num, self.loinc_num = np.array(numerics[0]), np.array(numerics[1])
-        self.mimic_wf, self.loinc_wf = np.array(waveforms[0]), np.array(waveforms[1])
-
-    def numeric(self, value):
-        mapped_values = np.unique(self.loinc_num[self.mimic_num == value])
-        return self.process_return(mapped_values)
-
-    def numeric_reverse(self, value):
-        mapped_values = np.unique(self.mimic_num[self.loinc_num == value])
-        return self.process_return(mapped_values)
-
-    def waveform(self, value):
-        mapped_values = np.unique(self.loinc_wf[self.mimic_wf == value])
-        return self.process_return(mapped_values)
-
-    def waveform_reverse(self, value):
-        mapped_values = np.unique(self.mimic_wf[self.loinc_wf == value])
-        return self.process_return(mapped_values)
+    def ccdef_label(self, value):
+        mapped_values = self._lookup("ccdef_label", value)
+        return mapped_values
 
 
 def main():
-    # Local Example...
-    local_map = {
-        "numeric": [[["HR"], ["8867-4"]], [["ABP-S"], ["76215-3"]]],
-        "waveform": [[["PLETH"], ["76523-0"]]],
-    }
-
-    local_loinc = LoincMapper(local_mapping=local_map)
-    print(f"LOINC code(s) for local HR numeric: {local_loinc.numeric('HR')}")
-    print(f"local label for 76215-3: {local_loinc.numeric_reverse('76215-3')}")
-    print(f"LOINC code(s) for local PLETH waveform: {local_loinc.waveform('PLETH')}")
-    print(f"local label for 76523-0: {local_loinc.waveform_reverse('76523-0')}")
-
-    # External Example...
-    MIMICIII_loinc = LoincMapper(external_mapping="MIMICIII")
-    print(f"LOINC code(s) for M3 ABP SYS numeric: {MIMICIII_loinc.numeric('ABP SYS')}")
-    print(f"MIMIC label for 76213-8: {MIMICIII_loinc.numeric_reverse('76213-8')}")
-    print(f"LOINC code(s) for M3 ART waveform: {MIMICIII_loinc.waveform('ART')}")
-    print(f"MIMIC label for 76284-9: {MIMICIII_loinc.waveform_reverse('76284-9')}")
-
-
+    
+    mapper = LoincMapper(local_encoding_csv="MIMICIII.csv")
+    print(mapper.local_label("NBPSys"))
+    print(mapper.loinc_code("76214-6"))
+    print(mapper.ccdef_label("CVP"))
+    print(mapper.local_label("CVP"))
+    
+    # example -- no loinc code or ccdef
+    print(mapper.local_label("PAP SYS"))
+    
+    # example lookup a loinc that doesn't exist
+    print(mapper.loinc_code("54666-0"))
+    
+    print("done")
 if __name__ == "__main__":
     main()

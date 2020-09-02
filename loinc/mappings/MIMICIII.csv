@@ -30,21 +30,21 @@ ABPMean,76214-6,numeric,ABP-M,Invasive mean BP
 ART Mean,76214-6,numeric,ABP-M,Invasive mean BP
 ABP,76214-6,numeric,ABP-M,Invasive mean BP
 CVP,60985-9,numeric,CVP,CVP
-PAP SYS,,numeric,
-PAP Sys,,numeric,
-PAPSys,,numeric,
-PAP DIAS,,numeric,
-PAP Dias,,numeric,
-PAPDias,,numeric,
-PAP MEAN,,numeric,
-PAP Mean,,numeric,
-PAPMean,,numeric,
-PAWP,75994-4,numeric,
-AOBP Sys,,numeric,
-AOBP Dias,,numeric,
-AOBP Mean,,numeric,
+PAP SYS,,numeric,,
+PAP Sys,,numeric,,
+PAPSys,,numeric,,
+PAP DIAS,,numeric,,
+PAP Dias,,numeric,,
+PAPDias,,numeric,,
+PAP MEAN,,numeric,,
+PAP Mean,,numeric,,
+PAPMean,,numeric,,
+PAWP,75994-4,numeric,,
+AOBP Sys,,numeric,,
+AOBP Dias,,numeric,,
+AOBP Mean,,numeric,,
 ART,76212-0,waveform,ABP,Invasive BP
-PAP,76284-9,waveform,
+PAP,76284-9,waveform,,
 CVP,60985-9,waveform,CVP,CVP
 
 

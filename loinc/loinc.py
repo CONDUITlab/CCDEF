@@ -128,9 +128,9 @@ class LoincMapper:
         if encoding_table_name in available_external_mappings.keys():
             # FIXME #11 requests should download csv file
             print(f"Downloading mapping for {encoding_table_name}")
-            encoding_table = requests.get(
-                available_external_mappings[encoding_table_name]
-            ).text
+            with requests.Session() as session:
+                download = session.get(available_external_mappings[encoding_table_name])
+                encoding_table = download.content.decode("utf-8")
             return encoding_table
         else:
             raise Exception(

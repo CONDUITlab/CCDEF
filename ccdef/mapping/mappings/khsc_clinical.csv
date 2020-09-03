@@ -1,0 +1,1274 @@
+category,local_label,ccdef_label,loinc_code,loinc_shortname
+clinical,HB,,718-7,Hgb Bld-mCnc
+clinical,AHB,,718-7,Hgb Bld-mCnc
+clinical,K,,2823-3,Potassium SerPl-sCnc
+clinical,CDIOX,,2028-9,CO2 SerPl-sCnc
+clinical,CL,,2075-0,Chloride SerPl-sCnc
+clinical,ERCS,,789-8,RBC # Bld Auto
+clinical,MCHC,,786-4,MCHC RBC Auto-mCnc
+clinical,MCH,,785-6,MCH RBC Qn Auto
+clinical,CHCT,,4544-3,Hct VFr Bld Auto
+clinical,HCT,,4544-3,Hct VFr Bld Auto
+clinical,BHCT,,4544-3,Hct VFr Bld Auto
+clinical,LKCS,,6690-2,WBC # Bld Auto
+clinical,ALT,,1742-6,ALT SerPl-cCnc
+clinical,PLT,,777-3,Platelet # Bld Auto
+clinical,AST,,1920-8,AST SerPl-cCnc
+clinical,ALB,,1751-7,Albumin SerPl-mCnc
+clinical,ALBE,,1751-7,Albumin SerPl-mCnc
+clinical,TP,,2885-2,Prot SerPl-mCnc
+clinical,ALP,,6768-6,ALP SerPl-cCnc
+clinical,RDW,,788-0,RDW RBC Auto-Rto
+clinical,EGFR,,33914-3,GFR/BSA.pred SerPl MDRD-ArVRat
+clinical,BAS,,704-7,Basophils # Bld Auto
+clinical,MCV,,30428-7,MCV RBC
+clinical,LYM,,731-0,Lymphocytes # Bld Auto
+clinical,NEU,,751-8,Neutrophils # Bld Auto
+clinical,PTTEST,,5902-2,Prothrombin time
+clinical,EOS,,711-2,Eosinophil # Bld Auto
+clinical,MON,,742-7,Monocytes # Bld Auto
+clinical,UNIT,,5802-4,Nitrite Ur Ql Strip
+clinical,COLOUR,,5778-6,Color Ur
+clinical,UPHD,,5803-2,pH Ur Strip
+clinical,UPH,,5803-2,pH Ur Strip
+clinical,UBIL,,5770-3,Bilirub Ur Ql Strip
+clinical,PSG,,5811-5,Sp Gr Ur Strip
+clinical,UP,,5804-0,Prot Ur Strip-mCnc
+clinical,MG,,2601-3,Magnesium SerPl-sCnc
+clinical,UWBC,,5821-4,WBC #/area UrnS HPF
+clinical,HGBA1C,,4548-4,Hgb A1c MFr Bld
+clinical,BEXD,,11555-0,Base excess Bld Calc-sCnc
+clinical,BEX,,11555-0,Base excess Bld Calc-sCnc
+clinical,PCO2,,11557-6,pCO2 Bld
+clinical,VPCO2,,11557-6,pCO2 Bld
+clinical,CLPCO2,,11557-6,pCO2 Bld
+clinical,MVPCO2,,11557-6,pCO2 Bld
+clinical,CVPCO2,,11557-6,pCO2 Bld
+clinical,CAPCO2,,11557-6,pCO2 Bld
+clinical,MVPO2,,11556-8,pO2 Bld
+clinical,PO2,,11556-8,pO2 Bld
+clinical,CLPO2,,11556-8,pO2 Bld
+clinical,CVPO2,,11556-8,pO2 Bld
+clinical,VPO2,,11556-8,pO2 Bld
+clinical,CAPO2,,11556-8,pO2 Bld
+clinical,UBAC,,5769-5,Bacteria #/area UrnS HPF
+clinical,CK,,2157-6,CK SerPl-cCnc
+clinical,CLPH,,11558-4,pH Bld
+clinical,MVPH,,11558-4,pH Bld
+clinical,APHC,,11558-4,pH Bld
+clinical,PH,,11558-4,pH Bld
+clinical,VPH,,11558-4,pH Bld
+clinical,CVPH,,11558-4,pH Bld
+clinical,TSH,,3016-3,TSH SerPl-aCnc
+clinical,BK,,6298-4,Potassium Bld-sCnc
+clinical,TROP,,10839-9,Troponin I SerPl-mCnc
+clinical,GAP,,33037-3,Anion Gap SerPl-sCnc
+clinical,MVHCO3,,1959-6,HCO3 Bld-sCnc
+clinical,CLHCO3,,1959-6,HCO3 Bld-sCnc
+clinical,HCO3,,1959-6,HCO3 Bld-sCnc
+clinical,VHCO3,,1959-6,HCO3 Bld-sCnc
+clinical,CVHCO3,,1959-6,HCO3 Bld-sCnc
+clinical,CAHCO3,,1959-6,HCO3 Bld-sCnc
+clinical,BNA,,2947-0,Sodium Bld-sCnc
+clinical,RMORB,,6742-1,RBC morph Bld
+clinical,RMOR,,6742-1,RBC morph Bld
+clinical,ESR,,4537-7,ESR Bld Qn Westrgrn
+clinical,LIPAS,,3040-3,Lipase SerPl-cCnc
+clinical,PTTPF,,14979-9,aPTT PPP
+clinical,PTT,,14979-9,aPTT PPP
+clinical,MPV,,32623-1,PMV Bld Auto
+clinical,AMYL,,1798-8,Amylase SerPl-cCnc
+clinical,URBC,,5808-1,RBC # UrnS HPF
+clinical,ULKCS,,20408-1,WBC # Ur Strip
+clinical,%ABR,,882-1,ABO + Rh Bld
+clinical,URPREG,,2106-3,HCG Preg Ur Ql
+clinical,GGT,,2324-2,GGT SerPl-cCnc
+clinical,TFERP,,2502-3,Iron Satn MFr SerPl
+clinical,GS,,664-3,Gram Stn XXX
+clinical,UMORPH,,3879-4,Opiates Ur Ql
+clinical,UOP,,3879-4,Opiates Ur Ql
+clinical,UBENZ,,3390-2,Benzodiaz Ur Ql
+clinical,%AS,,890-4,Bld gp Ab Scn SerPl Ql
+clinical,BNPEP,,30934-4,BNP SerPl-mCnc
+clinical,NTPBNP,,30934-4,BNP SerPl-mCnc
+clinical,UBARB,,3377-9,Barbiturates Ur Ql
+clinical,IGAN,,2458-8,IgA SerPl-mCnc
+clinical,FSH,,15067-2,FSH SerPl-aCnc
+clinical,ROH,,19145-2,Ref Lab Test Name
+clinical,ROC,,19145-2,Ref Lab Test Name
+clinical,ROK,,19145-2,Ref Lab Test Name
+clinical,ROCTC,,19145-2,Ref Lab Test Name
+clinical,RFN,,11572-5,Rheumatoid fact SerPl-aCnc
+clinical,HCG,,19080-1,HCG SerPl-aCnc
+clinical,COLPAR,,13362-9,Collect duration Time Ur
+clinical,PMORB,,11125-2,Plat morph Bld
+clinical,PMOR,,11125-2,Plat morph Bld
+clinical,IGMN,,2472-9,IgM SerPl-mCnc
+clinical,SPE19,,31208-2,Specimen source XXX
+clinical,SPE18,,31208-2,Specimen source XXX
+clinical,SPE17,,31208-2,Specimen source XXX
+clinical,SPE16,,31208-2,Specimen source XXX
+clinical,SPE15,,31208-2,Specimen source XXX
+clinical,SPE13,,31208-2,Specimen source XXX
+clinical,SPE20,,31208-2,Specimen source XXX
+clinical,SPE12,,31208-2,Specimen source XXX
+clinical,SPE11,,31208-2,Specimen source XXX
+clinical,SPE1,,31208-2,Specimen source XXX
+clinical,SDES,,31208-2,Specimen source XXX
+clinical,SPE14,,31208-2,Specimen source XXX
+clinical,SPE21,,31208-2,Specimen source XXX
+clinical,SPE2,,31208-2,Specimen source XXX
+clinical,SPE23,,31208-2,Specimen source XXX
+clinical,SPE22,,31208-2,Specimen source XXX
+clinical,SPEC5,,31208-2,Specimen source XXX
+clinical,SPEC36,,31208-2,Specimen source XXX
+clinical,SPEC35,,31208-2,Specimen source XXX
+clinical,SPEC33,,31208-2,Specimen source XXX
+clinical,SPEC29,,31208-2,Specimen source XXX
+clinical,SPEC24,,31208-2,Specimen source XXX
+clinical,SPEC21,,31208-2,Specimen source XXX
+clinical,SPEC13,,31208-2,Specimen source XXX
+clinical,ST,,31208-2,Specimen source XXX
+clinical,SPE9,,31208-2,Specimen source XXX
+clinical,SPE8,,31208-2,Specimen source XXX
+clinical,SPE7,,31208-2,Specimen source XXX
+clinical,SPE6,,31208-2,Specimen source XXX
+clinical,SPE5,,31208-2,Specimen source XXX
+clinical,SPE27,,31208-2,Specimen source XXX
+clinical,SPE25,,31208-2,Specimen source XXX
+clinical,SPE24,,31208-2,Specimen source XXX
+clinical,SPEC12,,31208-2,Specimen source XXX
+clinical,FIB,,3255-7,Fibrinogen PPP-mCnc
+clinical,LH,,10501-5,LH SerPl-aCnc
+clinical,PALB,,14338-8,Prealb SerPl-mCnc
+clinical,PROL,,2842-3,Prolactin SerPl-mCnc
+clinical,URPR,,2888-6,Prot Ur-mCnc
+clinical,UCAS,,9842-6,Casts #/area UrnS LPF
+clinical,BCL,,2069-3,Chloride Bld-sCnc
+clinical,CKMBT,,20569-0,CK MB CFr SerPl
+clinical,CKMBI,,20569-0,CK MB CFr SerPl
+clinical,CEAG,,2039-6,CEA SerPl-mCnc
+clinical,BG,,2871-2,B-Globulin SerPl Elph-mCnc
+clinical,A1G,,2865-4,Alpha1 Glob SerPl Elph-mCnc
+clinical,A2G,,2868-8,Alpha2 Glob SerPl Elph-mCnc
+clinical,UPCP,,3936-2,PCP Ur Ql
+clinical,GG,,2874-6,Gamma glob SerPl Elph-mCnc
+clinical,OSM,,2692-2,Osmolality SerPl
+clinical,ATPO,,8099-4,Thyroperoxidase Ab SerPl-aCnc
+clinical,BBAND,,763-3,Neuts Band # Bld Manual
+clinical,BAND,,763-3,Neuts Band # Bld Manual
+clinical,CRP,,30522-7,CRP SerPl HS-mCnc
+clinical,WMOR,,11156-7,WBC morph Bld
+clinical,WMORB,,11156-7,WBC morph Bld
+clinical,HOMOC,,13965-9,Hcys SerPl-sCnc
+clinical,VANCPR,,4092-3,Vancomycin Trough SerPl-mCnc
+clinical,TGIGA,,31017-7,tTG IgA Ser-aCnc
+clinical,AFP,,1834-1,AFP SerPl-mCnc
+clinical,URINML,,3167-4,Specimen vol 24h Ur
+clinical,UALML,,3167-4,Specimen vol 24h Ur
+clinical,UCORML,,3167-4,Specimen vol 24h Ur
+clinical,UCATML,,3167-4,Specimen vol 24h Ur
+clinical,UMETML,,3167-4,Specimen vol 24h Ur
+clinical,UVMAML,,3167-4,Specimen vol 24h Ur
+clinical,U5HIML,,3167-4,Specimen vol 24h Ur
+clinical,URNA,,2955-3,Sodium Ur-sCnc
+clinical,FNEUT,,12238-2,Neutrophils/leuk NFr Fld Manual
+clinical,UMTD,,3773-9,Methadone Ur Ql
+clinical,%DIG,,1006-6,DAT IgG-Sp Reag RBC-Imp
+clinical,CLO2S,,20564-1,SaO2 % Bld
+clinical,MVO2S,,20564-1,SaO2 % Bld
+clinical,O2SAT,,20564-1,SaO2 % Bld
+clinical,VO2SAT,,20564-1,SaO2 % Bld
+clinical,C125,,10334-1,Cancer Ag125 SerPl-aCnc
+clinical,CA125K,,10334-1,Cancer Ag125 SerPl-aCnc
+clinical,C3N,,4485-9,C3 SerPl-mCnc
+clinical,C4N,,4498-2,C4 SerPl-mCnc
+clinical,SIC,,6864-3,Hgb S Bld Ql Soly
+clinical,CVO2S,,2708-6,SaO2 % BldA
+clinical,IGE,,19113-0,IgE SerPl-aCnc
+clinical,IGEO,,19113-0,IgE SerPl-aCnc
+clinical,MONO,,743-5,Monocytes # Bld Manual
+clinical,BMON,,743-5,Monocytes # Bld Manual
+clinical,BLACT,,32693-4,Lactate Bld-sCnc
+clinical,DDIQ,,48065-7,D dimer FEU PPP-mCnc
+clinical,MP1G24,,33358-3,M Protein SerPl Elph-mCnc
+clinical,MP2G24,,33358-3,M Protein SerPl Elph-mCnc
+clinical,MP,,33358-3,M Protein SerPl Elph-mCnc
+clinical,SIR,,29247-4,Sirolimus Bld-mCnc
+clinical,BMETA,,739-3,Metamyelocytes # Bld Manual
+clinical,META,,739-3,Metamyelocytes # Bld Manual
+clinical,URPRT,,2889-4,Prot 24h Ur-mRate
+clinical,URK,,2828-2,Potassium Ur-sCnc
+clinical,PMYO,,2639-3,Myoglobin SerPl-mCnc
+clinical,BNERC,,772-4,nRBC # Bld Manual
+clinical,FAST,,49541-6,Fasting status Patient Ql Reported
+clinical,FLIPAS,,49541-6,Fasting status Patient Ql Reported
+clinical,MYEL,,748-4,Myelocytes # Bld Manual
+clinical,BMYEL,,748-4,Myelocytes # Bld Manual
+clinical,RPSA,,12841-3,PSA Free MFr SerPl
+clinical,CFP,,2880-3,Prot CSF-mCnc
+clinical,BCE,,19066-0,Blood Bank Cmnt Patient-Imp
+clinical,FAMTYP,,14725-6,Body fld type
+clinical,FTPTYP,,14725-6,Body fld type
+clinical,FELTYP,,14725-6,Body fld type
+clinical,FATYP,,14725-6,Body fld type
+clinical,FC3TYP,,14725-6,Body fld type
+clinical,FCTYP,,14725-6,Body fld type
+clinical,FC4TYP,,14725-6,Body fld type
+clinical,FLTYPE,,14725-6,Body fld type
+clinical,FGTYP,,14725-6,Body fld type
+clinical,FPHTYP,,14725-6,Body fld type
+clinical,SBPTYP,,14725-6,Body fld type
+clinical,FLDTYP,,14725-6,Body fld type
+clinical,CFLTYP,,14725-6,Body fld type
+clinical,FUTYP,,14725-6,Body fld type
+clinical,FPSAT,,10886-0,PSA Free SerPl-mCnc
+clinical,UOSM,,2695-5,Osmolality Ur
+clinical,MTEST,,31418-7,Heteroph Ab Ser Ql
+clinical,UTCA,,11004-9,Tricyclics Ur Ql
+clinical,TN2,,19157-7,Tube # CSF
+clinical,TN,,19157-7,Tube # CSF
+clinical,FK,,36916-5,Kappa LC Free Ser-mCnc
+clinical,HAPT,,4542-7,Haptoglob SerPl-mCnc
+clinical,IGFRES,,2484-4,IGF-I SerPl-mCnc
+clinical,UMAMPH,,3779-6,Methamphet Ur Ql
+clinical,APP,,10333-3,Appearance CSF
+clinical,APP2,,10333-3,Appearance CSF
+clinical,UYEAST,,5822-2,Yeast #/area UrnS HPF
+clinical,UAMPH,,19343-3,Amphet Ur Ql Scn
+clinical,MMACID,,13964-2,Methylmalonate SerPl-sCnc
+clinical,CLYM,,10328-3,Lymphocytes/leuk NFr CSF Manual
+clinical,LI,,14334-7,Lithium SerPl-sCnc
+clinical,CA0199,,24108-3,Cancer Ag19-9 SerPl-aCnc
+clinical,CA199K,,24108-3,Cancer Ag19-9 SerPl-aCnc
+clinical,SHBG,,13967-5,SHBG SerPl-sCnc
+clinical,ASPF,,6025-1,A fumigatus IgE Qn
+clinical,URCL,,2078-4,Chloride Ur-sCnc
+clinical,FTP,,2881-1,Prot Fld-mCnc
+clinical,TT,,3243-3,Thrombin time
+clinical,ANCE,,2742-5,ACE SerPl-cCnc
+clinical,C153,,6875-9,Cancer Ag15-3 SerPl-aCnc
+clinical,CA153K,,6875-9,Cancer Ag15-3 SerPl-aCnc
+clinical,FLERCS,,6741-3,RBC # Fld Manual
+clinical,SBPERC,,6741-3,RBC # Fld Manual
+clinical,URACET,,3299-5,APAP Ur Ql
+clinical,UACET,,3299-5,APAP Ur Ql
+clinical,ASO,,5370-2,ASO Ab SerPl-aCnc
+clinical,HELI,,17859-0,H pylori IgG SerPl Ql IA
+clinical,FAMYL,,1795-4,Amylase Fld-cCnc
+clinical,CERU,,2064-4,Ceruloplasmin SerPl-mCnc
+clinical,ERYC,,792-2,RBC # CSF Manual
+clinical,OB,,29771-3,Hemoccult Stl Ql IA
+clinical,B2M,,1952-1,B2 Microglob SerPl-mCnc
+clinical,HS2T,,16131-5,HSV2 DNA XXX Ql NAA+probe
+clinical,FLDH,,2529-6,LDH Fld-cCnc
+clinical,TFER,,3034-6,Transferrin SerPl-mCnc
+clinical,UOXY,,10998-3,oxyCODONE Ur Ql
+clinical,CNEU,,13516-0,Neutrophils/leuk NFr CSF Manual
+clinical,ERPO,,15061-5,EPO SerPl-aCnc
+clinical,A1ATR,,1825-9,A1AT SerPl-mCnc
+clinical,SMT,,5358-7,Smooth muscle Ab Titr Ser IF
+clinical,GENTPR,,3665-7,Gentamicin Trough SerPl-mCnc
+clinical,MTX,,14836-1,MTX SerPl-sCnc
+clinical,APOLIP,,1884-6,Apo B SerPl-mCnc
+clinical,ANFT,,29953-7,ANA Titr Ser
+clinical,PSA,,35741-8,PSA SerPl DL<=0.01 ng/mL-mCnc
+clinical,VANCPO,,4090-7,Vancomycin Peak SerPl-mCnc
+clinical,C50,,4532-8,CH50 SerPl-aCnc
+clinical,FPH,,2748-2,pH Fld
+clinical,GENTPO,,3663-2,Gentamicin Peak SerPl-mCnc
+clinical,KBK,,32140-6,Hgb F Bld Ql Kleih Betke
+clinical,GRHRM,,2963-7,GH SerPl-mCnc
+clinical,FBLAST,,13522-8,Blasts/leuk NFr Fld Manual
+clinical,IGG1,,2466-1,IgG1 Ser-mCnc
+clinical,FALB,,1747-5,Albumin Fld-mCnc
+clinical,TOTC,,19076-9,Total Cells Counted XXX
+clinical,DSCOM,,12286-1,Drugs Ur Scn
+clinical,GENT,,35668-3,Gentamicin SerPl-mCnc
+clinical,INLGF,,2483-6,IGF BP3 SerPl-mCnc
+clinical,FATSC,,2270-7,Fat Stl Ql
+clinical,B2IGG,,16135-6,B2 Glycoprot1 IgG Ser-aCnc
+clinical,FFN,,48039-2,Fibronectin Fetal XXX Ql
+clinical,UNAREF,,2956-1,Sodium 24h Ur-sRate
+clinical,URNAT,,2956-1,Sodium 24h Ur-sRate
+clinical,SMAB,,14252-1,Smooth muscle Ab Ser Ql
+clinical,BPH37,,49701-6,pH temp adj Bld
+clinical,PFPH37,,49701-6,pH temp adj Bld
+clinical,PH37,,49701-6,pH temp adj Bld
+clinical,AT,,3174-0,AT III PPP Chro-aCnc
+clinical,NRBC,,771-6,nRBC # Bld Auto
+clinical,APOLA1,,1869-7,Apo A-I SerPl-mCnc
+clinical,UMYOG,,2640-1,Myoglobin Ur Ql
+clinical,CRB,,6092-1,Crab IgE Qn
+clinical,GAD,,13926-1,GAD65 Ab Ser-aCnc
+clinical,UMALT,,14956-7,Microalbumin 24h Ur-mRate
+clinical,VOL,,17607-3,Specimen vol CSF
+clinical,VOL2,,17607-3,Specimen vol CSF
+clinical,PERCNT,,42483-8,M Protein MFr Ur Elph
+clinical,GAST,,2333-3,Gastrin SerPl-mCnc
+clinical,FCARN,,14286-9,Carnitine Free SerPl-sCnc
+clinical,HS1T,,16130-7,HSV1 DNA XXX Ql NAA+probe
+clinical,BPRMY,,781-5,Promyelocytes # Bld Manual
+clinical,PRMY,,781-5,Promyelocytes # Bld Manual
+clinical,BKQUA,,41479-7,BKV DNA # SerPl NAA+probe
+clinical,BKF,,41479-7,BKV DNA # SerPl NAA+probe
+clinical,BKQU,,41479-7,BKV DNA # SerPl NAA+probe
+clinical,PTT2,,5946-9,aPTT imm NP PPP
+clinical,ESM,,49839-4,Eosinophil UrnS Ql Wright Stn
+clinical,TOBPRE,,4059-2,Tobramycin Trough SerPl-mCnc
+clinical,ACRANB,,20427-1,AChR Ab Ser-sCnc
+clinical,VTMB1,,20468-5,Vit B1 SerPl-sCnc
+clinical,ATG,,3175-7,AT III Ag PPP IA-aCnc
+clinical,TRYP,,21582-2,Tryptase SerPl-mCnc
+clinical,CEOS,,26451-5,Eosinophil/leuk NFr CSF
+clinical,TOBPOS,,4057-6,Tobramycin Peak SerPl-mCnc
+clinical,CHRGA,,9811-1,CgA SerPl-mCnc
+clinical,MALP,,14869-2,Path Rev Bld -Imp
+clinical,CACIT,,1992-7,Calcit SerPl-mCnc
+clinical,CMACR,,30437-8,Monos+Macros/leuk NFr Fld
+clinical,FMACR,,30437-8,Monos+Macros/leuk NFr Fld
+clinical,%DBS,,1007-4,DAT Poly-Sp Reag RBC Ql
+clinical,BOHB,,6873-4,B-OH-Butyr SerPl-sCnc
+clinical,CRYOCT,,15174-6,Cryocrit Ser Spun Westergren
+clinical,C1ESII,,4477-6,C1INH SerPl-mCnc
+clinical,C1STF,,4477-6,C1INH SerPl-mCnc
+clinical,FLYM,,13941-0,Lymphocytes/leuk NFr Fld Manual
+clinical,AF,,20431-3,Smear XXX
+clinical,MYCO,,23905-3,Mycophenolate SerPl-mCnc
+clinical,FEO,,12209-3,Eosinophil/leuk NFr Fld Manual
+clinical,BONESP,,1777-2,ALP Bone SerPl-cCnc
+clinical,TOBR,,35670-9,Tobramycin SerPl-mCnc
+clinical,IGRAN,,34165-1,Imm Granulocytes Bld Ql Auto
+clinical,INSUAB,,8072-1,Insulin Ab Ser-aCnc
+clinical,IA2T,,31209-0,Islet Cell512 Ab Ser-aCnc
+clinical,PLSM,,24103-4,Plasma Cells # Bld Manual
+clinical,PHB,,4635-9,Hgb Free Ser-mCnc
+clinical,VANC,,20578-1,Vancomycin SerPl-mCnc
+clinical,BBLST,,708-8,Blasts # Bld Manual
+clinical,BLST,,708-8,Blasts # Bld Manual
+clinical,%ABR,,TR11686-3,
+clinical,%AS,,TR11561-8,
+clinical,%DBS,,TR10489-3,
+clinical,%DIG,,TR10489-3,
+clinical,A2HPLC,,42245-1,Hgb A2 MFr Bld HPLC
+clinical,ACARNS,,46252-3,Acylcarnitine pattern SerPl-Imp
+clinical,ACET,,TR10122-0,
+clinical,ACET,,14581-3,APAP SerPl-sCnc
+clinical,ACETA,,14581-3,APAP SerPl-sCnc
+clinical,ACETON,,14582-1,Acetone SerPl-sCnc
+clinical,ACRNUC,,43716-0,Acylcarnitine Ur Ql
+clinical,ACYLC,,1717-8,Acylcarnitine SerPl-mCnc
+clinical,ADCTH,,14674-6,ACTH Plas-sCnc
+clinical,AFP,,TR10021-4,
+clinical,AGAL,,1813-5,A-Galactosidase A SerPl-cCnc
+clinical,AGBMS,,59394-7,GBM Ab Ser IA-aCnc
+clinical,AHA,,58765-9,Histone Ab Ser Ql IA
+clinical,AHPLC,,42244-4,Hgb A MFr Bld HPLC
+clinical,AL2MAC,,1835-8,A2 Macroglob SerPl-mCnc
+clinical,ALB,,TR10010-7,
+clinical,ALC,,TR10177-4,
+clinical,ALC,,14719-9,Ethanol SerPl-sCnc
+clinical,ALD,,14586-2,Aldost SerPl-sCnc
+clinical,ALMC,,XON12663-1,
+clinical,ALP,,TR10016-4,
+clinical,ALPIS,,12805-8,ALP Iso SerPl-aCnc
+clinical,ALT,,TR10009-9,
+clinical,ALUMIN,,14593-8,Aluminum SerPl-sCnc
+clinical,AMINOU,,12467-7,Amino acids Ur
+clinical,AMIOD,,3330-8,Amiodarone SerPl-mCnc
+clinical,AMITR,,14597-9,Amitrip SerPl-sCnc
+clinical,AMM,,TR10034-7,
+clinical,AMM,,1839-0,Ammonia Bld-sCnc
+clinical,AMYINT,,XON10296-2,
+clinical,AMYL,,TR10038-8,
+clinical,AMYLPF,,1805-1,Amylase P SerPl-cCnc
+clinical,ANF,,TR10654-2,
+clinical,ANF,,49310-6,ANA Pat Ser-Imp
+clinical,ANFT,,TR10654-2,
+clinical,ANSKS,,10919-9,Anisakis IgE Qn
+clinical,ANTIDH,,14949-2,Vasopressin Plas-sCnc
+clinical,ANTISM,,31627-3,ENA SM Ab Ser Ql
+clinical,ANTITG,,TR10676-5,
+clinical,ANTITG,,56536-6,Thyroglob Ab SerPl IA-aCnc
+clinical,ARSEN,,15114-2,Arsenic Bld-sCnc
+clinical,ARSUL,,1901-8,Arylsulfatase SerPl-cCnc
+clinical,ASPGLN,,7105-0,A nidulans IgE Qn
+clinical,ASPM4,,51529-6,Mold Allerg Mix4 IgE Ql
+clinical,ASPRGS,,7099-5,Asparagus IgE Qn
+clinical,AST,,TR10051-1,
+clinical,AT,,TR10520-5,
+clinical,ATL,,734-4,Variant Lymphs # Bld Manual
+clinical,ATPO,,TR10677-3,
+clinical,ATROP,,XON13273-8,
+clinical,AXA,,31159-7,Heparin Anti Xa Fld.NB-aCnc
+clinical,B2M,,TR10060-2,
+clinical,B6,,39786-9,Vit B6 SerPl-sCnc
+clinical,BASO,,705-4,Basophils # Bld Manual
+clinical,BBAS,,705-4,Basophils # Bld Manual
+clinical,BCE,,TR12419-8,
+clinical,BEOS,,712-0,Eosinophil # Bld Manual
+clinical,BGAL,,1941-4,B-Galactosidase SerPl-cCnc
+clinical,BGLU,,38477-6,Glucosylceramidase SerPl-cCnc
+clinical,BGLUC,,15074-8,Glucose Bld-sCnc
+clinical,BGNR,,XON10336-6,
+clinical,BIONCA,,12180-6,Ca-I SerPl ISE-sCnc
+clinical,BK,,TR10359-8,
+clinical,BLACT,,TR10264-0,
+clinical,BLYM,,732-8,Lymphocytes # Bld Manual
+clinical,BNCA,,47598-8,Ca-I adj pH7.4 Bld-sCnc
+clinical,BNEU,,753-4,Neutrophils # Bld Manual
+clinical,BNPEP,,TR11434-8,
+clinical,BOHB,,TR10061-0,
+clinical,BTRINT,,XON10296-2,
+clinical,C1Q,,44702-9,C1q Ab Ser-aCnc
+clinical,C24C22,,30196-0,VLCFA C24:0/C22:0 SerPl-sRto
+clinical,C2COMP,,4484-2,C2 SerPl-mCnc
+clinical,C3N,,TR10610-4,
+clinical,C4N,,TR10611-2,
+clinical,C6C,,4507-0,C6 SerPl-mCnc
+clinical,CA,,TR10085-9,
+clinical,CA,,2000-8,Calcium SerPl-sCnc
+clinical,CADB,,15117-5,Cadmium Bld-sCnc
+clinical,CALP,,38445-3,Calprotectin Stl-mCnt
+clinical,CANCAS,,17353-4,c-ANCA Ser Ql IF
+clinical,CAO2S,,71853-6,SaO2 DF Bld
+clinical,CAPP,,14618-3,Appearance Stone
+clinical,CARBA,,TR10101-4,
+clinical,CARBA,,14639-9,carBAMazepine SerPl-sCnc
+clinical,CBAT,,41018-3,Testosterone.free+WB SerPl-sCnc
+clinical,CBWB,,15119-1,Cobalt Bld-sCnc
+clinical,CBWBC,,XON12663-1,
+clinical,CCEGFR,,50210-4,GFR/BSA.pred SerPlBld Cys-based-ArV
+clinical,CCP,,53027-9,cCP Ab Ser-aCnc
+clinical,CDIFFS,,57901-1,C diff GDH Stl Ql
+clinical,CDIFFT,,61367-9,C diff DNA XXX Ql NAA+probe
+clinical,CFGLU,,14744-7,Glucose CSF-sCnc
+clinical,CFLCOM,,XON10442-2,
+clinical,CFLRES,,XON10441-4,
+clinical,CFLTST,,XON10442-2,
+clinical,CFLUN,,XON10442-2,
+clinical,CFNMDA,,XON13181-3 ,
+clinical,CFP,,TR10374-7,
+clinical,CHOL,,TR10120-4,
+clinical,CHOL,,14647-2,Cholest SerPl-sCnc
+clinical,CHRMC,,XON12663-1,
+clinical,CHRMUG,,15118-3,Chromium Bld-sCnc
+clinical,CIMT,,XON12190-4,
+clinical,CK,,TR10146-9,
+clinical,CL,,TR10116-2,
+clinical,CLA,,43228-6,Cryptoc Ag XXX Ql LA
+clinical,CLOB,,14651-4,cloBAZam SerPl-sCnc
+clinical,CLONA,,14655-5,clonazePAM SerPl-sCnc
+clinical,CLOZA,,14656-3,cloZAPine SerPl-sCnc
+clinical,CMVF,,29604-6,CMV DNA # Bld NAA+probe
+clinical,CMVQU,,29604-6,CMV DNA # Bld NAA+probe
+clinical,CMVQUA,,29604-6,CMV DNA # Bld NAA+probe
+clinical,CMVT,,29604-6,CMV DNA # Bld NAA+probe
+clinical,CMVTE,,29604-6,CMV DNA # Bld NAA+probe
+clinical,CO2HB,,TR10104-8,
+clinical,CO2HB,,71890-8,COHgb MFr.DF Bld
+clinical,COLDAS,,TR10606-2,
+clinical,COLDAS,,32672-8,CA SerPl Ql
+clinical,COPC,,XON12663-1,
+clinical,COPP,,14665-4,Copper SerPl-sCnc
+clinical,COPRU,,34273-3,Copper Ur-sCnc
+clinical,COR,,14675-3,Cortis SerPl-sCnc
+clinical,CORAM,,TR10142-8,
+clinical,CORAM,,14679-5,Cortis AM peak SerPl-sCnc
+clinical,CORPM,,TR10143-6,
+clinical,CORPM,,14678-7,Cortis PM SerPl-sCnc
+clinical,COVIDT,,XON13527-7,
+clinical,CPEPT,,14633-2,C peptide SerPl-sCnc
+clinical,CPWB,,47100-3,Copper Bld-sCnc
+clinical,CREA,,14682-9,Creat SerPl-sCnc
+clinical,CREACL,,33558-8,Creat Cl ?Tm Ur+SerPl-vRate
+clinical,CREATO,,14683-7,Creat Ur-sCnc
+clinical,CREHVA,,14683-7,Creat Ur-sCnc
+clinical,CRMWB,,15118-3,Chromium Bld-sCnc
+clinical,CRP,,TR10620-3,
+clinical,CRYIGA,,40628-0,Cryoglob IgA Ser Inc-mCnc
+clinical,CRYIGG,,40582-9,Cryoglob IgG Ser Inc-mCnc
+clinical,CRYIGM,,40581-1,Cryoglob IgM Ser Inc-mCnc
+clinical,CRYOG,,29746-5,Cryoglob Ser Ql 3D Inc
+clinical,CSFACE,,12480-0,ACE CSF-cCnc
+clinical,CSFCM2,,XON10442-2,
+clinical,CSFCOM,,XON10442-2,
+clinical,CSFOCB,,32358-4,Oligoclonal Bands CSF Ql
+clinical,CULT,,41852-5,Microorganism/Agent XXX
+clinical,CYA,,TR10152-7,
+clinical,CYA,,14978-1,cycloSPORINE Bld IA-mCnc
+clinical,CYAND,,25387-2,Cyanide SerPl-sCnc
+clinical,CYAO,,55805-6,cycloSPORINE Bld LC/MS/MS-mCnc
+clinical,DATE,,31002-9,Dates IgE Qn
+clinical,DBIL,,TR10067-7,
+clinical,DBIL,,14629-0,Bilirub Direct SerPl-sCnc
+clinical,DCOMP,,TR10489-3,
+clinical,DCOMP,,1004-1,DAT Comp-Sp Reag RBC Ql
+clinical,DFAPCP,,13326-4,Pneumocystis XXX Micro
+clinical,DHEAS,,TR10156-8,
+clinical,DHEAS,,14688-6,DHEA-S SerPl-sCnc
+clinical,DIG,,TR10162-6,
+clinical,DIG,,14698-5,Digoxin SerPl-sCnc
+clinical,DONUT1,,14577-1,ABO + Rh Bld Donr
+clinical,DOSE,,XON10442-2,
+clinical,DPHEN,,39476-7,Diphenhy SerPl-sCnc
+clinical,DSC,,54247-2,Drug screen comment Ur-Imp
+clinical,E2,,TR10173-3,
+clinical,E2,,14715-7,Estradiol SerPl-sCnc
+clinical,EBQU,,5002-1,EBV DNA Bld Ql NAA+probe
+clinical,ELAS,,25907-7,Elastase Panc Stl-mCnt
+clinical,ENABSC,,14722-3,ENA Ab Ser Ql
+clinical,ENTERT,,5843-8,EV XXX Cult
+clinical,EOSI,,712-0,Eosinophil # Bld Manual
+clinical,EPI,,14711-6,Epineph Plas-sCnc
+clinical,ERYC2,,46087-3,RBC tube2 # CSF Manual
+clinical,ESM,,TR10514-8,
+clinical,ESR,,TR10494-3,
+clinical,ETHGLY,,14721-5,Ethylene Glycol SerPl-sCnc
+clinical,FBS,,TR10219-4,
+clinical,FBS,,14771-0,Glucose p fast SerPl-sCnc
+clinical,FBSROS,,TR10496-8,
+clinical,FBSROS,,33900-2,Fetal Cell Scn Bld Ql Rosette
+clinical,FC3,,6801-5,C3 Fld-mCnc
+clinical,FC4,,6908-8,C4 Fld-mCnc
+clinical,FCIL,,35477-9,Cil columnar lining cells/leuk Fld
+clinical,FCREA,,25386-4,Creat Fld-sCnc
+clinical,FER,,TR10186-5,
+clinical,FER,,20567-4,Ferritin SerPl IA-mCnc
+clinical,FFATAC,,15066-4,NEFA SerPl-sCnc
+clinical,FFN,,TR11410-8,
+clinical,FGLU,,14745-4,Glucose Fld-sCnc
+clinical,FHPLC,,42246-9,Hgb F MFr Bld HPLC
+clinical,FIB,,TR10556-9,
+clinical,FII,,XON10661-7,
+clinical,FIO2,,XON10442-2,
+clinical,FIX,,3186-4,Fact IXa PPP-aCnc
+clinical,FLCL,,2072-7,Chloride Fld-sCnc
+clinical,FLK,,2821-7,Potassium Fld-sCnc
+clinical,FLOW,,TR12659-9,
+clinical,FLTNC,,55793-4,Nuc cell # Fld
+clinical,FMAST,,69910-8,Basophils/Masts/leuk NFr Fld
+clinical,FNA,,2950-4,Sodium Fld-sCnc
+clinical,FNEU,,26502-5,Neutrophils # Prt
+clinical,FOL,,TR10192-3,
+clinical,FOL,,14732-2,Folate SerPl-sCnc
+clinical,FOTHR,,13528-5,Unident Cells/leuk NFr Fld Manual
+clinical,FPLAS,,51386-1,Plasma Cells/leuk NFr Fld Manual
+clinical,FREEPE,,32109-1,Phenytoin Free SerPl-sCnc
+clinical,FRT3,,14928-6,T3Free SerPl-sCnc
+clinical,FSH,,TR10193-1,
+clinical,FSQ,,35652-7,Epi Cells NFr Fld
+clinical,FT4,,TR10424-0,
+clinical,FT4,,14920-3,T4 Free SerPl-sCnc
+clinical,FTNC,,55793-4,Nuc cell # Fld
+clinical,FTUM,,51625-2,Malignant cells NFr Fld Manual
+clinical,FURE,,25549-7,Urea Fld-sCnc
+clinical,FV,,3192-2,Fact Va PPP-aCnc
+clinical,FVII,,3197-1,Fact VIIa PPP-aCnc
+clinical,FVIII,,3208-6,Fact VIIIa PPP-aCnc
+clinical,FX,,3217-7,Fact Xa PPP-aCnc
+clinical,FXI,,53222-6,Fact XIa PPP-aCnc
+clinical,FXII,,3231-8,Fact XIIa PPP-aCnc
+clinical,FXIII,,TR10552-8,
+clinical,FXIII,,3237-5,Fact XIIIa PPP-aCnc
+clinical,G6PDS,,TR10499-2,
+clinical,G6PDS,,2356-4,G6PD RBC Ql
+clinical,GAL,,62310-8,GALC DBS-cCnc
+clinical,GBPT,,25425-0,Gabapentin SerPl-sCnc
+clinical,GENT,,TR10208-7,
+clinical,GENTPO,,TR10207-9,
+clinical,GENTPR,,TR10209-5,
+clinical,GGT,,TR10203-8,
+clinical,GLU,,TR10220-2,
+clinical,GLU,,14749-6,Glucose SerPl-sCnc
+clinical,GLUP,,14743-9,Glucose BldC Glucomtr-sCnc
+clinical,GM1G,,50770-7,GM1 Gangl IgG/IgM Ser IA-Rto
+clinical,GMR,,XON10487-7,
+clinical,GRP,,6841-1,Grape IgE Qn
+clinical,GT50G1,,TR11996-6,
+clinical,GT50G1,,14754-6,Glucose 1h p 50 g Glc PO SerPl-sCnc
+clinical,GTNPA2,,TR10213-7,
+clinical,GTNPA2,,14759-5,Glucose 2h p Glc SerPl-sCnc
+clinical,GTNPAF,,TR10219-4,
+clinical,GTNPAF,,14771-0,Glucose p fast SerPl-sCnc
+clinical,H,,50863-0,H ion Bld-sCnc
+clinical,HAPT,,TR10227-7,
+clinical,HBEO,,59362-4,Race or ethnicity OMB.1997
+clinical,HBH,,4587-2,Hgb H MFr Bld Elph
+clinical,HBS,,71858-5,Hgb S MFr.DF Bld HPLC
+clinical,HCG,,TR10126-1,
+clinical,HDL,,14646-4,HDLc SerPl-sCnc
+clinical,HECOM,,XON10323-4,
+clinical,HGBA1C,,TR10228-5,
+clinical,HITCO,,18337-6,OH-Itraconaz SerPl-mCnc
+clinical,HITS,,XON10337-4,
+clinical,IDFINL,,TR10470-3,
+clinical,IDFINL,,14575-5,Bld gp Ab Invest PlasRBC-Imp
+clinical,IFAB,,11564-2,IF Ab Ser-aCnc
+clinical,IFE,,TR10376-2,
+clinical,IGAN,,TR10240-0,
+clinical,IGE,,TR10242-6,
+clinical,IGECOM,,TR11944-6,
+clinical,IGECOM,,XON10296-2,
+clinical,IGFCOM,,XON12659-9,
+clinical,IGGI,,38488-3,IgG Ser-aCnc
+clinical,IGGN,,TR10243-4,
+clinical,IGGN,,38488-3,IgG Ser-aCnc
+clinical,IGGT,,38488-3,IgG Ser-aCnc
+clinical,IGMI,,13313-2,IgM Ab.IgM SerPl-aCnc
+clinical,IGMN,,TR10246-7,
+clinical,IMGD,,2460-4,IgD Ser-mCnc
+clinical,INFABT,,62462-7,FLUAV+FLUBV RNA XXX Ql NAA+probe
+clinical,INR,,38875-1,INR PPP/Bld
+clinical,INSUL,,TR10252-5,
+clinical,INSUL,,14796-7,Insulin SerPl-sCnc
+clinical,IONCA,,12180-6,Ca-I SerPl ISE-sCnc
+clinical,IRF,,33516-6,Imm Retics NFr
+clinical,IRON,,TR10259-0,
+clinical,IRON,,14798-3,Iron SerPl-sCnc
+clinical,ISO,,14802-3,Isopropanol SerPl-sCnc
+clinical,K,,TR10359-8,
+clinical,KBK,,TR10496-8,
+clinical,KCOM,,TR11439-7,
+clinical,KCOM,,XON10314-3,
+clinical,KOH,,658-5,Calcofluor white XXX
+clinical,LACCSF,,TR10264-0,
+clinical,LACCSF,,2520-5,Lactate CSF-sCnc
+clinical,LACOM,,TR11439-7,
+clinical,LACOM,,XON10635-1,
+clinical,LAMOT,,25458-1,lamoTRIgine SerPl-sCnc
+clinical,LDH,,TR10265-7,
+clinical,LDH,,14804-9,LDH SerPl L to P-cCnc
+clinical,LDL,,22748-8,LDLc SerPl-sCnc
+clinical,LEAD,,14807-2,Lead Bld-sCnc
+clinical,LEADCO,,XON12663-1,
+clinical,LEVE,,48347-9,levETIRAcetam SerPl-sCnc
+clinical,LH,,TR10282-2,
+clinical,LI,,TR10278-0,
+clinical,LIPOA,,2573-4,HDL SerPl-mCnc
+clinical,LKM,,14272-9,LKM Ab Ser Ql
+clinical,LRATIO,,32309-7,Cholest/HDLc SerPl-sRto
+clinical,LYMC,,24105-9,Lymphoma Cells # Bld Manual
+clinical,LYMPH,,732-8,Lymphocytes # Bld Manual
+clinical,MAG,,31522-6,MAG IgM Ser Ql
+clinical,MALAC,,TR10509-8,
+clinical,MALAC,,XON11860-4,
+clinical,MALP,,TR11439-7,
+clinical,MALS,,32700-7,Malaria Smear Bld
+clinical,MALTE,,XON10487-7,
+clinical,MALTH,,10182-4,Hx of Travel
+clinical,MANGS,,25467-2,Manganese SerPl-sCnc
+clinical,MCHR,,71694-4,Hgb Retic Qn Auto
+clinical,MENT,,49671-1,N men DNA XXX Ql NAA+probe
+clinical,MEOH,,14835-3,Methanol SerPl-sCnc
+clinical,MERCWB,,25170-2,Mercury Bld-sCnc
+clinical,MESO,,40650-4,Mesothl Cell/leuk NFr Bld Manual
+clinical,METHB,,TR10299-6,
+clinical,METHB,,2619-5,MetHgb RBC Ql
+clinical,MG,,TR10283-0,
+clinical,MITOAB,,TR10648-4,
+clinical,MITOAB,,14236-4,Mitochondria Ab Ser Ql
+clinical,MIXCOM,,TR11944-6,
+clinical,MIXCOM,,XON10296-2,
+clinical,MP2,,35559-4,M Protein 2 SerPl Elph-mCnc
+clinical,MP2T,,13348-8,Monoclon Band Obs SerPl
+clinical,MPGM2,,35561-0,M Protein 2 Ur-mCnc
+clinical,MPGRAM,,40661-1,M Protein Ur Elph-mCnc
+clinical,MPOQ,,29643-4,Myeloperoxidase Ab Ser Ql IA
+clinical,MPRAT2,,44932-2,M Protein 2 MFr SerPl Elph
+clinical,MPRTIO,,34366-5,Prot/Creat Ur-Rto
+clinical,MPT,,13348-8,Monoclon Band Obs SerPl
+clinical,MPTP2,,51437-2,M Protein 2 Ur Elph-mCnc
+clinical,MPTYP,,13348-8,Monoclon Band Obs SerPl
+clinical,MTX,,TR10300-2,
+clinical,MUSK,,51763-1,MuSK Ab Titr SerPl
+clinical,NCA,,19072-8,Ca-I adj pH7.4 SerPl-sCnc
+clinical,NCC,,58906-9,Nuc cell # CSF Manual
+clinical,NCC2,,58906-9,Nuc cell # CSF Manual
+clinical,NDNA,,TR10636-9,
+clinical,NDNA,,31348-6,dsDNA Ab Ser Ql
+clinical,NERC,,30392-5,nRBC # Bld
+clinical,NEUT,,753-4,Neutrophils # Bld Manual
+clinical,NMDAS,,XON13182-1,
+clinical,NMO,,43638-6,AQP4 H2O channel IgG SerPl Ql
+clinical,NTM1,,30164-8,Nut Allerg Mix IgE Ql
+clinical,OCBLD,,799-7,RBC # Ur Manual
+clinical,OPDT,,41445-8,Deprecated O+P XXX
+clinical,ORGANU,,2676-5,Organic Acids Ur Ql
+clinical,OS,,48557-3,Origin Stone
+clinical,OSM,,TR10329-1,
+clinical,OXALU,,15086-2,Oxalate Ur-sCnc
+clinical,PACOM,,XON10314-3,
+clinical,PALB,,TR10360-6,
+clinical,PANCAS,,8088-7,ENA PCNA Ab Ser Ql
+clinical,PC,,TR10579-1,
+clinical,PC,,6006-1,Prot C PPP Chro-aCnc
+clinical,PCOM,,TR11439-7,
+clinical,PCOM,,XON10323-4,
+clinical,PCOMF,,TR11439-7,
+clinical,PCOMF,,XON10323-4,
+clinical,PCRC12,,XON10441-4,
+clinical,PCRC21,,XON10441-4,
+clinical,PCRC24,,XON10441-4,
+clinical,PCRC29,,XON10441-4,
+clinical,PCRC31,,XON10441-4,
+clinical,PCRC33,,XON10441-4,
+clinical,PCRC35,,XON10441-4,
+clinical,PCRC36,,XON10441-4,
+clinical,PCRC38,,XON10441-4,
+clinical,PCRC39,,XON10441-4,
+clinical,PCRC40,,XON10441-4,
+clinical,PCRC44,,XON10441-4,
+clinical,PCRC44,,XON10441-4,
+clinical,PCRC45,,XON10441-4,
+clinical,PCRC5,,XON10441-4,
+clinical,PECOM,,TR11847-1,
+clinical,PECOM,,XON10321-8,
+clinical,PENY,,TR10346-5,
+clinical,PENY,,14877-5,Phenytoin SerPl-sCnc
+clinical,PERCT2,,59800-3,M Protein 2 MFr Ur Elph
+clinical,PFIONC,,XON12171-5,
+clinical,PFNCA,,XON12860-3,
+clinical,PGND,,6217-4,Pigeon Drop IgE Qn
+clinical,PGNF,,10948-8,Pigeon Feather IgE Qn
+clinical,PH,,TR11470-2,
+clinical,PHNO,,TR10340-8,
+clinical,PHNO,,14874-2,PHENobarb SerPl-sCnc
+clinical,PHOS,,TR10348-1,
+clinical,PHOS,,14879-1,Phosphate SerPl-sCnc
+clinical,PHYA,,22671-2,Phytanate SerPl-sCnc
+clinical,PKAS,,2912-4,PK RBC-cCnc
+clinical,PLTAB,,TR10577-5,
+clinical,PLTAB,,24375-8,Platelet Ab Ser Ql
+clinical,PLTE,,49497-1,Platelet # Bld Est
+clinical,PLTEB,,49497-1,Platelet # Bld Est
+clinical,PLVIS,,TR10465-3,
+clinical,PLVIS,,4691-2,Visc Plas
+clinical,PLYM,,6863-5,Prolymphocytes # Bld Manual
+clinical,PROG,,TR10366-3,
+clinical,PROG,,14890-8,Progest SerPl-sCnc
+clinical,PROIN,,27882-0,Proinsulin SerPl-sCnc
+clinical,PROL,,TR10368-9,
+clinical,PRRTF,,6202-6,Parrot Feather IgE Qn
+clinical,PSA,,TR10372-1,
+clinical,PSFREE,,TR11442-1,
+clinical,PSFREE,,5889-1,Prot S Free PPP-aCnc
+clinical,PT2,,TR11664-0,
+clinical,PT2,,5956-8,PT imm NP Cont PPP
+clinical,PTH,,TR10336-6,
+clinical,PTH,,47180-5,PTH BS SerPl-sCnc
+clinical,PTHPEP,,2729-2,PTH Related Prot SerPl-mCnc
+clinical,PTT,,TR10537-9,
+clinical,PTT2,,TR10538-7,
+clinical,PTTPF,,TR10537-9,
+clinical,PYRKIN,,2913-2,PK SerPl-cCnc
+clinical,RARAH1,,TR10965-2,
+clinical,RARAH1,,58779-0,Peanut (rAra h) 1 IgE Qn
+clinical,RBCF,,14731-4,Folate RBC-sCnc
+clinical,RENN,,35570-1,Renin Plas-mCnc
+clinical,RES1,,XON10441-4,
+clinical,RES11,,XON10441-4,
+clinical,RES12,,XON10441-4,
+clinical,RES13,,XON10441-4,
+clinical,RES14,,XON10441-4,
+clinical,RES16,,XON10441-4,
+clinical,RES17,,XON10441-4,
+clinical,RES18,,XON10441-4,
+clinical,RES2,,XON10441-4,
+clinical,RES21,,XON10441-4,
+clinical,RES22,,XON10441-4,
+clinical,RES23,,XON10441-4,
+clinical,RES24,,XON10441-4,
+clinical,RES25,,XON10441-4,
+clinical,RES27,,XON10441-4,
+clinical,RES5,,XON10441-4,
+clinical,RES6,,XON10441-4,
+clinical,RES7,,XON10441-4,
+clinical,RES8,,XON10441-4,
+clinical,RES9,,XON10441-4,
+clinical,RETIC,,60474-4,Retics # Auto
+clinical,REV,,59462-2,Clinical biochemist review
+clinical,REVT3,,14929-4,T3Reverse SerPl-sCnc
+clinical,RFN,,TR10662-5,
+clinical,RP,,51632-8,Platelets.reticulated # Bld
+clinical,RSVPT,,40987-0,RSV RNA XXX NAA+probe
+clinical,SAL,,TR10389-5,
+clinical,SAL,,14909-6,Salicylates SerPl-sCnc
+clinical,SAL,,SAL,
+clinical,SBPTNC,,55793-4,Nuc cell # Fld
+clinical,SCOR,,51844-9,Cortis Sal-sCnc
+clinical,SCREA,,14682-9,Creat SerPl-sCnc
+clinical,SELE,,25521-6,Selenium SerPl-sCnc
+clinical,SELECO,,XON12659-9,
+clinical,SEVIS,,TR10465-3,
+clinical,SEVIS,,41241-1,Visc Ser Ql
+clinical,SG,,33513-3,Sp Gr XXX
+clinical,SHBG,,TR10395-2,
+clinical,SIC,,TR10513-0,
+clinical,SIR,,TR11444-7,
+clinical,SITE,,XON10442-2,
+clinical,SLCOM,,TR11439-7,
+clinical,SLCOM,,XON10323-4,
+clinical,SMAB,,TR10670-8,
+clinical,SMT,,TR10670-8,
+clinical,SODS,,54247-2,Drug screen comment Ur-Imp
+clinical,SPIN,,TR11824-0,
+clinical,SPIN,,13591-3,Fact Inhib XXX PPP-aCnc
+clinical,ST,,STL,
+clinical,T3TOT,,14930-2,T3 SerPl-sCnc
+clinical,TAC,,32721-3,Tacrolimus SerPl-mCnc
+clinical,TACRO,,TR10407-5,
+clinical,TACRO,,32721-3,Tacrolimus SerPl-mCnc
+clinical,TBIIG,,40673-6,TSH BII Ser-aCnc
+clinical,TBIL,,TR10065-1,
+clinical,TBIL,,14631-6,Bilirub SerPl-sCnc
+clinical,TCOM,,XON10487-7,
+clinical,TCOMB,,XON10487-7,
+clinical,TCOMC,,XON10487-7,
+clinical,TCOMF,,XON10487-7,
+clinical,TEST,,TR10411-7,
+clinical,TEST,,14913-8,Testost SerPl-sCnc
+clinical,TFER,,TR10435-6,
+clinical,THEO,,TR10415-8,
+clinical,THEO,,14915-3,Theophylline SerPl-sCnc
+clinical,THGLB,,14918-7,Thyroglob SerPl-sCnc
+clinical,THLRBC,,47130-0,Thallium RBC-sCnc
+clinical,THYBGL,,27980-2,T4BG SerPl-sCnc
+clinical,TINTRP,,TR11710-1,
+clinical,TINTRP,,14924-5,Transf React PlasRBC-Imp
+clinical,TITRE,,TR11562-6,
+clinical,TITRE,,15343-7,Bld gp Ab Scn Titr SerPl
+clinical,TITREC,,TR10605-4,
+clinical,TITREC,,14658-9,CA Titr SerPl
+clinical,TOBPOS,,TR10427-3,
+clinical,TOBPRE,,TR10429-9,
+clinical,TOBR,,TR10428-1,
+clinical,TOP,,25541-4,Topiramate SerPl-sCnc
+clinical,TP,,TR10374-7,
+clinical,TPMTC,,XON10336-6,
+clinical,TR36,,XON10441-4,
+clinical,TRIG,,TR10438-0,
+clinical,TRIG,,14927-8,Trigl SerPl-sCnc
+clinical,TROP,,TR10445-5,
+clinical,TS,,33725-3,Tumor site
+clinical,TSH,,TR10421-6,
+clinical,TT,,TR10539-5,
+clinical,TURBID,,20627-6,Turbidity Ur Ql
+clinical,U5HICT,,14684-5,Creat 24h Ur-sRate
+clinical,U5HIL,,25971-3,5OH-indoleacetate 24h Ur-sCnc
+clinical,UALCOM,,XON10336-6,
+clinical,UALCR,,25886-3,Creat 24h Ur-sCnc
+clinical,UCAN,,3427-2,Cannabinoids Ur Ql
+clinical,UCATCT,,14684-5,Creat 24h Ur-sRate
+clinical,UCITCT,,25886-3,Creat 24h Ur-sCnc
+clinical,UCOC,,XON10462-0,
+clinical,UCRYS,,38459-4,Crystals #/area UrnS HPF
+clinical,UEPI,,46133-5,Epi Cells #/area UrnS LPF
+clinical,UG,,15076-3,Glucose Ur-sCnc
+clinical,UHSID,,TR10506-4,
+clinical,UHSID,,17783-2,Hemosiderin Ur Ql Micro
+clinical,UKET,,22702-5,Ketones Ur Strip-sCnc
+clinical,UMDMA,,14267-9,MDMA Ur Ql
+clinical,UMETCT,,14684-5,Creat 24h Ur-sRate
+clinical,UMUC,,46421-4,Mucous Threads #/area UrnS HPF
+clinical,UNIC,,48704-1,Unident Cells # Bld
+clinical,UNOMER,,44924-9,Normetanephrine/Creat 24h Ur-sRto
+clinical,UOSM,,TR10329-1,
+clinical,UPECOM,,49299-1,Prot Pattern Ur Elph-Imp
+clinical,UPH,,TR11470-2,
+clinical,UR2,,22664-7,Urea SerPl-sCnc
+clinical,URALAT,,25301-3,Alanine 24h Ur-sRate
+clinical,URALU,,52915-6,Aluminum Ur-sCnc
+clinical,URAMNO,,14596-1,Amitrip+Nor Ur Ql
+clinical,URCA,,TR10085-9,
+clinical,URCA,,2004-0,Calcium Ur-sCnc
+clinical,URCAT,,14637-3,Calcium 24h Ur-sRate
+clinical,URCL,,TR10116-2,
+clinical,URCLT,,2079-2,Chloride 24h Ur-sRate
+clinical,URCO1,,45313-4,Copro1/Creat Ur-sRto
+clinical,URCOPT,,14666-2,Copper 24h Ur-sRate
+clinical,URCORT,,14676-1,Cortis F 24h Ur-sRate
+clinical,URCRE,,22700-9,Urea Ur-sCnc
+clinical,URCREA,,TR10149-3,
+clinical,URCREA,,14683-7,Creat Ur-sCnc
+clinical,URCRT,,14684-5,Creat 24h Ur-sRate
+clinical,URDOPT,,44918-1,DOPamine/Creat 24h Ur-sRto
+clinical,URE,,TR10451-3,
+clinical,URE,,22664-7,Urea SerPl-sCnc
+clinical,UREPI,,24522-5,Epineph/Creat Ur-sRto
+clinical,URIC,,TR10450-5,
+clinical,URIC,,14933-6,Urate SerPl-sCnc
+clinical,URK,,TR10359-8,
+clinical,URKT,,2829-0,Potassium 24h Ur-sRate
+clinical,URMALR,,32294-1,Albumin/Creat Ur-Rto
+clinical,URMG,,TR10283-0,
+clinical,URMG,,2598-1,Magnesium Ur-sCnc
+clinical,URMGT,,2599-9,Magnesium 24h Ur-sRate
+clinical,URNA,,TR10397-8,
+clinical,UROBIL,,34928-2,Urobilinogen Ur Strip-sCnc
+clinical,URPHOS,,TR10348-1,
+clinical,URPHOS,,13539-2,Phosphate Ur-sCnc
+clinical,URPHOT,,14881-7,Phosphate 24h Ur-sRate
+clinical,URPR,,TR10374-7,
+clinical,URUREA,,TR10451-3,
+clinical,URUREA,,22700-9,Urea Ur-sCnc
+clinical,URURET,,25550-5,Urea 24h Ur-sRate
+clinical,URURIC,,TR10450-5,
+clinical,URURIC,,14934-4,Urate Ur-sCnc
+clinical,URURIT,,14935-1,Urate 24h Ur-sRate
+clinical,URVMAR,,14948-4,VMA/Creat Ur-sRto
+clinical,UTECH,,XON10487-7,
+clinical,UVMACT,,14684-5,Creat 24h Ur-sRate
+clinical,VALP,,TR10457-0,
+clinical,VALP,,14946-8,Valproate SerPl-sCnc
+clinical,VANC,,TR10461-2,
+clinical,VANCPO,,TR10460-4,
+clinical,VANCPR,,TR10462-0,
+clinical,VD25,,14635-7,25(OH)D3 SerPl-sCnc
+clinical,VD25K,,14635-7,25(OH)D3 SerPl-sCnc
+clinical,VITB12,,TR10138-6,
+clinical,VITB12,,14685-2,Vit B12 SerPl-sCnc
+clinical,VOLCOM,,XON10336-6,
+clinical,VORI,,38370-3,Voriconazole SerPl-mCnc
+clinical,VTM125,,60493-4,Calcidiol+Calciferol SerPl-sCnc
+clinical,VTMA,,14905-4,Vit A SerPl-sCnc
+clinical,VTMC,,14622-5,Vit C SerPl-sCnc
+clinical,VTME,,29747-3,Tocopherols SerPl-sCnc
+clinical,VWDC,,TR11439-7,
+clinical,VWDC,,48595-3,von Willebrand eval PPP-Imp
+clinical,VWFACM,,73978-9,vWf:Ac PPP IA-aCnc
+clinical,VWFAGM,,41867-3,vWF Ag PPP-aCnc
+clinical,VWFM,,TR10591-6,
+clinical,VWFM,,6013-7,vWF multimers PPP IB
+clinical,VZT,,11483-5,VZV DNA XXX Ql NAA+probe
+clinical,WBPORQ,,15093-8,FEP Bld-sCnc
+clinical,ZIN,,14955-9,Zinc SerPl-sCnc
+clinical,ZINCOM,,XON12659-9,
+clinical,A1AT,,TR10603-9,
+clinical,A2MG,,TR10022-2,
+clinical,ACARNP,,TR11689-7,
+clinical,ACARNU,,TR11689-7,
+clinical,ACCARN,,TR11689-7,
+clinical,ACE,,TR10041-2,
+clinical,ACECSF,,TR10041-2,
+clinical,ACRAB,,TR10621-1,
+clinical,ACTH,,TR10008-1,
+clinical,ADH,,TR10042-0,
+clinical,AFBS,,TR11730-9,
+clinical,AGALAC,,TR12114-5,
+clinical,ALDOS,,TR10015-6,
+clinical,ALPISO,,TR10017-2,
+clinical,ALUM,,TR10024-8,
+clinical,AMIO,,TR10031-3,
+clinical,AMIT,,TR10032-1,
+clinical,AMYISO,,TR10039-6,
+clinical,ANCAAB,,TR10653-4,
+clinical,ANISAK,,TR11142-7,
+clinical,ANTIXA,,TR10560-1,
+clinical,APOA1,,TR10045-3,
+clinical,APOB,,TR10046-1,
+clinical,ARAHP,,TR10965-2,
+clinical,ARBS,,TR11688-9,
+clinical,ARS,,TR10049-5,
+clinical,ARSULF,,TR10110-5,
+clinical,ASOT,,TR11445-4,
+clinical,ASPARA,,TR11184-9,
+clinical,ASPERN,,TR11127-8,
+clinical,ASPFUM,,TR11128-6,
+clinical,ATAG,,TR11383-7,
+clinical,B2GLPR,,TR10633-6,
+clinical,BACTS,,TR11718-4,
+clinical,BALDIF,,TR11392-8,
+clinical,BGALAC,,TR12073-3,
+clinical,BGAS,,TR11390-2,
+clinical,BGLUCO,,TR11712-7,
+clinical,BICA,,TR10086-7,
+clinical,BKVQ,,TR12353-9,
+clinical,BLOC,,TR11963-6,
+clinical,BM,,TR11439-7,
+clinical,BNPNTP,,TR11434-8,
+clinical,BPORQ,,TR10357-2,
+clinical,BSALP,,TR11380-3,
+clinical,BTRANS,,TR10059-4,
+clinical,C1EST,,TR10607-0,
+clinical,C1ESTF,,TR10607-0,
+clinical,C1QB,,TR11420-7,
+clinical,C2,,TR10609-6,
+clinical,C6,,TR10613-8,
+clinical,CA125,,TR10088-3,
+clinical,CA153,,TR10090-9,
+clinical,CA199,,TR10092-5,
+clinical,CABGAS,,TR11390-2,
+clinical,CADBLD,,TR10080-0,
+clinical,CALBAT,,TR10412-5,
+clinical,CALC,,TR10087-5,
+clinical,CALCIT,,TR10083-4,
+clinical,CALPRO,,TR12040-2,
+clinical,CARDA,,TR10524-7,
+clinical,CARN,,TR10106-3,
+clinical,CATECH,,TR10108-9,
+clinical,CBC,,TR10477-8,
+clinical,CCPAB,,TR11643-4,
+clinical,CDIFFP,,TR12248-1,
+clinical,CEA,,TR10105-5,
+clinical,CER,,TR10112-1,
+clinical,CH50,,TR10617-9,
+clinical,CHE,,TR10123-8,
+clinical,CHPN,,TR10688-0,
+clinical,CHRMGA,,TR11622-8,
+clinical,CHRMWB,,TR10128-7,
+clinical,CHTC,,TR10689-8,
+clinical,CLAT,,TR11511-3,
+clinical,CLBGAS,,TR11390-2,
+clinical,CLOBAZ,,TR10132-9,
+clinical,CLON,,TR10134-5,
+clinical,CLOZ,,TR10136-0,
+clinical,CMP,,TR11801-8,
+clinical,CMV,,TR12210-1,
+clinical,CMVQ,,TR12251-5,
+clinical,COBWB,,TR10140-2,
+clinical,COLDAG,,TR10605-4,
+clinical,COP,,TR10141-0,
+clinical,COVID,,TR12936-1,
+clinical,CPBGAS,,TR11390-2,
+clinical,CPEP,,TR10079-2,
+clinical,CPOPCR,,TR11748-1,
+clinical,CRAB,,TR10987-6,
+clinical,CRCL,,TR10150-1,
+clinical,CRYO,,TR10622-9,
+clinical,CSFCC,,TR10476-0,
+clinical,CSFCC2,,TR10476-0,
+clinical,CSFDIF,,TR11392-8,
+clinical,CSFGP,,TR11801-8,
+clinical,CTNGN,,TR11749-9,
+clinical,CVBGAS,,TR11390-2,
+clinical,CYAN,,TR11405-8,
+clinical,CYAOUT,,TR10152-7,
+clinical,CYSTC,,TR10153-5,
+clinical,DATEGE,,TR11210-2,
+clinical,DDI,,TR10541-1,
+clinical,DFAP,,TR10719-3,
+clinical,DIFF,,TR10487-7,
+clinical,DIPHEN,,TR10165-9,
+clinical,DRUGS,,TR10169-1,
+clinical,EBVQ,,TR12233-3,
+clinical,ELASF,,TR11695-4,
+clinical,ELCFU,,TR11801-8,
+clinical,ELCGU,,TR11801-8,
+clinical,ENA,,TR10639-3,
+clinical,ENASCR,,TR10639-3,
+clinical,ENTERO,,TR11874-5,
+clinical,EPO,,TR10172-5,
+clinical,F10,,TR10548-6,
+clinical,F11,,TR10549-4,
+clinical,F12,,TR10550-2,
+clinical,F13,,TR10552-8,
+clinical,F2,,TR10543-7,
+clinical,F5,,TR10545-2,
+clinical,F7,,TR10546-0,
+clinical,F8,,TR10547-8,
+clinical,F9,,TR10544-5,
+clinical,FFA,,TR10184-0,
+clinical,FFATS,,TR10183-2,
+clinical,FLALB,,TR10010-7,
+clinical,FLAMYL,,TR10038-8,
+clinical,FLC,,TR11636-8,
+clinical,FLC3,,TR10610-4,
+clinical,FLC4,,TR10611-2,
+clinical,FLCC,,TR10476-0,
+clinical,FLCREA,,TR10149-3,
+clinical,FLDCHM,,TR11801-8,
+clinical,FLDIF,,TR11392-8,
+clinical,FLEL,,TR11663-2,
+clinical,FLGLU,,TR10220-2,
+clinical,FLLDH,,TR10265-7,
+clinical,FLPH,,TR11470-2,
+clinical,FLTP,,TR10374-7,
+clinical,FLURE,,TR10451-3,
+clinical,FMH,,TR10496-8,
+clinical,FPENY,,TR10347-3,
+clinical,FPSAB,,TR10373-9,
+clinical,FT3,,TR10441-4,
+clinical,FUNC,,TR10699-7,
+clinical,FUNS,,TR11720-0,
+clinical,GABA,,TR10199-8,
+clinical,GADAB,,TR10642-7,
+clinical,GALAC,,TR12072-5,
+clinical,GAS,,TR10206-1,
+clinical,GBMABS,,TR10641-9,
+clinical,GH,,TR10398-6,
+clinical,GLUPOC,,TR10220-2,
+clinical,GM1MAB,,TR10632-8,
+clinical,GMC,,TR12183-0,
+clinical,GRAPE,,TR11001-5,
+clinical,HA,,TR10643-5,
+clinical,HAPTEL,,TR10227-7,
+clinical,HBEL,,TR10503-1,
+clinical,HELP,,TR11616-0,
+clinical,HIT,,TR10562-7,
+clinical,HIVPCR,,TR10843-1,
+clinical,HIVVL,,TR11916-4,
+clinical,HOMOCY,,TR10232-7,
+clinical,HRDNA,,TR10821-7,
+clinical,HSVZV,,TR10705-2,
+clinical,IA2,,TR10656-7,
+clinical,ICA,,TR10086-7,
+clinical,IFA,,TR10645-0,
+clinical,IGD,,TR10241-8,
+clinical,IGEOUT,,TR10242-6,
+clinical,IGF1,,TR10254-1,
+clinical,IGFBP3,,TR11467-8,
+clinical,IGGSUB,,TR10244-2,
+clinical,INFAB,,TR12261-4,
+clinical,INSAB,,TR10644-3,
+clinical,IPS,,TR11630-1,
+clinical,ITCON,,TR12165-7,
+clinical,LA,,TR10565-0,
+clinical,LAM,,TR10268-1,
+clinical,LCFAT,,TR10185-7,
+clinical,LEADS,,TR10269-9,
+clinical,LEGCA,,TR11731-7,
+clinical,LEVET,,TR12055-0,
+clinical,LIPASB,,TR10273-1,
+clinical,LIPID,,TR10274-9,
+clinical,LKMAB,,TR10647-6,
+clinical,LPA,,TR10275-6,
+clinical,MAGAB,,TR10649-2,
+clinical,MAL,,TR10509-8,
+clinical,MANG,,TR10284-8,
+clinical,MCKMB,,TR10148-5,
+clinical,MENPCR,,TR12098-0,
+clinical,MERC,,TR10290-5,
+clinical,METHMA,,TR10305-1,
+clinical,MONOT,,TR10836-5,
+clinical,MPA,,TR10311-9,
+clinical,MPD,,TR10712-8,
+clinical,MRSAS,,TR10710-2,
+clinical,MUSKAB,,TR10673-2,
+clinical,MVBGAS,,TR11390-2,
+clinical,MYD,,TR11738-2,
+clinical,MYGLOB,,TR10312-7,
+clinical,NMDA,,TR12411-5,
+clinical,NMDA,,XON13182-1 ,
+clinical,NMDACF,,TR12411-5,
+clinical,NMOIGG,,TR12166-5,
+clinical,NOROV,,TR12603-7,
+clinical,NTMX1,,TR11666-5,
+clinical,OBT,,TR10322-6,
+clinical,OCBCSF,,TR10377-0,
+clinical,OP,,TR10717-7,
+clinical,PAMINO,,TR10029-7,
+clinical,PANAB,,TR10656-7,
+clinical,PARAS,,TR11721-8,
+clinical,PARNAB,,TR11677-2,
+clinical,PAROTF,,TR10935-5,
+clinical,PART,,TR11771-3,
+clinical,PCRRT,,TR12087-3,
+clinical,PFICA,,TR10086-7,
+clinical,PGEOND,,TR10940-5,
+clinical,PGEONF,,TR11159-1,
+clinical,PHYTAN,,TR10350-7,
+clinical,PINV,,TR11807-5,
+clinical,PKA,,TR10382-0,
+clinical,PLHB,,TR10505-6,
+clinical,PLTAG,,TR10576-7,
+clinical,PN,,TR10874-6,
+clinical,PROINS,,TR10367-1,
+clinical,PRVKNS,,TR10382-0,
+clinical,PT,,TR10540-3,
+clinical,PTHRP,,TR11699-6,
+clinical,RBCFOL,,TR10192-3,
+clinical,RECIRC,,TR11571-7,
+clinical,REN,,TR10386-1,
+clinical,RESPC,,TR11982-6,
+clinical,RET,,TR10512-2,
+clinical,RETICP,,TR10512-2,
+clinical,ROCT,,TR11801-8,
+clinical,ROHT,,TR11439-7,
+clinical,ROKT,,TR11797-8,
+clinical,RSV,,TR11772-1,
+clinical,SALCOR,,TR11403-3,
+clinical,SBPCC,,TR10476-0,
+clinical,SCSF,,TR11778-8,
+clinical,SEL,,TR10392-9,
+clinical,SKINAB,,TR11625-1,
+clinical,SOPLAB,,TR10577-5,
+clinical,SPE,,TR10378-8,
+clinical,SSC,,TR11935-4,
+clinical,STREPT,,TR12167-3,
+clinical,STROKB,,TR11801-8,
+clinical,T3REV,,TR10442-2,
+clinical,T3T,,TR10439-8,
+clinical,TBG,,TR10423-2,
+clinical,TBII,,TR10423-2,
+clinical,THGLOB,,TR10420-8,
+clinical,THLERC,,TR10414-1,
+clinical,TOPIR,,TR10433-1,
+clinical,TPMT,,TR12054-3,
+clinical,TROPHS,,TR12690-4,
+clinical,TRXOTH,,TR11710-1,
+clinical,TRXRC,,TR11710-1,
+clinical,TRYPSE,,TR10681-5,
+clinical,TSAT,,TR11706-9,
+clinical,TTGIGA,,TR12039-4,
+clinical,TYPSC,,TR11843-0,
+clinical,U5HIAA,,TR10078-4,
+clinical,UALDOS,,TR10015-6,
+clinical,UALUM,,TR10024-8,
+clinical,UAMINO,,TR10029-7,
+clinical,UCA,,TR10085-9,
+clinical,UCATS,,TR10108-9,
+clinical,UCIT,,TR10131-1,
+clinical,UCOP,,TR10141-0,
+clinical,UCOR,,TR11403-3,
+clinical,UDOPA,,TR10167-5,
+clinical,UDS,,TR12185-5,
+clinical,UDSHSC,,TR12185-5,
+clinical,UDSN,,TR12185-5,
+clinical,UEL,,TR11663-2,
+clinical,UMALB,,TR11430-6,
+clinical,UMETS,,TR10292-1,
+clinical,UMG,,TR10283-0,
+clinical,UMIC,,TR10454-7,
+clinical,UMU,,TR11612-9,
+clinical,UPBGT,,TR10356-4,
+clinical,UPEL,,TR11807-5,
+clinical,UPHOS,,TR10348-1,
+clinical,UPR,,TR10374-7,
+clinical,UPREG,,TR10127-9,
+clinical,URACR,,TR11937-0,
+clinical,URALUM,,TR10024-8,
+clinical,URCOP,,TR10141-0,
+clinical,URDSO,,TR12185-5,
+clinical,UREA1,,TR10451-3,
+clinical,UREA2,,TR10451-3,
+clinical,UREL,,TR11663-2,
+clinical,URHVA,,TR10234-3,
+clinical,URINE,,TR11798-6,
+clinical,URMYOG,,TR10312-7,
+clinical,URORG,,TR10326-7,
+clinical,UROXAL,,TR10331-7,
+clinical,URPEL,,TR11807-5,
+clinical,URPOR,,TR10357-2,
+clinical,URVMA,,TR10463-8,
+clinical,UUREA,,TR10451-3,
+clinical,UURIC,,TR10450-5,
+clinical,UVMA,,TR10463-8,
+clinical,VAGS,,TR10686-4,
+clinical,VBG,,TR11390-2,
+clinical,VBGAS,,TR11390-2,
+clinical,VD125,,TR10084-2,
+clinical,VD25OH,,TR10082-6,
+clinical,VDET,,TR10726-8,
+clinical,VID,,TR10726-8,
+clinical,VITA,,TR10387-9,
+clinical,VITB1,,TR10416-6,
+clinical,VITB6,,TR10380-4,
+clinical,VITC,,TR10050-3,
+clinical,VITE,,TR10431-5,
+clinical,VOLAT,,TR10012-3,
+clinical,VORIC,,TR12169-9,
+clinical,VWS,,TR10593-2,
+clinical,WNILE,,TR11787-9,
+clinical,XM,,TR11843-0,
+clinical,ZINC,,TR10468-7,

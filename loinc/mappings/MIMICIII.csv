@@ -1,51 +1,51 @@
-local_label,loinc_code,category,ccdef_label,loinc_shortname
-HR,8867-4,numeric,HR,Heart rate
-PULSE,8867-4,numeric,HR,Heart rate
-RESP,76174-2,numeric,RR,Resp rate PulseOx.pleth
-%SpO2,76522-2,numeric,SPO2,Transmission % BldA PulseOx
-dSpO2,76522-2,numeric,SPO2,Transmission % BldA PulseOx
-SpO2,76522-2,numeric,SPO2,Transmission % BldA PulseOx
-SpO2 L,76522-2,numeric,SPO2,Transmission % BldA PulseOx
-SpO2 R,76522-2,numeric,SPO2,Transmission % BldA PulseOx
-NBPSys,76534-7,numeric,NIBP-S,BP sys by Noninvasive
-NBP Sys,76534-7,numeric,NIBP-S,BP sys by Noninvasive
-NBP SYS,76534-7,numeric,NIBP-S,BP sys by Noninvasive
-NBPDias,76535-4,numeric,NIBP-D,BP dias by Noninvasive
-NBP Dias,76535-4,numeric,NIBP-D,BP dias by Noninvasive
-NBP DIAS,76535-4,numeric,NIBP-D,BP dias by Noninvasive
-NBPMean,76536-2,numeric,NIBP-M,BP mean by Noninvasive
-NBP Mean,76536-2,numeric,NIBP-M,BP mean by Noninvasive
-NBP MEAN,76536-2,numeric,NIBP-M,BP mean by Noninvasive
-NBP,76536-2,numeric,NIBP-M,BP mean by Noninvasive
-ABP SYS,76215-3,numeric,ABP-S,Invasive sys BP
-ABP Sys,76215-3,numeric,ABP-S,Invasive sys BP
-ABPSys,76215-3,numeric,ABP-S,Invasive sys BP
-ART Sys,76215-3,numeric,ABP-S,Invasive sys BP
-ABP DIAS,76213-8,numeric,ABP-D,Invasive dias BP
-ABP Dias,76213-8,numeric,ABP-D,Invasive dias BP
-ABPDias,76213-8,numeric,ABP-D,Invasive dias BP
-ABP MEAN,76214-6,numeric,ABP-M,Invasive mean BP
-ABP Mean,76214-6,numeric,ABP-M,Invasive mean BP
-ABPMean,76214-6,numeric,ABP-M,Invasive mean BP
-ART Mean,76214-6,numeric,ABP-M,Invasive mean BP
-ABP,76214-6,numeric,ABP-M,Invasive mean BP
-CVP,60985-9,numeric,CVP,CVP
-PAP SYS,,numeric,,
-PAP Sys,,numeric,,
-PAPSys,,numeric,,
-PAP DIAS,,numeric,,
-PAP Dias,,numeric,,
-PAPDias,,numeric,,
-PAP MEAN,,numeric,,
-PAP Mean,,numeric,,
-PAPMean,,numeric,,
-PAWP,75994-4,numeric,,
-AOBP Sys,,numeric,,
-AOBP Dias,,numeric,,
-AOBP Mean,,numeric,,
-ART,76212-0,waveform,ABP,Invasive BP
-PAP,76284-9,waveform,,
-CVP,60985-9,waveform,CVP,CVP
+category,local_label,ccdef_label,loinc_code,loinc_shortname
+numeric,HR,HR,8867-4,Heart rate
+numeric,PULSE,HR,8867-4,Heart rate
+numeric,RESP,RR,76174-2,Resp rate PulseOx.pleth
+numeric,%SpO2,SPO2,76522-2,Transmission % BldA PulseOx
+numeric,dSpO2,SPO2,76522-2,Transmission % BldA PulseOx
+numeric,SpO2,SPO2,76522-2,Transmission % BldA PulseOx
+numeric,SpO2 L,SPO2,76522-2,Transmission % BldA PulseOx
+numeric,SpO2 R,SPO2,76522-2,Transmission % BldA PulseOx
+numeric,NBPSys,NIBP-S,76534-7,BP sys by Noninvasive
+numeric,NBP Sys,NIBP-S,76534-7,BP sys by Noninvasive
+numeric,NBP SYS,NIBP-S,76534-7,BP sys by Noninvasive
+numeric,NBPDias,NIBP-D,76535-4,BP dias by Noninvasive
+numeric,NBP Dias,NIBP-D,76535-4,BP dias by Noninvasive
+numeric,NBP DIAS,NIBP-D,76535-4,BP dias by Noninvasive
+numeric,NBPMean,NIBP-M,76536-2,BP mean by Noninvasive
+numeric,NBP Mean,NIBP-M,76536-2,BP mean by Noninvasive
+numeric,NBP MEAN,NIBP-M,76536-2,BP mean by Noninvasive
+numeric,NBP,NIBP-M,76536-2,BP mean by Noninvasive
+numeric,ABP SYS,ABP-S,76215-3,Invasive sys BP
+numeric,ABP Sys,ABP-S,76215-3,Invasive sys BP
+numeric,ABPSys,ABP-S,76215-3,Invasive sys BP
+numeric,ART Sys,ABP-S,76215-3,Invasive sys BP
+numeric,ABP DIAS,ABP-D,76213-8,Invasive dias BP
+numeric,ABP Dias,ABP-D,76213-8,Invasive dias BP
+numeric,ABPDias,ABP-D,76213-8,Invasive dias BP
+numeric,ABP MEAN,ABP-M,76214-6,Invasive mean BP
+numeric,ABP Mean,ABP-M,76214-6,Invasive mean BP
+numeric,ABPMean,ABP-M,76214-6,Invasive mean BP
+numeric,ART Mean,ABP-M,76214-6,Invasive mean BP
+numeric,ABP,ABP-M,76214-6,Invasive mean BP
+numeric,CVP,CVP,60985-9,CVP
+numeric,PAP SYS,,,
+numeric,PAP Sys,,,
+numeric,PAPSys,,,
+numeric,PAP DIAS,,,
+numeric,PAP Dias,,,
+numeric,PAPDias,,,
+numeric,PAP MEAN,,,
+numeric,PAP Mean,,,
+numeric,PAPMean,,,
+numeric,PAWP,,75994-4,
+numeric,AOBP Sys,,,
+numeric,AOBP Dias,,,
+numeric,AOBP Mean,,,
+waveform,ART,ABP,76212-0,Invasive BP
+waveform,PAP,,76284-9,
+waveform,CVP,CVP,60985-9,CVP
 
 
 

@@ -20,7 +20,6 @@ class Mapping:
     loinc: str
     loinc_sn: str
 
-# FIXME #13 some instance variables/methods should not be public
 
 class LoincMapper:
     """
@@ -142,7 +141,7 @@ class LoincMapper:
         if not comparison.all():
             raise Exception(
                 "Check schema of local_mapping_table (csv). "
-                "Example: Must contain cols category (str), " 
+                "Example: Must contain cols category (str), "
                 "local_label (str), ccdef_label (str), "
                 "loinc_code (str), and loinc_shortname (str)"
             )
@@ -193,11 +192,11 @@ class LoincMapper:
         # check if passed value is invalid for subsetting arrays
         if np.all(sel_rows == False):
             return Mapping(
-                category=["None"], 
+                category=["None"],
                 local=["None"],
                 ccdef="None",
                 loinc="None",
-                loinc_sn="None" 
+                loinc_sn="None",
             )
 
         categories = self._categories[sel_rows]
@@ -215,7 +214,7 @@ class LoincMapper:
             print(f"Mapping returns ccdef_label(s): {ccdef_label.tolist()}")
             print(f"Mapping returns loinc code(s): {loinc_code.tolist()}")
             print(f"Mapping return loinc shortname(s): {loinc_sn.tolist()}")
-            
+
             raise Exception(
                 "Error in mapping table. Multiple return values "
                 "for ccdef label, loinc code and/or loinc shortname. "
@@ -233,7 +232,7 @@ class LoincMapper:
             ],
             ccdef=str("None" if str(ccdef_label[0]) == str(np.nan) else ccdef_label[0]),
             loinc=str("None" if str(loinc_code[0]) == str(np.nan) else loinc_code[0]),
-            loinc_sn=str("None" if str(loinc_sn[0]) == str(np.nan) else loinc_sn[0])
+            loinc_sn=str("None" if str(loinc_sn[0]) == str(np.nan) else loinc_sn[0]),
         )
 
     def local_label(self, value):
@@ -261,6 +260,7 @@ def main():
     print(remote_mapper.loinc_code("75994-4"))  # loinc entry without ccdef
     test = remote_mapper.local_label("NBPSys")
     print("done")
+
 
 if __name__ == "__main__":
     main()

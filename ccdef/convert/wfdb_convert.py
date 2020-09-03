@@ -17,9 +17,9 @@ from ccdef.mapping.loinc import LoincMapper
     - rebuild time index from sample rate and basetime
 '''
 # FIXME #15 where is best entry point for LoincMapper to avoid setting as a global
-mapper = LoincMapper(external_mapping_table="MIMICIII")
 
-def convert_wfdb_numerics (h5f, num_head):
+
+def convert_wfdb_numerics (h5f, num_head, mapper):
     '''
     Convert numerics using wfdb library
     '''
@@ -49,7 +49,7 @@ def convert_wfdb_numerics (h5f, num_head):
     h5f['Numerics/Vitals'].meta = new_meta
 
 
-def convert_wfdb_waveforms (h5f, wave_head):
+def convert_wfdb_waveforms (h5f, wave_head, mapper):
     ''' Convert waveforms using wfdb library '''
     
     wave_record = wfdb.rdrecord(wave_head, sampfrom = 0, sampto = None )
@@ -86,7 +86,7 @@ def scantree(path):
             yield entry
 
 
-def ccdef_from_wfdb(name, dest_path='', numerics=True, waveforms=True, clinical=False):
+def ccdef_from_wfdb(name, dest_path='', numerics=True, waveforms=True, clinical=False, mapper = None):
     
     ''' 
     First deterine if the source is a numeric or waveform record
@@ -145,6 +145,11 @@ def ccdef_from_wfdb(name, dest_path='', numerics=True, waveforms=True, clinical=
     out_name = os.path.join(dest_path,base_name) + '.h5'
     print('Saving to file {}'.format(out_name))
     
+    '''Generate napper using MIMIC III table '''
+
+    if mapper is None:    
+        mapper = LoincMapper(external_mapping_table="MIMICIII")
+    
     with audata.File.new(out_name, time_reference=base_dt, title=record.record_name, 
                    author='Mimic III matched dataset', organization = 'PhysioNet', overwrite=True) as f:
     
@@ -154,11 +159,11 @@ def ccdef_from_wfdb(name, dest_path='', numerics=True, waveforms=True, clinical=
 
         ''' Extract data from the wfdb numerics record if present and numerics=True'''
         if (num_exists & numerics):
-            convert_wfdb_numerics (f, num_head)
+            convert_wfdb_numerics (f, num_head, mapper)
         
         ''' Extract from the wfdb waveforms record if present '''
         if (wave_exists & waveforms):
-            convert_wfdb_waveforms (f, wave_head)
+            convert_wfdb_waveforms (f, wave_head, mapper)
 
 #        wv_head = wfdb.rdheader(wave_head, rd_segments=True )
 
@@ -173,6 +178,9 @@ def convert_files (source, dest_path, numerics=True, waveforms=True, clinical=Fa
     - master records have the pattern p#####.hea
     If recursive is True then crawl subfolders and convert files as above
     '''
+    
+    mapper = LoincMapper(external_mapping_table="MIMICIII")
+    
     if os.path.isfile(source):
         print ('File {} is a file, converting'.format(source))
         # convert
@@ -189,7 +197,7 @@ def convert_files (source, dest_path, numerics=True, waveforms=True, clinical=Fa
             #covert
             print('Converting {}'.format(file))
             ccdef_from_wfdb(file, dest_path=dest_path, numerics=numerics,
-                            waveforms=waveforms, clinical=clinical)
+                            waveforms=waveforms, clinical=clinical, mapper = mapper)
             
 
 if __name__ == '__main__':

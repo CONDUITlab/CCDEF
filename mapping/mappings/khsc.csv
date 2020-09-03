@@ -1,0 +1,25 @@
+local_label,loinc_code,category,ccdef_label,loinc_shortname
+HR,8867-4,numeric,HR,Heart Rate
+SPO2-%,76522-2,numeric,SPO2,Transmission % BldA PulseOx
+NBP-S,76534-7,numeric,NIBP-S,BP sys by Noninvasive
+NBP-D,76535-4,numeric,NIBP-D,BP dias by Noninvasive
+NBP-M,76536-2,numeric,NIBP-M,BP mean by Noninvasive
+AR1-M,76214-6,numeric,ABP-M,Invasive mean BP
+AR2-M,76214-6,numeric,ABP-M,Invasive mean BP
+CVP1,60985-9,numeric,CVP,CVP
+CVP2,60985-9,numeric,CVP,CVP
+ICP1,,numeric,,
+ICP2,,numeric,,
+PA1,,numeric,,
+PA2,,numeric,,
+AR1,76212-0,waveform,ABP,Invasive BP
+AR2,76212-0,waveform,ABP,Invasive BP
+AR3,76212-0,waveform,ABP,Invasive BP
+I,,waveform,ECG-I,ECG Lead I
+II,,waveform,ECG-II,ECG Lead II
+III,,waveform,ECG-III,ECG Lead III
+V,,waveform,ECG-V,ECG Lead V
+SPO2,,waveform,PLETH,Plethysmogram
+CVP1,60985-9,waveform,CVP,CVP
+CVP2,60985-9,waveform,CVP,CVP
+RR,,waveform,,

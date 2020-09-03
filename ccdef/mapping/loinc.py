@@ -16,9 +16,9 @@ import requests
 class Mapping:
     category: list
     local: list
-    loinc: str
     ccdef: str
-
+    loinc: str
+    loinc_sn: str
 
 class LoincMapper:
     """
@@ -33,7 +33,13 @@ class LoincMapper:
         local_mapping_table: str (path)
         external_mapping_table: str
     returns:
-        Mapping(category(list),local(list),loinc(str),ccdef(str))
+        Mapping(
+            category(list),
+            local(list),
+            ccdef(str),
+            loinc(str),
+            loinc_sn:(str)
+        )
 
     Examples:
     
@@ -71,8 +77,9 @@ class LoincMapper:
 
         self.mapping_table = None
         self.local_labels = None
-        self.loinc_codes = None
         self.ccdef_labels = None
+        self.loinc_codes = None
+        self.loinc_sns = None
 
         # Check named kwargs. Expectation is that user provides value
         # for named parameter local_mapping_table or external_mapping_table
@@ -117,11 +124,11 @@ class LoincMapper:
         req_cols = np.sort(
             np.array(
                 [
+                    "category",
                     "local_label",
+                    "ccdef_label",
                     "loinc_code",
                     "loinc_shortname",
-                    "category",
-                    "ccdef_label",
                 ]
             )
         )
@@ -132,16 +139,16 @@ class LoincMapper:
         if not comparison.all():
             raise Exception(
                 "Check schema of local_mapping_table (csv). "
-                "Example: Must contain cols local_label (str), "
-                "loinc_code (str), loinc_shortname (str), "
-                "category (str), and ccdef_label (str)"
+                "Example: Must contain cols category (str), " 
+                "local_label (str), ccdef_label (str), "
+                "loinc_code (str), and loinc_shortname (str)"
             )
 
     @staticmethod
     def download_mapping_table(mapping_table_name):
         print("Downloading list of available mappings from CCDEF.org")
         url = (
-            "https://raw.githubusercontent.com/CONDUITlab/ccdef/master/"
+            "https://raw.githubusercontent.com/CONDUITlab/CCDEF/master/"
             "loinc/mappings/external_mappings.json"
         )
         available_external_mappings = json.loads(requests.get(url).text)
@@ -168,8 +175,9 @@ class LoincMapper:
         """
         self.categories = self.mapping_table["category"].to_numpy()
         self.local_labels = self.mapping_table["local_label"].to_numpy()
-        self.loinc_codes = self.mapping_table["loinc_code"].to_numpy()
         self.ccdef_labels = self.mapping_table["ccdef_label"].to_numpy()
+        self.loinc_codes = self.mapping_table["loinc_code"].to_numpy()
+        self.loinc_sns = self.mapping_table["loinc_shortname"].to_numpy()
 
     def _lookup(self, ref_col, value):
         if ref_col == "local":
@@ -182,7 +190,11 @@ class LoincMapper:
         # check if passed value is invalid for subsetting arrays
         if np.all(sel_rows == False):
             return Mapping(
-                category=["None"], local=["None"], loinc="None", ccdef="None"
+                category=["None"], 
+                local=["None"],
+                ccdef="None",
+                loinc="None",
+                loinc_sn="None" 
             )
 
         categories = self.categories[sel_rows]
@@ -192,15 +204,19 @@ class LoincMapper:
         # if so, print return values and raise exception to
         # notify user that there is a problem in the mapping table.
 
-        loinc_code = np.unique(self.loinc_codes[sel_rows])
         ccdef_label = np.unique(self.ccdef_labels[sel_rows])
+        loinc_code = np.unique(self.loinc_codes[sel_rows])
+        loinc_sn = np.unique(self.loinc_sns[sel_rows])
 
-        if len(loinc_code) > 1 or len(ccdef_label) > 1:
-            print(f"Mapping returns loinc code(s): {loinc_code.tolist()}")
+        if len(loinc_code) > 1 or len(ccdef_label) > 1 or len(loinc_sn) > 1:
             print(f"Mapping returns ccdef_label(s): {ccdef_label.tolist()}")
+            print(f"Mapping returns loinc code(s): {loinc_code.tolist()}")
+            print(f"Mapping return loinc shortname(s): {loinc_sn.tolist()}")
+            
             raise Exception(
                 "Error in mapping table. Multiple return values "
-                "for loinc code and/or ccdef label. Single values expected."
+                "for ccdef label, loinc code and/or loinc shortname. "
+                "Single values expected."
             )
 
         return Mapping(
@@ -212,8 +228,9 @@ class LoincMapper:
                 "None" if str(local_label) == str(np.nan) else str(local_label)
                 for local_label in local_labels
             ],
-            loinc=str("None" if str(loinc_code[0]) == str(np.nan) else loinc_code[0]),
             ccdef=str("None" if str(ccdef_label[0]) == str(np.nan) else ccdef_label[0]),
+            loinc=str("None" if str(loinc_code[0]) == str(np.nan) else loinc_code[0]),
+            loinc_sn=str("None" if str(loinc_sn[0]) == str(np.nan) else loinc_sn[0])
         )
 
     def local_label(self, value):
@@ -239,7 +256,8 @@ def main():
     )  # local_label with no loinc/ccdef mapping
     print(remote_mapper.ccdef_label("BPM"))  # Invalid ccdef_label
     print(remote_mapper.loinc_code("75994-4"))  # loinc entry without ccdef
-
+    test = remote_mapper.local_label("NBPSys")
+    print("done")
 
 if __name__ == "__main__":
     main()

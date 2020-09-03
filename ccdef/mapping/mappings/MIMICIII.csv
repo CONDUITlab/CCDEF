@@ -46,3 +46,7 @@ numeric,AOBP Mean,,,
 waveform,ART,ABP,76212-0,Invasive BP
 waveform,PAP,,76284-9,
 waveform,CVP,CVP,60985-9,CVP
+waveform,I,ECG-I,,ECG Lead I
+waveform,II,ECG-II,,ECG Lead II
+waveform,III,ECG-III,,ECG Lead III
+waveform,V,ECG-V,,ECG Lead V

@@ -124,11 +124,11 @@ class LoincMapper:
         req_cols = np.sort(
             np.array(
                 [
+                    "category",
                     "local_label",
+                    "ccdef_label",
                     "loinc_code",
                     "loinc_shortname",
-                    "category",
-                    "ccdef_label",
                 ]
             )
         )
@@ -139,9 +139,9 @@ class LoincMapper:
         if not comparison.all():
             raise Exception(
                 "Check schema of local_mapping_table (csv). "
-                "Example: Must contain cols local_label (str), "
-                "loinc_code (str), loinc_shortname (str), "
-                "category (str), and ccdef_label (str)"
+                "Example: Must contain cols category (str), " 
+                "local_label (str), ccdef_label (str), "
+                "loinc_code (str), and loinc_shortname (str)"
             )
 
     @staticmethod

@@ -121,11 +121,12 @@ def make_mapping (filename, mapper=None, overwrite=True):
     sarray, saType =  df_to_sarray(signals)
     # test for existance
     if 'Mapping' in f['/'].list()['datasets']:
+        print('Mapping table exists')
         if overwrite:
             del f.hdf['Mapping']
             f.hdf.create_dataset('Mapping', data=sarray, dtype=saType)
         else:
-            print('Mapping table exists, not overwritten')
+            print('Not overwritten')
     else:
         f.hdf.create_dataset('Mapping', data=sarray, dtype=saType)
             

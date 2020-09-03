@@ -141,7 +141,7 @@ class LoincMapper:
     def download_mapping_table(mapping_table_name):
         print("Downloading list of available mappings from CCDEF.org")
         url = (
-            "https://raw.githubusercontent.com/CONDUITlab/CCDEF/master/"
+            "https://raw.githubusercontent.com/CONDUITlab/ccdef/master/"
             "loinc/mappings/external_mappings.json"
         )
         available_external_mappings = json.loads(requests.get(url).text)

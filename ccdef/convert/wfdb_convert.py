@@ -6,6 +6,7 @@ import audata
 import pandas as pd
 import wfdb
 from ccdef.mapping.loinc import LoincMapper
+import ccdef.mapping.mapping
 
 
 '''Todo:
@@ -196,8 +197,12 @@ def convert_files (source, dest_path, numerics=True, waveforms=True, clinical=Fa
         for file in num_headers:
             #covert
             print('Converting {}'.format(file))
-            ccdef_from_wfdb(file, dest_path=dest_path, numerics=numerics,
+            try:
+                ccdef_from_wfdb(file, dest_path=dest_path, numerics=numerics,
                             waveforms=waveforms, clinical=clinical, mapper = mapper)
+                #make mapping - destination file
+            except:
+                print('Error with file {}'.format(file))
             
 
 if __name__ == '__main__':

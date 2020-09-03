@@ -16,7 +16,7 @@ from ccdef.mapping.loinc import LoincMapper
     - integrate clinical values from MIMIC III DB (requires DB credentials and DUA) 
     - rebuild time index from sample rate and basetime
 '''
-# FIXME where is best entry point for LoincMapper to avoid setting as a global
+# FIXME #15 where is best entry point for LoincMapper to avoid setting as a global
 mapper = LoincMapper(external_mapping_table="MIMICIII")
 
 def convert_wfdb_numerics (h5f, num_head):

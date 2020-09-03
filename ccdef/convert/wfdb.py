@@ -5,7 +5,7 @@ import glob
 import audata
 import pandas as pd
 import wfdb
-import loinc
+from ccdef.mapping.loinc import LoincMapper
 
 
 '''Todo:
@@ -16,6 +16,8 @@ import loinc
     - integrate clinical values from MIMIC III DB (requires DB credentials and DUA) 
     - rebuild time index from sample rate and basetime
 '''
+# FIXME where is best entry point for LoincMapper to avoid setting as a global
+mapper = LoincMapper(external_mapping_table="MIMICIII")
 
 def convert_wfdb_numerics (h5f, num_head):
     '''
@@ -28,11 +30,13 @@ def convert_wfdb_numerics (h5f, num_head):
     cols = list(record.sig_name)
     old_meta = h5f['Numerics/Vitals'].meta['columns']
     columns = {}
-    MIMICIII_loinc = loinc.Loinc(external_mapping="MIMICIII")
+   
     for idx, col in enumerate(cols):
+        mapping = mapper.local_label(col)
+        
         col_meta = {}
         col_meta['type'] = old_meta[col]['type']
-        col_meta['LOINC'] = MIMICIII_loinc.numeric(col)
+        col_meta['LOINC'] = mapping.loinc if mapping.loinc is not "None" else None
         col_meta['uom'] = record.units[idx] if record.units is not None else None
         col_meta['scale'] = 1
         col_meta['sample_rate'] = record.fs
@@ -54,13 +58,14 @@ def convert_wfdb_waveforms (h5f, wave_head):
 
     cols = list(wave_record.sig_name)
     old_meta = h5f['Waveforms/Hemodynamics'].meta['columns']
-    MIMICIII_loinc = loinc.Loinc(external_mapping="MIMICIII")
-
+    
     columns = {}
     for idx, col in enumerate(cols):
+        mapping = mapper.local_label(col)
+
         col_meta = {}
         col_meta['type'] = old_meta[col]['type']
-        col_meta['LOINC'] = MIMICIII_loinc.waveform(col)
+        col_meta['LOINC'] = mapping.loinc if mapping.loinc is not "None" else None
         col_meta['uom'] = wave_record.units[idx] if wave_record.units is not None else None
         col_meta['scale'] = 1
         col_meta['sample_rate'] = wave_record.fs

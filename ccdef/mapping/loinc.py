@@ -20,6 +20,8 @@ class Mapping:
     loinc: str
     loinc_sn: str
 
+# FIXME #13 some instance variables/methods should not be public
+
 class LoincMapper:
     """
     Methods to map local entities to LOINC codes and CCDEF. Allows for lookup 
@@ -75,11 +77,12 @@ class LoincMapper:
             "\n"
         )
 
-        self.mapping_table = None
-        self.local_labels = None
-        self.ccdef_labels = None
-        self.loinc_codes = None
-        self.loinc_sns = None
+        self._mapping_table = None
+        self._categories = None
+        self._local_labels = None
+        self._ccdef_labels = None
+        self._loinc_codes = None
+        self._loinc_sns = None
 
         # Check named kwargs. Expectation is that user provides value
         # for named parameter local_mapping_table or external_mapping_table
@@ -92,12 +95,12 @@ class LoincMapper:
             )
         else:
             if "local_mapping_table" in kwargs.keys():
-                mapping_table = self.load_mapping_table(kwargs["local_mapping_table"])
-                self.check_mapping_table_schema(mapping_table)
-                self.mapping_table = mapping_table
+                mapping_table = self._load_mapping_table(kwargs["local_mapping_table"])
+                self._check_mapping_table_schema(mapping_table)
+                self._mapping_table = mapping_table
 
             elif "external_mapping_table" in kwargs.keys():
-                self.mapping_table = self.download_mapping_table(
+                self._mapping_table = self._download_mapping_table(
                     kwargs["external_mapping_table"]
                 )
             else:
@@ -109,12 +112,12 @@ class LoincMapper:
         self._initialize_arrays()
 
     @staticmethod
-    def load_mapping_table(csv_path):
+    def _load_mapping_table(csv_path):
         mapping_table = pd.read_csv(csv_path)
         return mapping_table
 
     @staticmethod
-    def check_mapping_table_schema(mapping_table):
+    def _check_mapping_table_schema(mapping_table):
         """
         Check that local csv mapping file contains local_label, loinc_code,
         loinc_shortname, category, and ccdef_label cols. Raises an exception 
@@ -145,11 +148,11 @@ class LoincMapper:
             )
 
     @staticmethod
-    def download_mapping_table(mapping_table_name):
+    def _download_mapping_table(mapping_table_name):
         print("Downloading list of available mappings from CCDEF.org")
         url = (
-            "https://raw.githubusercontent.com/CONDUITlab/CCDEF/master/"
-            "loinc/mappings/external_mappings.json"
+            "https://raw.githubusercontent.com/CONDUITlab/ccdef/master/"
+            "ccdef/mapping/mappings/external_mappings.json"
         )
         available_external_mappings = json.loads(requests.get(url).text)
 
@@ -173,19 +176,19 @@ class LoincMapper:
         Internal method to extract mapping table cols as numpy 
         arrays and store as instance variables on class. 
         """
-        self.categories = self.mapping_table["category"].to_numpy()
-        self.local_labels = self.mapping_table["local_label"].to_numpy()
-        self.ccdef_labels = self.mapping_table["ccdef_label"].to_numpy()
-        self.loinc_codes = self.mapping_table["loinc_code"].to_numpy()
-        self.loinc_sns = self.mapping_table["loinc_shortname"].to_numpy()
+        self._categories = self._mapping_table["category"].to_numpy()
+        self._local_labels = self._mapping_table["local_label"].to_numpy()
+        self._ccdef_labels = self._mapping_table["ccdef_label"].to_numpy()
+        self._loinc_codes = self._mapping_table["loinc_code"].to_numpy()
+        self._loinc_sns = self._mapping_table["loinc_shortname"].to_numpy()
 
     def _lookup(self, ref_col, value):
         if ref_col == "local":
-            sel_rows = self.local_labels == value
+            sel_rows = self._local_labels == value
         elif ref_col == "loinc":
-            sel_rows = self.loinc_codes == value
+            sel_rows = self._loinc_codes == value
         else:
-            sel_rows = self.ccdef_labels == value
+            sel_rows = self._ccdef_labels == value
 
         # check if passed value is invalid for subsetting arrays
         if np.all(sel_rows == False):
@@ -197,16 +200,16 @@ class LoincMapper:
                 loinc_sn="None" 
             )
 
-        categories = self.categories[sel_rows]
-        local_labels = self.local_labels[sel_rows]
+        categories = self._categories[sel_rows]
+        local_labels = self._local_labels[sel_rows]
 
         # Check if loinc_code and ccdef_label length is > 1
         # if so, print return values and raise exception to
         # notify user that there is a problem in the mapping table.
 
-        ccdef_label = np.unique(self.ccdef_labels[sel_rows])
-        loinc_code = np.unique(self.loinc_codes[sel_rows])
-        loinc_sn = np.unique(self.loinc_sns[sel_rows])
+        ccdef_label = np.unique(self._ccdef_labels[sel_rows])
+        loinc_code = np.unique(self._loinc_codes[sel_rows])
+        loinc_sn = np.unique(self._loinc_sns[sel_rows])
 
         if len(loinc_code) > 1 or len(ccdef_label) > 1 or len(loinc_sn) > 1:
             print(f"Mapping returns ccdef_label(s): {ccdef_label.tolist()}")

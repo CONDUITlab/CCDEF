@@ -12,7 +12,7 @@ import pandas as pd
 import h5py
 import numpy as np
 import audata
-#from ccdef._utils import df_to_sarray
+from ccdef._utils import df_to_sarray
 
 std_signals = []
 
@@ -22,51 +22,8 @@ comp_type = np.dtype([('parameter', dt), ('loinc', dt), ('source_name', dt),
                       ('dataset', dt), ('column', 'i8')])
 """
 
-""" Helper functions """
 
-def df_to_sarray(df):
-    """
-    Convert a pandas DataFrame object to a numpy structured array.
-    Also, for every column of a str type, convert it into 
-    a 'bytes' str literal of length = max(len(col)).
-
-    :param df: the data frame to convert
-    :return: a numpy structured array representation of df
-    """
-    dt = h5py.special_dtype(vlen=str)
-    def make_col_type(col_type, col):
-        try:
-            if 'numpy.object_' in str(col_type.type):
-                maxlens = col.dropna().str.len()
-                if maxlens.any():
-                    maxlen = maxlens.max().astype(int) 
-                    col_type = dt
-                else:
-                    col_type = 'f2'
-            return col.name, col_type
-        except:
-            print(col.name, col_type, col_type.type, type(col))
-            raise
-
-    v = df.values            
-    types = df.dtypes
-    numpy_struct_types = [make_col_type(types[col], df.loc[:, col]) for col in df.columns]
-    dtype = np.dtype(numpy_struct_types)
-    z = np.zeros(v.shape[0], dtype)
-    for (i, k) in enumerate(z.dtype.names):
-        # This is in case you have problems with the encoding, remove the if branch if not
-        try:
-            if dtype[i].str.startswith('|S'):
-                z[k] = df[k].str.encode('latin').astype('S')
-            else:
-                z[k] = v[:, i]
-        except:
-            print(k, v[:, i])
-            raise
-
-    return z, dtype
-
-""" Reading functions """
+#%% reading functions
 
 def numerics (names = '', loincs = '', time = 'relative'):
     
@@ -95,7 +52,7 @@ def waveforms (name = '', loinc='', time='relative'):
     """Waveforms"""
     return
 
-""" Writing/Encoding Functions """
+#%% Writing/Encoding Functions
 
 
 def build_col_dict(dset, category, params):

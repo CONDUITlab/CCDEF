@@ -11,6 +11,18 @@ import numpy as np
 import pandas as pd
 import requests
 
+print(
+    "\n"
+    "***** CCDEF LoincMapper *****\n"
+    "This material contains content from LOINC (http://loinc.org).\n"
+    "LOINC is copyright © 1995-2020, Regenstrief Institute, Inc.\n"
+    "and the Logical Observation Identifiers Names and Codes (LOINC)\n"
+    "Committee and is available at no cost under the license at\n"
+    "http://loinc.org/license. LOINC® is a registered United States\n"
+    "trademark of Regenstrief Institute, Inc."
+    "\n"
+)
+
 
 @dataclass
 class Mapping:
@@ -63,18 +75,6 @@ class LoincMapper:
     """
 
     def __init__(self, **kwargs):
-
-        print(
-            "\n"
-            "***** CCDEF LoincMapper *****\n"
-            "This material contains content from LOINC (http://loinc.org).\n"
-            "LOINC is copyright © 1995-2020, Regenstrief Institute, Inc.\n"
-            "and the Logical Observation Identifiers Names and Codes (LOINC)\n"
-            "Committee and is available at no cost under the license at\n"
-            "http://loinc.org/license. LOINC® is a registered United States\n"
-            "trademark of Regenstrief Institute, Inc."
-            "\n"
-        )
 
         self._mapping_table = None
         self._categories = None

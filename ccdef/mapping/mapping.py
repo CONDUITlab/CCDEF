@@ -77,6 +77,7 @@ def build_col_dict(dset, category, params, mapper):
             col_meta['column'] = idx+1
             col_meta['category'] = category
             col_meta['loinc'] = col_dict[k]['LOINC']
+            col_meta['loinc_name'] = mapper.local_label(k).loinc_sn
             columns[counter] = col_meta
             
     return columns

@@ -37,7 +37,7 @@ def convert_wfdb_numerics (h5f, num_head, mapper):
         
         col_meta = {}
         col_meta['type'] = old_meta[col]['type']
-        col_meta['LOINC'] = mapping.loinc if mapping.loinc is not "None" else None
+        col_meta['LOINC'] = mapping.loinc if mapping.loinc != "None" else None
         col_meta['uom'] = record.units[idx] if record.units is not None else None
         col_meta['scale'] = 1
         col_meta['sample_rate'] = record.fs
@@ -66,7 +66,7 @@ def convert_wfdb_waveforms (h5f, wave_head, mapper):
 
         col_meta = {}
         col_meta['type'] = old_meta[col]['type']
-        col_meta['LOINC'] = mapping.loinc if mapping.loinc is not "None" else None
+        col_meta['LOINC'] = mapping.loinc if mapping.loinc != None else None
         col_meta['uom'] = wave_record.units[idx] if wave_record.units is not None else None
         col_meta['scale'] = 1
         col_meta['sample_rate'] = wave_record.fs
@@ -169,7 +169,7 @@ def ccdef_from_wfdb(name, dest_path='', numerics=True, waveforms=True, clinical=
 #        wv_head = wfdb.rdheader(wave_head, rd_segments=True )
 
 #    return (record,wv_head)
-    return
+    return (out_name)
        
 
 def convert_files (source, dest_path, numerics=True, waveforms=True, clinical=False, recursive=False):
@@ -198,9 +198,9 @@ def convert_files (source, dest_path, numerics=True, waveforms=True, clinical=Fa
             #covert
             print('Converting {}'.format(file))
             try:
-                ccdef_from_wfdb(file, dest_path=dest_path, numerics=numerics,
+                dest_name = ccdef_from_wfdb(file, dest_path=dest_path, numerics=numerics,
                             waveforms=waveforms, clinical=clinical, mapper = mapper)
-                #make mapping - destination file
+                ccdef.mapping.mapping.make_mapping(dest_name)
             except:
                 print('Error with file {}'.format(file))
             

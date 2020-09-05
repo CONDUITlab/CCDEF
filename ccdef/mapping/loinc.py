@@ -145,25 +145,19 @@ class LoincMapper:
     def _download_mapping_table(mapping_table_name):
         available_external_mappings = None
 
-        try:
-            url = (
-                "https://raw.githubusercontent.com/CONDUITlab/ccdef/master/"
-                "ccdef/mapping/mappings/external_mappings.json"
-            )
-            available_external_mappings = json.loads(requests.get(url).text)
-        except:
-            print("Error downloading predefined mappings from CCDEF.org")
+        url = (
+            "https://raw.githubusercontent.com/CONDUITlab/ccdef/master/"
+            "ccdef/mapping/mappings/external_mappings.json"
+        )
+        available_external_mappings = json.loads(requests.get(url).text)
 
         if mapping_table_name in available_external_mappings.keys():
-            try:
-                with requests.Session() as session:
-                    download = session.get(
-                        available_external_mappings[mapping_table_name]
-                    ).content
-                    mapping_table = pd.read_csv(io.StringIO(download.decode("utf-8")))
-                    return mapping_table
-            except:
-                print("Error downloading mapping table.")
+            with requests.Session() as session:
+                download = session.get(
+                    available_external_mappings[mapping_table_name]
+                ).content
+                mapping_table = pd.read_csv(io.StringIO(download.decode("utf-8")))
+                return mapping_table
         else:
             raise Exception(
                 "Pass valid table identifier (str) for "

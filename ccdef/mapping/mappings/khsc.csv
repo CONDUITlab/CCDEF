@@ -30,18 +30,6 @@ numeric,,PA-L-M,8415-2,PA-L BP mean
 numeric,,PA-R-M,8416-0,PA-R BP mean
 numeric,,PA-L-S,8441-8,PA-L BP sys
 numeric,,PS-R-S,8442-6,PA-R BP sys
-numeric,,,60821-6,Apnea duration
-numeric,,,76007-4,VT.expired on vent Airway
-numeric,,,76008-2,Expired min Vol MV
-numeric,,,76009-0,Inspired min Vol MV
-numeric,,,60829-9,Plateau pressure
-numeric,,,75942-3,Press during insp Airway
-numeric,,,75943-1,Press during resp pause Airway
-numeric,,,60952-9,Pressure mean during insp Airway
-numeric,,,20075-8,PEEP Respiratory
-numeric,,,75946-4,Airway resist
-numeric,,,75947-2,Airway resist during expir
-numeric,,,75948-0,Airway resist during insp
 waveform,AR1,ABP,76212-0,Invasive BP
 waveform,AR2,ABP,76212-0,Invasive BP
 waveform,AR3,ABP,76212-0,Invasive BP

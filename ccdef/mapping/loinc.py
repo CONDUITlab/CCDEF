@@ -2,6 +2,13 @@
 # @Author: Alex Hamilton - https://github.com/alexhamiltonRN
 # @Date: 2020-08-27
 # @Desc: class for for mapping local chart events and signals to LOINC
+#
+# This material contains content from LOINC (http://loinc.org).
+# LOINC is copyright © 1995-2020, Regenstrief Institute, Inc.
+# and the Logical Observation Identifiers Names and Codes (LOINC)
+# Committee and is available at no cost under the license at
+# http://loinc.org/license. LOINC® is a registered United States
+# trademark of Regenstrief Institute, Inc.
 
 import io
 import json
@@ -10,18 +17,6 @@ from dataclasses import dataclass
 import numpy as np
 import pandas as pd
 import requests
-
-print(
-    "\n"
-    "***** CCDEF LoincMapper *****\n"
-    "This material contains content from LOINC (http://loinc.org).\n"
-    "LOINC is copyright © 1995-2020, Regenstrief Institute, Inc.\n"
-    "and the Logical Observation Identifiers Names and Codes (LOINC)\n"
-    "Committee and is available at no cost under the license at\n"
-    "http://loinc.org/license. LOINC® is a registered United States\n"
-    "trademark of Regenstrief Institute, Inc."
-    "\n"
-)
 
 
 @dataclass
@@ -148,22 +143,27 @@ class LoincMapper:
 
     @staticmethod
     def _download_mapping_table(mapping_table_name):
-        print("Downloading list of available mappings from CCDEF.org")
-        url = (
-            "https://raw.githubusercontent.com/CONDUITlab/ccdef/master/"
-            "ccdef/mapping/mappings/external_mappings.json"
-        )
-        available_external_mappings = json.loads(requests.get(url).text)
+        available_external_mappings = None
 
-        print("Verifying requested mapping exists")
+        try:
+            url = (
+                "https://raw.githubusercontent.com/CONDUITlab/ccdef/master/"
+                "ccdef/mapping/mappings/external_mappings.json"
+            )
+            available_external_mappings = json.loads(requests.get(url).text)
+        except:
+            print("Error downloading predefined mappings from CCDEF.org")
+
         if mapping_table_name in available_external_mappings.keys():
-            print(f"Passed. Downloading mapping table for {mapping_table_name}")
-            with requests.Session() as session:
-                download = session.get(
-                    available_external_mappings[mapping_table_name]
-                ).content
-                mapping_table = pd.read_csv(io.StringIO(download.decode("utf-8")))
-            return mapping_table
+            try:
+                with requests.Session() as session:
+                    download = session.get(
+                        available_external_mappings[mapping_table_name]
+                    ).content
+                    mapping_table = pd.read_csv(io.StringIO(download.decode("utf-8")))
+                    return mapping_table
+            except:
+                print("Error downloading mapping table.")
         else:
             raise Exception(
                 "Pass valid table identifier (str) for "

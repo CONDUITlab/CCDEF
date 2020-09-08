@@ -30,21 +30,21 @@ numeric,ABPMean,ABP-M,76214-6,Invasive mean BP
 numeric,ART Mean,ABP-M,76214-6,Invasive mean BP
 numeric,ABP,ABP-M,76214-6,Invasive mean BP
 numeric,CVP,CVP,60985-9,CVP
-numeric,PAP SYS,,,
-numeric,PAP Sys,,,
-numeric,PAPSys,,,
-numeric,PAP DIAS,,,
-numeric,PAP Dias,,,
-numeric,PAPDias,,,
-numeric,PAP MEAN,,,
-numeric,PAP Mean,,,
-numeric,PAPMean,,,
-numeric,PAWP,,75994-4,
+numeric,PAP SYS,PAP-S,8440-0,PA BP sys
+numeric,PAP Sys,PAP-S,8440-0,PA BP sys
+numeric,PAPSys,PAP-S,8440-0,PA BP sys
+numeric,PAP DIAS,PAP-D,8385-7,PA BP dias
+numeric,PAP Dias,PAP-D,8385-7,PA BP dias
+numeric,PAPDias,PAP-D,8385-7,PA BP dias
+numeric,PAP MEAN,PAP-M,8414-5,PA BP mean
+numeric,PAP Mean,PAP-M,8414-5,PA BP mean
+numeric,PAPMean,PAP-M,8414-5,PA BP mean
+numeric,PAWP,PAWP,75994-4,PAW pressure
 numeric,AOBP Sys,,,
 numeric,AOBP Dias,,,
 numeric,AOBP Mean,,,
 waveform,ART,ABP,76212-0,Invasive BP
-waveform,PAP,,76284-9,
+waveform,PAP,PAP,76284-9,PA BP
 waveform,CVP,CVP,60985-9,CVP
 waveform,I,ECG-I,,ECG Lead I
 waveform,II,ECG-II,,ECG Lead II

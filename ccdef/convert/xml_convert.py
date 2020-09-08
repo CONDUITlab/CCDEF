@@ -13,35 +13,68 @@ import h5py
 import audata
 import mmap
 import pandas as pd
+from lxml import etree
 
 #%% helper functions
 
 def get_file_info (filename):
-# get start and end time from a bedmaster xml file
-    
+""" get start and end time from a bedmaster xml file """
 
-    with open(filename, 'rb') as f:
-        # memory-map the file, size 0 means whole file
-        m = mmap.mmap(f.fileno(), 0, prot=mmap.PROT_READ)  
-                              # prot argument is *nix only
+_, elem = next(etree.iterparse(infile, tag='VitalSigns', 
+   huge_tree=True, recover=True))
+start_str = elem.attrib['CollectionTime']
 
-        i = m.find(b'<Waveforms CollectionTime')   # search for last occurrence of 'word'
-        m.seek(i)             # seek to the location
-        line = m.read(85)
-        start_str = str(line).split('CollectionTime="')[1].split('"')[0]
-        start = pd.to_datetime(start_str, infer_datetime_format=True)
+start = pd.to_datetime(start_str, infer_datetime_format=True)
 
-        i = m.rfind(b'<Waveforms CollectionTime')   # search for last occurrence of 'word'
-        m.seek(i)             # seek to the location
-        line = m.read(85)
-        end_str = str(line).split('CollectionTime="')[1].split('"')[0]
-        end = pd.to_datetime(end_str, infer_datetime_format=True)
+for _, element in etree.iterparse(infile, tag='VitalSigns',
+    huge_tree=True, recover=True):
+    time = element.attrib['CollectionTime']
+    element.clear(keep_tail=True)
+end_str = time
+end = pd.to_datetime(end_str, infer_datetime_format=True)
+duration = end-start
 
-        duration = end-start
-    
-    return [start, end, duration] 
+""" Examine the file header """
+_, elem = next(etree.iterparse(infile, tag='FileInfo'))
+bed = elem.findtext('Bed')
+monitor_type = elem.findtext('FamilyType')
 
+print('File runs {} to {}, duration is '.format(start, end, duration))
+
+    return [start, end, duration, bed, monitor_type] 
 
 
 #%% xml conversion
+def convert_xml(infile, outfile, numerics=True, Waveforms=True):
+    print('Converting {} to {}'.format(infile, outfile))
 
+    for _, element in etree.iterparse(infile, events=("start", "end"), tag='VitalSigns',
+        huge_tree=True, recover=True)):
+        element.findtext('Time')
+        vitals = element.getchildren()
+        for i in vitals:
+            time = i.findtext('Time')
+            chan = i.findtext('Parameter')
+            value = i.findtext('Value')
+            uom = i.findtext('UOM')
+            print(time, chan, value)
+        element.clear(keep_tail=True)
+
+
+#when creating new dataset, use total duration, sample rate, number of samples, to create dset
+# overwrite in chunks as the data are read
+# assign metadata at time of creation
+# sample rate, col name, LOINC, basetime, scale
+# look at audata Dataset creation - may be an issue with req col
+#%% main
+
+def main():
+
+    infile = '/Volumes/ExternalPL/Data/KHSC/xml/new/K2ICU_BED05-1577888092.xml'
+    outfile = '/Volumes/ExternalPL/Data/KHSC/test.h5'
+    convert_xml(infile, outfile)
+    return
+
+if __name__ == "__main__":
+
+    main ()

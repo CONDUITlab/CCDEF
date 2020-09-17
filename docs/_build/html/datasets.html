@@ -1,0 +1,341 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Dataset Format &mdash; CCDEF 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> CCDEF
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro_h5.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="groups.html">Groups and Datasets</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CCDEF</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Dataset Format</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/datasets.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dataset-format">
+<h1>Dataset Format<a class="headerlink" href="#dataset-format" title="Permalink to this headline">¶</a></h1>
+<p>Datasets can be single channels or they can be a table of multiple channels.</p>
+<div class="section" id="single-channel-dataset-format">
+<h2>Single Channel Dataset Format<a class="headerlink" href="#single-channel-dataset-format" title="Permalink to this headline">¶</a></h2>
+<p>In this case, each signal is stored in a separate dataset in its respective group.
+The file structure would be:</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">/ (root)</div>
+<div class="line-block">
+<div class="line">.mapping</div>
+<div class="line">/Numerics</div>
+<div class="line-block">
+<div class="line">HR</div>
+<div class="line">ABP-S</div>
+<div class="line">ABP-D</div>
+<div class="line">ABP-M</div>
+<div class="line">SPO2</div>
+<div class="line"><br /></div>
+</div>
+<div class="line">/Waveforms</div>
+<div class="line-block">
+<div class="line">ECG-II</div>
+<div class="line">ABP</div>
+<div class="line">CVP</div>
+<div class="line"><br /></div>
+</div>
+<div class="line">/Clinial</div>
+<div class="line-block">
+<div class="line">Notes</div>
+<div class="line">Labs</div>
+<div class="line">Micro</div>
+</div>
+</div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="tabular-format">
+<h2>Tabular Format<a class="headerlink" href="#tabular-format" title="Permalink to this headline">¶</a></h2>
+<p>In a tabular dataset, multiple similar signals (generally same sample rate and source) are stored together.
+The resulting file structure looks like:</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">/ (root)</div>
+<div class="line-block">
+<div class="line">.mapping</div>
+<div class="line">/Numerics</div>
+<div class="line-block">
+<div class="line">Vitals</div>
+<div class="line"><br /></div>
+</div>
+<div class="line">/Waveforms</div>
+<div class="line-block">
+<div class="line">Hemodynamics</div>
+<div class="line"><br /></div>
+</div>
+<div class="line">/Clinial</div>
+<div class="line-block">
+<div class="line">Notes</div>
+<div class="line">Labs</div>
+<div class="line">Micro</div>
+</div>
+</div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="dataset-metadata">
+<h2>Dataset Metadata<a class="headerlink" href="#dataset-metadata" title="Permalink to this headline">¶</a></h2>
+<p>Dataset metadata is stored in an attribute and contains the following</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span><span class="o">/.</span><span class="n">meta</span>
+     <span class="p">{</span>
+         <span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="p">{</span>
+             <span class="s2">&quot;HR&quot;</span><span class="p">:</span> <span class="p">{</span>
+             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;real&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;LOINC&quot;</span><span class="p">:</span> <span class="s2">&quot;8867-4&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;uom&quot;</span><span class="p">:</span> <span class="s2">&quot;bpm&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+             <span class="s2">&quot;sample_rate&quot;</span><span class="p">:</span> <span class="mf">0.0166666666667</span><span class="p">,</span>
+             <span class="s2">&quot;fmt&quot;</span><span class="p">:</span> <span class="s2">&quot;16&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;baseline&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+             <span class="s2">&quot;base_datetime&quot;</span><span class="p">:</span> <span class="s2">&quot;2116-12-24 12:35:06.147000&quot;</span>
+            <span class="p">},</span>
+             <span class="s2">&quot;CVP&quot;</span><span class="p">:</span> <span class="p">{</span>
+                 <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;real&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;LOINC&quot;</span><span class="p">:</span> <span class="s2">&quot;60985-9&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;uom&quot;</span><span class="p">:</span> <span class="s2">&quot;mmHg&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                 <span class="s2">&quot;sample_rate&quot;</span><span class="p">:</span> <span class="mf">0.0166666666667</span><span class="p">,</span>
+                 <span class="s2">&quot;fmt&quot;</span><span class="p">:</span> <span class="s2">&quot;16&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;baseline&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                 <span class="s2">&quot;base_datetime&quot;</span><span class="p">:</span> <span class="s2">&quot;2116-12-24 12:35:06.147000&quot;</span>
+            <span class="p">},</span>
+             <span class="s2">&quot;SpO2&quot;</span><span class="p">:</span> <span class="p">{</span>
+             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;real&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;LOINC&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;uom&quot;</span><span class="p">:</span> <span class="s2">&quot;%&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+             <span class="s2">&quot;sample_rate&quot;</span><span class="p">:</span> <span class="mf">0.0166666666667</span><span class="p">,</span>
+             <span class="s2">&quot;fmt&quot;</span><span class="p">:</span> <span class="s2">&quot;16&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;baseline&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+             <span class="s2">&quot;base_datetime&quot;</span><span class="p">:</span> <span class="s2">&quot;2116-12-24 12:35:06.147000&quot;</span>
+            <span class="p">},</span>
+        <span class="s2">&quot;NBPSys&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;real&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LOINC&quot;</span><span class="p">:</span> <span class="s2">&quot;76534-7&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;uom&quot;</span><span class="p">:</span> <span class="s2">&quot;mmHg&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;sample_rate&quot;</span><span class="p">:</span> <span class="mf">0.0166666666667</span><span class="p">,</span>
+            <span class="s2">&quot;fmt&quot;</span><span class="p">:</span> <span class="s2">&quot;16&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;baseline&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;base_ddatetime&quot;</span><span class="p">:</span> <span class="s2">&quot;2116-12-24 12:35:06.147000&quot;</span>
+            <span class="p">},</span>
+        <span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="dataset-metadata-fields">
+<h3>Dataset Metadata Fields<a class="headerlink" href="#dataset-metadata-fields" title="Permalink to this headline">¶</a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">type</dt>
+<dd class="field-odd"><p>will be “real” for a data column and “time” for a timestamp column</p>
+</dd>
+<dt class="field-even">LONIC</dt>
+<dd class="field-even"><p>Loinc code</p>
+</dd>
+<dt class="field-odd">uom</dt>
+<dd class="field-odd"><p>units of measurement</p>
+</dd>
+<dt class="field-even">scale</dt>
+<dd class="field-even"><p>scale factor for storing raw output from data acquisiting systems as integer values (this will be set to 1 for data stored as floats)</p>
+</dd>
+<dt class="field-odd">sample_rate</dt>
+<dd class="field-odd"><p>sample rate in Hz</p>
+</dd>
+<dt class="field-even">base_datetime</dt>
+<dd class="field-even"><p>the time origin of the dataset formatted as “YYYY-MM-DD HH:MM:SS.ssss”</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Phil Laird
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

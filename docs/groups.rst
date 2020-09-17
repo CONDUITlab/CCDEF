@@ -1,7 +1,10 @@
-Groups and Datasets
+Core CCDEF Groups
 *******************
 
-These are the groups
+These are the principal groups in a CCDEF HDF5 file. 
+The root group is obviously mandatory but valid files can be created with physiologic data (Numerics and/or Waveforms) only or with clinical data only.
+
+The Research and Reference groups are strictly optional and are not parsed by any of the viewer or analysis tools at this time.
 
 Root (/)
 ========
@@ -31,17 +34,51 @@ The data model is self-describing so it is fairly straight forward for end users
 The mapping table describes parameters in terms of LOINC (link) to provide further standardization and clarity as to the nature of the information. 
 The mapping table also provides the group, dataset and column (if the dataset is tabular)
 
-+-------------+-------+---------+--------+------------+
-| ccdef label | LOINC | dataset | column | short name |
-+=============+=======+=========+========+============+
-|one          | two   |  three  | four   |            |
-+-------------+-------+---------+--------+------------+
-|one          | two   |  three  | four   |            |
-+-------------+-------+---------+--------+------------+
++---------+---------------------------+------------+--------+----------+---------+-------------------+
+| signal  | dataset                   | local_name | column | category | LOINC   | loinc_name        |
++=========+===========================+============+========+==========+=========+===================+
+| HR      | /Numerics/Vitals/         |    HR      |  1     | numerics | 8867-4  | Heart Rate        | 
++---------+---------------------------+------------+--------+----------+---------+-------------------+
+| ABP-S   | /Numerics/Vitals/         |   ABPSys   |  2     | numerics | 76215-3 | Invasive sys BP   | 
++---------+---------------------------+------------+--------+----------+---------+-------------------+
+| ECG-I   | /Waveforms/Hemodynamics   |    I       |  1     | waveforms|         |                   | 
++---------+---------------------------+------------+--------+----------+---------+-------------------+
+
+Mapping Table Fields
+^^^^^^^^^^^^^^^^^^^^
+:signal:
+    The CCDEF standard signal name (see list)
+
+:dataset:
+    The dataset containing the signal
+
+:local_name:
+    The original name of the signal in the datafile. This will generally be the dataset name if multiple datasets are used or it will be the column name in a tabular dataset.
+
+:column:
+    The column number in *dataset* for the signal of interest
+
+:category:
+    Waveform or Numeric
+
+:LOINC:
+    The LOINC for the signal of interest.
+    A number of waveform signals do not currently have assigned LOINC identifiers but additions are being proposed to address this.
+
+:loinc_name: 
+    This is the LOINC short name (if it exists) for the signal
+
+
 
 example dataframe from MIMIC 
 
-example from API f.show_map()
+example from API: f.show_map()
+
+Future Mapping Possibilities
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Future versions of CCDEF may include additional ontologies such as OMOP in the mapping table. 
+This is an area of active development. 
 
 
 Numerics
@@ -57,16 +94,6 @@ Typical parameters include:
 - SpO2
 - HR
 
-Numerics Metadata
------------------
-
-.meta - stuff, base time
-
-Numerics Timestamps
---------------------
-
-Absolute vs relative vs implied
-
 Waveforms
 ==========
 
@@ -77,20 +104,6 @@ The most common dataset will be hemodynamic measurements conisting of:
 - one
 - two
 - three
-
-Waveform Metadata
------------------
-
-Data format
------------
-
-Tabular vs columnar
-
-
-Timestamps
-----------
-
-
 
 Clinical
 ========

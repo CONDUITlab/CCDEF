@@ -1,0 +1,375 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Groups and Datasets &mdash; CCDEF 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Introduction" href="intro_h5.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> CCDEF
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro_h5.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Groups and Datasets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#root">Root (/)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#root-group-metadata">Root Group Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#root-group-datasets">Root Group Datasets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mapping">.Mapping</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#numerics">Numerics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#numerics-metadata">Numerics Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#numerics-timestamps">Numerics Timestamps</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#waveforms">Waveforms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#waveform-metadata">Waveform Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data-format">Data format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#timestamps">Timestamps</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#clinical">Clinical</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#datasets">Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clinical-timestamps">Clinical Timestamps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metadata">Metadata</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#demographics">Demographics</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#research">Research</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CCDEF</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Groups and Datasets</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/groups.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="groups-and-datasets">
+<h1>Groups and Datasets<a class="headerlink" href="#groups-and-datasets" title="Permalink to this headline">¶</a></h1>
+<p>These are the groups</p>
+<div class="section" id="root">
+<h2>Root (/)<a class="headerlink" href="#root" title="Permalink to this headline">¶</a></h2>
+<p>The root group is the top level of the file, it contains a series of other high level groups with physiologic and clinical data.</p>
+<div class="section" id="root-group-metadata">
+<h3>Root Group Metadata<a class="headerlink" href="#root-group-metadata" title="Permalink to this headline">¶</a></h3>
+<p>The .metadata attribute contains information about the file including:
+- datasource
+- file version
+- base time</p>
+<p><strong>Example</strong></p>
+</div>
+<div class="section" id="root-group-datasets">
+<h3>Root Group Datasets<a class="headerlink" href="#root-group-datasets" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="mapping">
+<h4>.Mapping<a class="headerlink" href="#mapping" title="Permalink to this headline">¶</a></h4>
+<p>One of the key issues in data sharing is the ability to seamlessly ingest data from multiple sites into the end users’ application without having to develop site specific pipelines.
+This is complicated by the fact that collect sites will have various local factors that influence the way they store data, based on equipment, etc.
+The data model is self-describing so it is fairly straight forward for end users to locate and extract the data that they need, but to add an additional level of interoperability we provide a mapping table for common key parameters that allow a user to directly (or using library functions) search and access the information they require.</p>
+<p>The mapping table describes parameters in terms of LOINC (link) to provide further standardization and clarity as to the nature of the information.
+The mapping table also provides the group, dataset and column (if the dataset is tabular)</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 14%" />
+<col style="width: 18%" />
+<col style="width: 16%" />
+<col style="width: 24%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>ccdef label</p></th>
+<th class="head"><p>LOINC</p></th>
+<th class="head"><p>dataset</p></th>
+<th class="head"><p>column</p></th>
+<th class="head"><p>short name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>one</p></td>
+<td><p>two</p></td>
+<td><p>three</p></td>
+<td><p>four</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>one</p></td>
+<td><p>two</p></td>
+<td><p>three</p></td>
+<td><p>four</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>example dataframe from MIMIC</p>
+<p>example from API f.show_map()</p>
+</div>
+</div>
+</div>
+<div class="section" id="numerics">
+<h2>Numerics<a class="headerlink" href="#numerics" title="Permalink to this headline">¶</a></h2>
+<p>The numerics group contains signals at a sample rate of less than 50 Hz.
+Generally data in this group will be in a single tabular dataset called <em>Vitals</em></p>
+<p>Typical parameters include:</p>
+<ul class="simple">
+<li><p>Invasive BP (ABP)</p></li>
+<li><p>Non-invasive BP</p></li>
+<li><p>SpO2</p></li>
+<li><p>HR</p></li>
+</ul>
+<div class="section" id="numerics-metadata">
+<h3>Numerics Metadata<a class="headerlink" href="#numerics-metadata" title="Permalink to this headline">¶</a></h3>
+<p>.meta - stuff, base time</p>
+</div>
+<div class="section" id="numerics-timestamps">
+<h3>Numerics Timestamps<a class="headerlink" href="#numerics-timestamps" title="Permalink to this headline">¶</a></h3>
+<p>Absolute vs relative vs implied</p>
+</div>
+</div>
+<div class="section" id="waveforms">
+<h2>Waveforms<a class="headerlink" href="#waveforms" title="Permalink to this headline">¶</a></h2>
+<p>The Waveforms group contains data that is recorded at frequencies typically 100-500 Hz.</p>
+<p>The most common dataset will be hemodynamic measurements conisting of:</p>
+<ul class="simple">
+<li><p>one</p></li>
+<li><p>two</p></li>
+<li><p>three</p></li>
+</ul>
+<div class="section" id="waveform-metadata">
+<h3>Waveform Metadata<a class="headerlink" href="#waveform-metadata" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="data-format">
+<h3>Data format<a class="headerlink" href="#data-format" title="Permalink to this headline">¶</a></h3>
+<p>Tabular vs columnar</p>
+</div>
+<div class="section" id="timestamps">
+<h3>Timestamps<a class="headerlink" href="#timestamps" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="clinical">
+<h2>Clinical<a class="headerlink" href="#clinical" title="Permalink to this headline">¶</a></h2>
+<p>The clinical group contains:</p>
+<div class="section" id="datasets">
+<h3>Datasets<a class="headerlink" href="#datasets" title="Permalink to this headline">¶</a></h3>
+<p>Possible Datasets:
+- Labs
+- Micro
+- Notes (EMR notes)
+- Diagnosis</p>
+</div>
+<div class="section" id="clinical-timestamps">
+<h3>Clinical Timestamps<a class="headerlink" href="#clinical-timestamps" title="Permalink to this headline">¶</a></h3>
+<p>Clinical data tend to be much sparser than physiologic data and therefore timestamps will typically be included in these datasets.
+The most common format will be an absolute timestamp stored as a string (possibly with an offset for anonymization)</p>
+</div>
+<div class="section" id="metadata">
+<h3>Metadata<a class="headerlink" href="#metadata" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="demographics">
+<h4>Demographics<a class="headerlink" href="#demographics" title="Permalink to this headline">¶</a></h4>
+<p>This is stored in the .Demographics attribute. It is a JSON formatted string.</p>
+<p><strong>Example:</strong></p>
+</div>
+</div>
+</div>
+<div class="section" id="research">
+<h2>Research<a class="headerlink" href="#research" title="Permalink to this headline">¶</a></h2>
+<p>The research group is an optional group with no specific format.
+It is intended primarily to support files used in trials and can contain trial specific information such as randomization, group assignment, etc.</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p>The reference group is also optional and is included for future development.
+The main purpose of this group is to include links (refered to as references in HDF5) to regions of interest within files or external links to other files.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="intro_h5.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Phil Laird
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

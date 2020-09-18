@@ -21,7 +21,7 @@ def open_db():
 def patient_id_from_file(filename):
     return (filename.split('/')[-1].split('-')[0][1:].strip("0"))
 
-def extract_notes(infile, origin):
+def extract_notes(infile):
     """
     extract_notes(infile)
 
@@ -58,11 +58,13 @@ def extract_notes(infile, origin):
     notes = pd.read_sql_query(query,con)
     """ change time stamp to seconds from origin """
     
+    origin = pd.to_datetime(wfdb.rdheader(infile).base_datetime)
+    notes.insert(0, 'time', '')
+    for idx, row in notes.iterrows():
+        notes['time'].iloc[idx]=int((pd.to_datetime(row['charttime'])-origin).total_seconds())
+    del notes['charttime']
+    del notes['chartdate']
 
-    for idx, row in ldf.iterrows():
-        ldf['Time'].iloc[idx]=((base_datetime-pd.to_datetime(row['Order_datetime'])).total_seconds())
-
-    
     return (notes)
 
 def write_notes(notes_df, outfile):
@@ -81,20 +83,11 @@ def write_notes(notes_df, outfile):
         DataFrame containing notes, times, etc
     """
     
-    dt = h5py.special_dtype(vlen=str)
-    comp_type = np.dtype([('time', dt), ('date', dt), ('description', dt), ('category', dt), ('text', dt)])
-    # define array for writing to dataset
-    # use df to sArray
-
-    arr_data = np.empty((0,), dtype=comp_type)
-    for idx, row in notes_df.iterrows():
-        arr = np.array([(str(row['chartdate']), row['charttime'], row['description'], row['category'], row['text'])], 
-                   dtype = comp_type)
-        arr_data = np.append(arr_data, arr)
+    arr, saType = df_to_sarray(notes_df)
     
     with h5py.File(outfile, 'a') as f:
-        clin = f.require_group('/Clinical')
-        note_ds = f.create_dataset('Clinical/notes', maxshape = (None, ), data = arr_data,
+        clin = f.require_group('/clinical')
+        note_ds = f.create_dataset('clinical/notes', maxshape = (None, ), data = arr, dtype = saType,
                                  compression="gzip", compression_opts = 9, shuffle = True)
         
         

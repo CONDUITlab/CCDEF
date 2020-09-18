@@ -1,29 +1,31 @@
-Dataset Format
-==============
+.. _Dataset_details:
+
+Monitor/Physiologic Datasets (Waveform and Numerics)
+====================================================
 
 Datasets can be single channels or they can be a table of multiple channels. 
 
-Single Channel Dataset Format
-------------------------------
+Single Channel Format
+---------------------
 
 In this case, each signal is stored in a separate dataset in its respective group.
 The file structure would be:
 
  | / (root)
  |      .mapping
- |      /Numerics
+ |      /numerics
  |          HR
  |          ABP-S
  |          ABP-D
  |          ABP-M
  |          SPO2
  |
- |      /Waveforms
+ |      /waveforms
  |          ECG-II
  |          ABP
  |          CVP
  |  
- |      /Clinial
+ |      /clinial
  |          Notes
  |          Labs
  |          Micro
@@ -37,25 +39,24 @@ The resulting file structure looks like:
 
  | / (root)
  |      .mapping
- |      /Numerics
- |          Vitals
+ |      /numerics
+ |          vitals
  |
- |      /Waveforms
- |          Hemodynamics
+ |      /wwaveforms
+ |          hemodynamics
  |  
- |      /Clinial
- |          Notes
- |          Labs
- |          Micro
+ |      /clinial
+ |          notes
+ |          labs
+ |          micro
 
+Monitor Dataset Metadata
+--------------------------
 
-Dataset Metadata
------------------
-
-Dataset metadata is stored in an attribute and contains the following ::
+Metadata for datasets derived from bedside monitors (numerics and waveforms) is stored JSON formatted attribute as shown below. ::
 
     dataset/.meta
-         {
+        {
              "columns": {
                  "HR": {
                  "type": "real",

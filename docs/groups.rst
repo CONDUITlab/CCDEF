@@ -14,22 +14,29 @@ The root group is the top level of the file, it contains a series of other high 
 Root Group Metadata
 -------------------
 
-The .metadata attribute contains information about the file including:
-- datasource
-- file version
-- base time
+The .metadata attribute contains information about the file. ::
 
-**Example**
+    /.meta
+        {
+            "title": "...",
+            "author": "...",
+            "organization": "...",
+            "time": {
+                "origin": "2020-41-17 15:41:22.306880 EST",
+                "units": "seconds"
+            }
+        }
 
 Root Group Datasets
 -------------------
 
-.Mapping
+.mapping
 ^^^^^^^^
 
 One of the key issues in data sharing is the ability to seamlessly ingest data from multiple sites into the end users' application without having to develop site specific pipelines. 
 This is complicated by the fact that collect sites will have various local factors that influence the way they store data, based on equipment, etc. 
-The data model is self-describing so it is fairly straight forward for end users to locate and extract the data that they need, but to add an additional level of interoperability we provide a mapping table for common key parameters that allow a user to directly (or using library functions) search and access the information they require.
+The data model is self-describing so it is fairly straight forward for end users to locate and extract the data that they need, but to add an additional level of interoperability we provide a mapping table for common key :ref:`signal names<Standard Signal Names>` that allow a user to directly (or using library functions) search and access the information they require.
+
 
 The mapping table describes parameters in terms of LOINC (link) to provide further standardization and clarity as to the nature of the information. 
 The mapping table also provides the group, dataset and column (if the dataset is tabular)
@@ -37,42 +44,51 @@ The mapping table also provides the group, dataset and column (if the dataset is
 +---------+---------------------------+------------+--------+----------+---------+-------------------+
 | signal  | dataset                   | local_name | column | category | LOINC   | loinc_name        |
 +=========+===========================+============+========+==========+=========+===================+
-| HR      | /Numerics/Vitals/         |    HR      |  1     | numerics | 8867-4  | Heart Rate        | 
+| HR      | /numerics/vitals/         |    HR      |  1     | numerics | 8867-4  | Heart Rate        | 
 +---------+---------------------------+------------+--------+----------+---------+-------------------+
-| ABP-S   | /Numerics/Vitals/         |   ABPSys   |  2     | numerics | 76215-3 | Invasive sys BP   | 
+| ABP-S   | /numerics/vitals/         |   ABPSys   |  2     | numerics | 76215-3 | Invasive sys BP   | 
 +---------+---------------------------+------------+--------+----------+---------+-------------------+
-| ECG-I   | /Waveforms/Hemodynamics   |    I       |  1     | waveforms|         |                   | 
+| ECG-I   | /waveforms/hemodynamics   |    I       |  1     | waveforms|         |                   | 
 +---------+---------------------------+------------+--------+----------+---------+-------------------+
 
-Mapping Table Fields
-^^^^^^^^^^^^^^^^^^^^
-:signal:
-    The CCDEF standard signal name (see list)
+Mapping Table Field Descriptions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-:dataset:
-    The dataset containing the signal
+.. py:data:: signal
+   :type: string
+   :value: The CCDEF standard signal name
 
-:local_name:
-    The original name of the signal in the datafile. This will generally be the dataset name if multiple datasets are used or it will be the column name in a tabular dataset.
+.. py:data:: dataset
+   :type: string
+   :value: the name of the dataset containing the signal (can be accessed directly as f['/Group/'+dataset])
 
-:column:
-    The column number in *dataset* for the signal of interest
+.. py:data:: local_name
+   :type: string
+   :value: The original name of the signal in the datafile. This will generally be the dataset name if multiple datasets are used or it will be the column name in a tabular dataset.
 
-:category:
-    Waveform or Numeric
+.. py:data:: column
+   :type: int
+   :value: The number of the column in *dataset* containing the signal (default is 1 for a single column dataset)
 
-:LOINC:
-    The LOINC for the signal of interest.
+.. py:data:: category
+   :type: string
+   :value: {waveform, numeric}
+
+.. py:data:: LOINC
+   :type: string
+   :value:  The LOINC for the signal of interest. 
+
+.. py:data:: loinc_name
+   :type: string
+   :value: This is the LOINC short name (if it exists) for the signal
+
+
+.. note::
+
     A number of waveform signals do not currently have assigned LOINC identifiers but additions are being proposed to address this.
 
-:loinc_name: 
-    This is the LOINC short name (if it exists) for the signal
+** example dataframe from MIMIC **
 
-
-
-example dataframe from MIMIC 
-
-example from API: f.show_map()
 
 Future Mapping Possibilities
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -87,54 +103,97 @@ Numerics
 The numerics group contains signals at a sample rate of less than 50 Hz. 
 Generally data in this group will be in a single tabular dataset called *Vitals*
 
+Numerics Datasets
+-----------------
+
+These can be tabular or single channel as described in detail :ref:`here<Dataset_details>`.
+
 Typical parameters include:
 
-- Invasive BP (ABP)
-- Non-invasive BP
+- Invasive BP (ABP) 
+- Non-invasive BP (NIBP)
 - SpO2
 - HR
+
 
 Waveforms
 ==========
 
 The Waveforms group contains data that is recorded at frequencies typically 100-500 Hz.
+There is generally more variabiltiy in the sample rates for different waveform signals, particularly if they are derived from different sources (eg bedside monitor, ventilator, etc).
 
-The most common dataset will be hemodynamic measurements conisting of:
+Waveform Datasets
+-----------------
 
-- one
-- two
-- three
+The most common datasets will be cardiorespiratory measurements conisting of:
 
-Clinical
-========
+- ECG leads
+- SpO2
+- ABP
 
-The clinical group contains:
+Once again, these can be tabular or single channel as described in detail :ref:`here<Dataset_details>`.
 
+Clinical datasets
+==================
+
+The clinical group contains a variety of information extracted from the EMR and other sources, generally excluding monitor data.
+As there are a wide range of EMR data extraction pipelines, it is difficulty to completely standardize this group but we provide some high level guidance.
+Perhaps the greatest challenge within the clinical data is mapping concepts such as interventions and clinical observations. 
+This is an active area of research and is one of the goals of the OMOP-CDM.
 
 Datasets
 --------
-Possible Datasets:
-- Labs
-- Micro
-- Notes (EMR notes)
-- Diagnosis
+Suggested Clinical Datasets Include:
 
+- labs
+- micro
+- notes (EMR notes)
+- diagnosis
+
+Imaging if available would be in a separate group */Clinical/Imaging*
 
 Clinical Timestamps
 -------------------
 
 Clinical data tend to be much sparser than physiologic data and therefore timestamps will typically be included in these datasets.
-The most common format will be an absolute timestamp stored as a string (possibly with an offset for anonymization)
+The prefered method is a time column with seconds from the orgin or *base_datetime*. 
 
-Metadata
---------
+Clinical Group Metadata
+------------------------
 
 Demographics
 ^^^^^^^^^^^^
 
-This is stored in the .Demographics attribute. It is a JSON formatted string.
+Demographic information about the patient is stored as a group attribute ".Demographics" Acceptable demographics fields are:
 
-**Example:**
+.. py:data:: age
+   :type: float
+   :value: the patient's age in years
+
+.. py:data:: gender 
+    :type: string
+    :value: {M,F}
+
+.. py:data:: expired 
+    :type: int
+    :value: {0,1} 0 indicating that the patient did not die during the period covered by the file 
+
+.. py:data:: admit_dx 
+    :type: string
+    :value: admission ICD 9 code  
+
+** should we make the admission dx a separate attribute? should it be a list of possible dx codes, eg ICD9, ICD10 **
+
+
+The result is a JSON formatted attribute like this:
+. ::
+
+    /clinical.demographics
+        {
+            "age": 40.1,
+            "gender": "M",
+            "expired": 0
+        }
 
 
 Research

@@ -12,10 +12,8 @@ The Critical Care Data Format (CCDEF) Specification
 
    intro_h5
    groups
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   datasets
+   derived
+   signals
+   tools
+   examples

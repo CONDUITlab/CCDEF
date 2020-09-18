@@ -30,12 +30,14 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Monitor/Physiologic Datasets (Waveform and Numerics)" href="datasets.html" />
     <link rel="prev" title="Introduction" href="intro_h5.html" /> 
 </head>
 
@@ -88,19 +90,25 @@
 <li class="toctree-l2"><a class="reference internal" href="#root">Root (/)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#root-group-metadata">Root Group Metadata</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#root-group-datasets">Root Group Datasets</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#mapping">.Mapping</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#mapping-table-fields">Mapping Table Fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mapping">.mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mapping-table-field-descriptions">Mapping Table Field Descriptions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#future-mapping-possibilities">Future Mapping Possibilities</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#numerics">Numerics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#waveforms">Waveforms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#clinical">Clinical</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#numerics">Numerics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#numerics-datasets">Numerics Datasets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#waveforms">Waveforms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#waveform-datasets">Waveform Datasets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#clinical-datasets">Clinical datasets</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#datasets">Datasets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#clinical-timestamps">Clinical Timestamps</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#metadata">Metadata</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#clinical-group-metadata">Clinical Group Metadata</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#demographics">Demographics</a></li>
 </ul>
 </li>
@@ -110,6 +118,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">Monitor/Physiologic Datasets (Waveform and Numerics)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="derived.html">Derived Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="signals.html">Standard Signal Names</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Open source tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 </ul>
 
             
@@ -175,7 +188,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="core-ccdef-groups">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="core-ccdef-groups">
 <h1>Core CCDEF Groups<a class="headerlink" href="#core-ccdef-groups" title="Permalink to this headline">¶</a></h1>
 <p>These are the principal groups in a CCDEF HDF5 file.
 The root group is obviously mandatory but valid files can be created with physiologic data (Numerics and/or Waveforms) only or with clinical data only.</p>
@@ -185,19 +222,27 @@ The root group is obviously mandatory but valid files can be created with physio
 <p>The root group is the top level of the file, it contains a series of other high level groups with physiologic and clinical data.</p>
 <div class="section" id="root-group-metadata">
 <h3>Root Group Metadata<a class="headerlink" href="#root-group-metadata" title="Permalink to this headline">¶</a></h3>
-<p>The .metadata attribute contains information about the file including:
-- datasource
-- file version
-- base time</p>
-<p><strong>Example</strong></p>
+<p>The .metadata attribute contains information about the file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/.</span><span class="n">meta</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;organization&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;origin&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-41-17 15:41:22.306880 EST&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="s2">&quot;seconds&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="root-group-datasets">
 <h3>Root Group Datasets<a class="headerlink" href="#root-group-datasets" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="mapping">
-<h4>.Mapping<a class="headerlink" href="#mapping" title="Permalink to this headline">¶</a></h4>
+<h4>.mapping<a class="headerlink" href="#mapping" title="Permalink to this headline">¶</a></h4>
 <p>One of the key issues in data sharing is the ability to seamlessly ingest data from multiple sites into the end users’ application without having to develop site specific pipelines.
 This is complicated by the fact that collect sites will have various local factors that influence the way they store data, based on equipment, etc.
-The data model is self-describing so it is fairly straight forward for end users to locate and extract the data that they need, but to add an additional level of interoperability we provide a mapping table for common key parameters that allow a user to directly (or using library functions) search and access the information they require.</p>
+The data model is self-describing so it is fairly straight forward for end users to locate and extract the data that they need, but to add an additional level of interoperability we provide a mapping table for common key <a class="reference internal" href="signals.html#standard-signal-names"><span class="std std-ref">signal names</span></a> that allow a user to directly (or using library functions) search and access the information they require.</p>
 <p>The mapping table describes parameters in terms of LOINC (link) to provide further standardization and clarity as to the nature of the information.
 The mapping table also provides the group, dataset and column (if the dataset is tabular)</p>
 <table class="docutils align-default">
@@ -222,7 +267,7 @@ The mapping table also provides the group, dataset and column (if the dataset is
 </thead>
 <tbody>
 <tr class="row-even"><td><p>HR</p></td>
-<td><p>/Numerics/Vitals/</p></td>
+<td><p>/numerics/vitals/</p></td>
 <td><p>HR</p></td>
 <td><p>1</p></td>
 <td><p>numerics</p></td>
@@ -230,7 +275,7 @@ The mapping table also provides the group, dataset and column (if the dataset is
 <td><p>Heart Rate</p></td>
 </tr>
 <tr class="row-odd"><td><p>ABP-S</p></td>
-<td><p>/Numerics/Vitals/</p></td>
+<td><p>/numerics/vitals/</p></td>
 <td><p>ABPSys</p></td>
 <td><p>2</p></td>
 <td><p>numerics</p></td>
@@ -238,7 +283,7 @@ The mapping table also provides the group, dataset and column (if the dataset is
 <td><p>Invasive sys BP</p></td>
 </tr>
 <tr class="row-even"><td><p>ECG-I</p></td>
-<td><p>/Waveforms/Hemodynamics</p></td>
+<td><p>/waveforms/hemodynamics</p></td>
 <td><p>I</p></td>
 <td><p>1</p></td>
 <td><p>waveforms</p></td>
@@ -248,34 +293,48 @@ The mapping table also provides the group, dataset and column (if the dataset is
 </tbody>
 </table>
 </div>
-<div class="section" id="mapping-table-fields">
-<h4>Mapping Table Fields<a class="headerlink" href="#mapping-table-fields" title="Permalink to this headline">¶</a></h4>
-<dl class="field-list simple">
-<dt class="field-odd">signal</dt>
-<dd class="field-odd"><p>The CCDEF standard signal name (see list)</p>
-</dd>
-<dt class="field-even">dataset</dt>
-<dd class="field-even"><p>The dataset containing the signal</p>
-</dd>
-<dt class="field-odd">local_name</dt>
-<dd class="field-odd"><p>The original name of the signal in the datafile. This will generally be the dataset name if multiple datasets are used or it will be the column name in a tabular dataset.</p>
-</dd>
-<dt class="field-even">column</dt>
-<dd class="field-even"><p>The column number in <em>dataset</em> for the signal of interest</p>
-</dd>
-<dt class="field-odd">category</dt>
-<dd class="field-odd"><p>Waveform or Numeric</p>
-</dd>
-<dt class="field-even">LOINC</dt>
-<dd class="field-even"><p>The LOINC for the signal of interest.
-A number of waveform signals do not currently have assigned LOINC identifiers but additions are being proposed to address this.</p>
-</dd>
-<dt class="field-odd">loinc_name</dt>
-<dd class="field-odd"><p>This is the LOINC short name (if it exists) for the signal</p>
-</dd>
-</dl>
-<p>example dataframe from MIMIC</p>
-<p>example from API: f.show_map()</p>
+<div class="section" id="mapping-table-field-descriptions">
+<h4>Mapping Table Field Descriptions<a class="headerlink" href="#mapping-table-field-descriptions" title="Permalink to this headline">¶</a></h4>
+<dl class="py data">
+<dt id="signal">
+<code class="sig-name descname">signal</code><em class="property">: string</em><em class="property"> = The CCDEF standard signal name</em><a class="headerlink" href="#signal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="dataset">
+<code class="sig-name descname">dataset</code><em class="property">: string</em><em class="property"> = the name of the dataset containing the signal (can be accessed directly as f['/Group/'+dataset])</em><a class="headerlink" href="#dataset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="local_name">
+<code class="sig-name descname">local_name</code><em class="property">: string</em><em class="property"> = The original name of the signal in the datafile. This will generally be the dataset name if multiple datasets are used or it will be the column name in a tabular dataset.</em><a class="headerlink" href="#local_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="column">
+<code class="sig-name descname">column</code><em class="property">: int</em><em class="property"> = The number of the column in *dataset* containing the signal (default is 1 for a single column dataset)</em><a class="headerlink" href="#column" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="category">
+<code class="sig-name descname">category</code><em class="property">: string</em><em class="property"> = {waveform, numeric}</em><a class="headerlink" href="#category" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="LOINC">
+<code class="sig-name descname">LOINC</code><em class="property">: string</em><em class="property"> = The LOINC for the signal of interest.</em><a class="headerlink" href="#LOINC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="loinc_name">
+<code class="sig-name descname">loinc_name</code><em class="property">: string</em><em class="property"> = This is the LOINC short name (if it exists) for the signal</em><a class="headerlink" href="#loinc_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A number of waveform signals do not currently have assigned LOINC identifiers but additions are being proposed to address this.</p>
+</div>
+<p>** example dataframe from MIMIC **</p>
 </div>
 <div class="section" id="future-mapping-possibilities">
 <h4>Future Mapping Possibilities<a class="headerlink" href="#future-mapping-possibilities" title="Permalink to this headline">¶</a></h4>
@@ -288,46 +347,91 @@ This is an area of active development.</p>
 <h2>Numerics<a class="headerlink" href="#numerics" title="Permalink to this headline">¶</a></h2>
 <p>The numerics group contains signals at a sample rate of less than 50 Hz.
 Generally data in this group will be in a single tabular dataset called <em>Vitals</em></p>
+<div class="section" id="numerics-datasets">
+<h3>Numerics Datasets<a class="headerlink" href="#numerics-datasets" title="Permalink to this headline">¶</a></h3>
+<p>These can be tabular or single channel as described in detail <a class="reference internal" href="datasets.html#dataset-details"><span class="std std-ref">here</span></a>.</p>
 <p>Typical parameters include:</p>
 <ul class="simple">
 <li><p>Invasive BP (ABP)</p></li>
-<li><p>Non-invasive BP</p></li>
+<li><p>Non-invasive BP (NIBP)</p></li>
 <li><p>SpO2</p></li>
 <li><p>HR</p></li>
 </ul>
 </div>
+</div>
 <div class="section" id="waveforms">
 <h2>Waveforms<a class="headerlink" href="#waveforms" title="Permalink to this headline">¶</a></h2>
-<p>The Waveforms group contains data that is recorded at frequencies typically 100-500 Hz.</p>
-<p>The most common dataset will be hemodynamic measurements conisting of:</p>
+<p>The Waveforms group contains data that is recorded at frequencies typically 100-500 Hz.
+There is generally more variabiltiy in the sample rates for different waveform signals, particularly if they are derived from different sources (eg bedside monitor, ventilator, etc).</p>
+<div class="section" id="waveform-datasets">
+<h3>Waveform Datasets<a class="headerlink" href="#waveform-datasets" title="Permalink to this headline">¶</a></h3>
+<p>The most common datasets will be cardiorespiratory measurements conisting of:</p>
 <ul class="simple">
-<li><p>one</p></li>
-<li><p>two</p></li>
-<li><p>three</p></li>
+<li><p>ECG leads</p></li>
+<li><p>SpO2</p></li>
+<li><p>ABP</p></li>
 </ul>
+<p>Once again, these can be tabular or single channel as described in detail <a class="reference internal" href="datasets.html#dataset-details"><span class="std std-ref">here</span></a>.</p>
 </div>
-<div class="section" id="clinical">
-<h2>Clinical<a class="headerlink" href="#clinical" title="Permalink to this headline">¶</a></h2>
-<p>The clinical group contains:</p>
+</div>
+<div class="section" id="clinical-datasets">
+<h2>Clinical datasets<a class="headerlink" href="#clinical-datasets" title="Permalink to this headline">¶</a></h2>
+<p>The clinical group contains a variety of information extracted from the EMR and other sources, generally excluding monitor data.
+As there are a wide range of EMR data extraction pipelines, it is difficulty to completely standardize this group but we provide some high level guidance.
+Perhaps the greatest challenge within the clinical data is mapping concepts such as interventions and clinical observations.
+This is an active area of research and is one of the goals of the OMOP-CDM.</p>
 <div class="section" id="datasets">
 <h3>Datasets<a class="headerlink" href="#datasets" title="Permalink to this headline">¶</a></h3>
-<p>Possible Datasets:
-- Labs
-- Micro
-- Notes (EMR notes)
-- Diagnosis</p>
+<p>Suggested Clinical Datasets Include:</p>
+<ul class="simple">
+<li><p>labs</p></li>
+<li><p>micro</p></li>
+<li><p>notes (EMR notes)</p></li>
+<li><p>diagnosis</p></li>
+</ul>
+<p>Imaging if available would be in a separate group <em>/Clinical/Imaging</em></p>
 </div>
 <div class="section" id="clinical-timestamps">
 <h3>Clinical Timestamps<a class="headerlink" href="#clinical-timestamps" title="Permalink to this headline">¶</a></h3>
 <p>Clinical data tend to be much sparser than physiologic data and therefore timestamps will typically be included in these datasets.
-The most common format will be an absolute timestamp stored as a string (possibly with an offset for anonymization)</p>
+The prefered method is a time column with seconds from the orgin or <em>base_datetime</em>.</p>
 </div>
-<div class="section" id="metadata">
-<h3>Metadata<a class="headerlink" href="#metadata" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="clinical-group-metadata">
+<h3>Clinical Group Metadata<a class="headerlink" href="#clinical-group-metadata" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="demographics">
 <h4>Demographics<a class="headerlink" href="#demographics" title="Permalink to this headline">¶</a></h4>
-<p>This is stored in the .Demographics attribute. It is a JSON formatted string.</p>
-<p><strong>Example:</strong></p>
+<p>Demographic information about the patient is stored as a group attribute “.Demographics” Acceptable demographics fields are:</p>
+<dl class="py data">
+<dt id="age">
+<code class="sig-name descname">age</code><em class="property">: float</em><em class="property"> = the patient's age in years</em><a class="headerlink" href="#age" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="gender">
+<code class="sig-name descname">gender</code><em class="property">: string</em><em class="property"> = {M,F}</em><a class="headerlink" href="#gender" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="expired">
+<code class="sig-name descname">expired</code><em class="property">: int</em><em class="property"> = {0,1} 0 indicating that the patient did not die during the period covered by the file</em><a class="headerlink" href="#expired" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="admit_dx">
+<code class="sig-name descname">admit_dx</code><em class="property">: string</em><em class="property"> = admission ICD 9 code</em><a class="headerlink" href="#admit_dx" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>** should we make the admission dx a separate attribute? should it be a list of possible dx codes, eg ICD9, ICD10 **</p>
+<p>The result is a JSON formatted attribute like this:
+.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">clinical</span><span class="o">.</span><span class="n">demographics</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mf">40.1</span><span class="p">,</span>
+        <span class="s2">&quot;gender&quot;</span><span class="p">:</span> <span class="s2">&quot;M&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;expired&quot;</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -350,6 +454,8 @@ The main purpose of this group is to include links (refered to as references in 
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="datasets.html" class="btn btn-neutral float-right" title="Monitor/Physiologic Datasets (Waveform and Numerics)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="intro_h5.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

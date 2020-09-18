@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Dataset Format &mdash; CCDEF 1.0.0 documentation</title>
+  <title>Monitor/Physiologic Datasets (Waveform and Numerics) &mdash; CCDEF 1.0.0 documentation</title>
   
 
   
@@ -30,12 +30,15 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Derived Data" href="derived.html" />
+    <link rel="prev" title="Core CCDEF Groups" href="groups.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -81,9 +84,22 @@
             
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro_h5.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="groups.html">Groups and Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="groups.html">Core CCDEF Groups</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Monitor/Physiologic Datasets (Waveform and Numerics)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#single-channel-format">Single Channel Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tabular-format">Tabular Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#monitor-dataset-metadata">Monitor Dataset Metadata</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dataset-metadata-fields">Dataset Metadata Fields</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="derived.html">Derived Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="signals.html">Standard Signal Names</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Open source tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 </ul>
 
             
@@ -130,7 +146,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Dataset Format</li>
+      <li>Monitor/Physiologic Datasets (Waveform and Numerics)</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -149,11 +165,35 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="dataset-format">
-<h1>Dataset Format<a class="headerlink" href="#dataset-format" title="Permalink to this headline">¶</a></h1>
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="monitor-physiologic-datasets-waveform-and-numerics">
+<span id="dataset-details"></span><h1>Monitor/Physiologic Datasets (Waveform and Numerics)<a class="headerlink" href="#monitor-physiologic-datasets-waveform-and-numerics" title="Permalink to this headline">¶</a></h1>
 <p>Datasets can be single channels or they can be a table of multiple channels.</p>
-<div class="section" id="single-channel-dataset-format">
-<h2>Single Channel Dataset Format<a class="headerlink" href="#single-channel-dataset-format" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="single-channel-format">
+<h2>Single Channel Format<a class="headerlink" href="#single-channel-format" title="Permalink to this headline">¶</a></h2>
 <p>In this case, each signal is stored in a separate dataset in its respective group.
 The file structure would be:</p>
 <blockquote>
@@ -161,7 +201,7 @@ The file structure would be:</p>
 <div class="line">/ (root)</div>
 <div class="line-block">
 <div class="line">.mapping</div>
-<div class="line">/Numerics</div>
+<div class="line">/numerics</div>
 <div class="line-block">
 <div class="line">HR</div>
 <div class="line">ABP-S</div>
@@ -170,14 +210,14 @@ The file structure would be:</p>
 <div class="line">SPO2</div>
 <div class="line"><br /></div>
 </div>
-<div class="line">/Waveforms</div>
+<div class="line">/waveforms</div>
 <div class="line-block">
 <div class="line">ECG-II</div>
 <div class="line">ABP</div>
 <div class="line">CVP</div>
 <div class="line"><br /></div>
 </div>
-<div class="line">/Clinial</div>
+<div class="line">/clinial</div>
 <div class="line-block">
 <div class="line">Notes</div>
 <div class="line">Labs</div>
@@ -196,31 +236,31 @@ The resulting file structure looks like:</p>
 <div class="line">/ (root)</div>
 <div class="line-block">
 <div class="line">.mapping</div>
-<div class="line">/Numerics</div>
+<div class="line">/numerics</div>
 <div class="line-block">
-<div class="line">Vitals</div>
+<div class="line">vitals</div>
 <div class="line"><br /></div>
 </div>
-<div class="line">/Waveforms</div>
+<div class="line">/wwaveforms</div>
 <div class="line-block">
-<div class="line">Hemodynamics</div>
+<div class="line">hemodynamics</div>
 <div class="line"><br /></div>
 </div>
-<div class="line">/Clinial</div>
+<div class="line">/clinial</div>
 <div class="line-block">
-<div class="line">Notes</div>
-<div class="line">Labs</div>
-<div class="line">Micro</div>
+<div class="line">notes</div>
+<div class="line">labs</div>
+<div class="line">micro</div>
 </div>
 </div>
 </div>
 </div></blockquote>
 </div>
-<div class="section" id="dataset-metadata">
-<h2>Dataset Metadata<a class="headerlink" href="#dataset-metadata" title="Permalink to this headline">¶</a></h2>
-<p>Dataset metadata is stored in an attribute and contains the following</p>
+<div class="section" id="monitor-dataset-metadata">
+<h2>Monitor Dataset Metadata<a class="headerlink" href="#monitor-dataset-metadata" title="Permalink to this headline">¶</a></h2>
+<p>Metadata for datasets derived from bedside monitors (numerics and waveforms) is stored JSON formatted attribute as shown below.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span><span class="o">/.</span><span class="n">meta</span>
-     <span class="p">{</span>
+    <span class="p">{</span>
          <span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="p">{</span>
              <span class="s2">&quot;HR&quot;</span><span class="p">:</span> <span class="p">{</span>
              <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;real&quot;</span><span class="p">,</span>
@@ -296,6 +336,15 @@ The resulting file structure looks like:</p>
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="derived.html" class="btn btn-neutral float-right" title="Derived Data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="groups.html" class="btn btn-neutral float-left" title="Core CCDEF Groups" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

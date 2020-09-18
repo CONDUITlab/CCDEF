@@ -24,7 +24,7 @@ def patient_id_from_file(filename):
     return (filename.split('/')[-1].split('-')[0][1:].strip("0"))
 
 def extract_notes(infile):
-"""
+    """
     extract_notes(infile)
 
     Take all lab values in the mimic3 db for infile
@@ -37,8 +37,7 @@ def extract_notes(infile):
 
     infile: string
         filename of a wfdb file from the MIMIC3 matched dataset
-
-"""
+    """
 
     # get patient ID
     subj_id = patient_id_from_file(infile)

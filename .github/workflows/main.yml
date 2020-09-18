@@ -7,8 +7,6 @@ name: CI
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -33,4 +31,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docs/_build
+          publish_dir: docs/_build/html

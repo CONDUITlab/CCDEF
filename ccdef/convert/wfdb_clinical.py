@@ -1,13 +1,10 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
-Convert MIMIC III data to hdf5 - ccdef
-
+Convert MIMIC III data to CCDEF (hdf5 based)
 """
 import numpy as np
 import pandas as pd
-import psycopg2
-import sqlite3
+import psycopg2 
+#import sqlite3
 import h5py
 import json
 import wfdb
@@ -37,6 +34,9 @@ def extract_notes(infile):
 
     infile: string
         filename of a wfdb file from the MIMIC3 matched dataset
+
+    return: notes
+        DataFrame containing notes, times, etc
     """
 
     # get patient ID
@@ -53,11 +53,26 @@ def extract_notes(infile):
     """.format(subj_id)
 
     notes = pd.read_sql_query(query,con)
+    """ change time stamp to seconds from origin """
+
     
     return (notes)
 
 def write_notes(notes_df, outfile):
+    """
+    write_notes(notes_df, infile)
 
+    Write notes from notes_df to infile    
+
+    Parameters
+    ----------
+
+    infile: string
+        filename of a wfdb file from the MIMIC3 matched dataset
+
+    notes_df: notes
+        DataFrame containing notes, times, etc
+    """
     
     dt = h5py.special_dtype(vlen=str)
     comp_type = np.dtype([('time', dt), ('date', dt), ('description', dt), ('category', dt), ('text', dt)])
@@ -97,6 +112,9 @@ def extract_labs(infile):
     WHERE subject_id = {};
     """.format(subj_id)
     labs = pd.read_sql_query(query,con)
+
+    #convert time
+
     
     return (labs)
 

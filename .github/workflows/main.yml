@@ -28,7 +28,7 @@ jobs:
         uses: ammaraskar/sphinx-action@0.4
         with:
           # ref. https://github.com/ammaraskar/sphinx-action/issues/14
-          pre-build-command: "apt-get update -y && apt-get install -y latexmk texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended"
+          pre-build-command: "apt-get update -y && apt-get install -y latexmk texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended pandoc"
       - name: Deploy Docs
         uses: peaceiris/actions-gh-pages@v3
         with:

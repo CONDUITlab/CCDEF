@@ -28,4 +28,9 @@ path = '/mnt/data04/Conduit/pcsdata/latest/'
 
 """
 
+"""
+   ldf=ldf.reset_index()
+    for idx, row in ldf.iterrows():
+        ldf['Time'].iloc[idx]=((base_datetime-pd.to_datetime(row['Order_datetime'])).total_seconds())
+"""
 

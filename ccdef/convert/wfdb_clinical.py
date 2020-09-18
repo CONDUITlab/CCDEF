@@ -8,6 +8,7 @@ import psycopg2
 import h5py
 import json
 import wfdb
+from ccdef._utils import df_to_sarray
 
 def open_db():
     schema = 'mimiciii'
@@ -20,11 +21,11 @@ def open_db():
 def patient_id_from_file(filename):
     return (filename.split('/')[-1].split('-')[0][1:].strip("0"))
 
-def extract_notes(infile):
+def extract_notes(infile, origin):
     """
     extract_notes(infile)
 
-    Take all lab values in the mimic3 db for infile
+    Take all notes in the mimic3 db for infile
     
     TODO: Will need to build option to include only labs/notes in the period where there is waveform/numeric data
     but for now we include everything so it is available for context (eg echo reports)
@@ -34,6 +35,8 @@ def extract_notes(infile):
 
     infile: string
         filename of a wfdb file from the MIMIC3 matched dataset
+    origin: datetime
+        the base datetime for the file
 
     return: notes
         DataFrame containing notes, times, etc
@@ -54,6 +57,10 @@ def extract_notes(infile):
 
     notes = pd.read_sql_query(query,con)
     """ change time stamp to seconds from origin """
+    
+
+    for idx, row in ldf.iterrows():
+        ldf['Time'].iloc[idx]=((base_datetime-pd.to_datetime(row['Order_datetime'])).total_seconds())
 
     
     return (notes)
@@ -77,6 +84,8 @@ def write_notes(notes_df, outfile):
     dt = h5py.special_dtype(vlen=str)
     comp_type = np.dtype([('time', dt), ('date', dt), ('description', dt), ('category', dt), ('text', dt)])
     # define array for writing to dataset
+    # use df to sArray
+
     arr_data = np.empty((0,), dtype=comp_type)
     for idx, row in notes_df.iterrows():
         arr = np.array([(str(row['chartdate']), row['charttime'], row['description'], row['category'], row['text'])], 
@@ -90,14 +99,31 @@ def write_notes(notes_df, outfile):
         
         
 def extract_labs(infile):
-    ''' 
-    Currently this takes all lab values in the mimic3 db for each waveform file
-    Will need to build option to include only labs/notes in the period where there is waveform/numeric data
+    """
+    extract_labs(infile)
+
+    Take all lab values in the mimic3 db for infile
+    
+    TODO: Will need to build option to include only labs/notes in the period where there is waveform/numeric data
     but for now we include everything so it is available for context (eg echo reports)
-    '''
+
+    Parameters
+    ----------
+
+    infile: string
+        filename of a wfdb file from the MIMIC3 matched dataset
+    origin: datetime
+        the base datetime for the file
+
+    return: notes
+        DataFrame containing notes, times, etc
+    """
 
     # get patient ID
     subj_id = patient_id_from_file(infile)
+
+    #get basetime
+    origin = wfdb.rdheader(infile).base_datetime
     
     #get lab_events for this patient
     con = open_db()
@@ -114,22 +140,29 @@ def extract_labs(infile):
     labs = pd.read_sql_query(query,con)
 
     #convert time
+    origin = pd.to_datetime(wfdb.rdheader(infile).base_datetime)
+    labs.insert(0, 'time', '')
 
-    
+    for idx, row in labs.iterrows():
+        labs['time'].iloc[idx]=int((pd.to_datetime(row['charttime'])-origin).total_seconds())
+    del labs['charttime']
+
     return (labs)
 
 def write_labs(labs_df, outfile):
 
     # TODO: convert flag to category and encode in .flag_info
-    
-    dt = h5py.special_dtype(vlen=str)
-    comp_type = np.dtype([('time', dt), ('testid', 'i8'), ('value', dt), ('valuenum', 'f8'), ('flag', dt)])
+    arr, saType = df_to_sarray(labs_df)
+
+
+ #   dt = h5py.special_dtype(vlen=str)
+ #   comp_type = np.dtype([('time', dt), ('testid', 'i8'), ('value', dt), ('valuenum', 'f8'), ('flag', dt)])
     # define array for writing to dataset
-    arr_data = np.empty((0,), dtype=comp_type)
-    for idx, row in labs_df.iterrows():
-        arr = np.array([(str(row['charttime']), row['itemid'], row['value'], row['valuenum'], row['flag'])], 
-                   dtype = comp_type)
-        arr_data = np.append(arr_data, arr)
+#    arr_data = np.empty((0,), dtype=comp_type)
+#    for idx, row in labs_df.iterrows():
+#        arr = np.array([(str(row['charttime']), row['itemid'], row['value'], row['valuenum'], row['flag'])], 
+#                  dtype = comp_type)
+#        arr_data = np.append(arr_data, arr)
         
         
     #create metadata
@@ -138,8 +171,8 @@ def write_labs(labs_df, outfile):
     test_info = labs_grouped.T.to_dict('dict')
     
     with h5py.File(outfile, 'a') as f:
-        clin = f.require_group('/Clinical')
-        lab_ds = f.create_dataset('Clinical/labs', maxshape = (None, ), data = arr_data,
+        clin = f.require_group('/clinical')
+        lab_ds = f.create_dataset('clinical/labs', maxshape = (None, ), data = arr, dtype=saType,
                                  compression="gzip", compression_opts = 9, shuffle = True)
         lab_ds.attrs['.test_info'] = json.dumps(test_info) 
         
@@ -283,21 +316,21 @@ def convert_mimic_matched (filename, samp_end = None, all_labs=True, all_notes=T
 #        meta.attrs['mapping'] = json.dumps('Placeholder', indent = 4)
         
         
-        grp_numerics = f.require_group('Numerics')
+        grp_numerics = f.require_group('numerics')
         print('Converting numerics')
         record = wfdb.rdrecord(filename+'n', sampfrom = 0, sampto = samp_end )
         df = pd.DataFrame(data = record.p_signal, columns = record.sig_name)
-        ds_num = grp_numerics.create_dataset('data', maxshape = (None,), data = df.to_records(index=False),
+        ds_num = grp_numerics.create_dataset('vitals', maxshape = (None,), data = df.to_records(index=False),
                                  compression="gzip", compression_opts=9, shuffle = True)
         
-        grp_waveforms = f.require_group('/Waveforms')
+        grp_waveforms = f.require_group('/waveforms')
         print('Converting waveforms')
         record = wfdb.rdrecord(filename, sampfrom = 0, sampto = samp_end )
         df = pd.DataFrame(data = record.p_signal, columns = record.sig_name)
-        ds_wave = grp_waveforms.create_dataset('Hemodynamic', maxshape = (None,), data = df.to_records(index=False),
+        ds_wave = grp_waveforms.create_dataset('hemodynamics', maxshape = (None,), data = df.to_records(index=False),
                                  compression="gzip", compression_opts=9, shuffle = True)
         
-        grp_clinical = f.require_group('/Clinical')
+        grp_clinical = f.require_group('/clinical')
 
         #demographics
 
@@ -330,6 +363,8 @@ def convert_mimic_matched (filename, samp_end = None, all_labs=True, all_notes=T
     write_labs(labs, outfile)
     
     print ('Extracting notes')
-    notes = extract_notes(filename)
+    notes = extract_notes(filename))
     write_notes(notes, outfile)      
+
+    #micro
         

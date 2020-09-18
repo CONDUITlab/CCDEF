@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; CCDEF 1.0.0 documentation</title>
+  <title>Standard Signal Names &mdash; CCDEF 1.0.0 documentation</title>
   
 
   
@@ -35,8 +35,10 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-    <link rel="index" title="Index" href="#" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Open source tools" href="tools.html" />
+    <link rel="prev" title="Derived Data" href="derived.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -82,12 +84,16 @@
             
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro_h5.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="groups.html">Core CCDEF Groups</a></li>
 <li class="toctree-l1"><a class="reference internal" href="datasets.html">Monitor/Physiologic Datasets (Waveform and Numerics)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="derived.html">Derived Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="signals.html">Standard Signal Names</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Standard Signal Names</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#numerics">Numerics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#waveforms">Waveforms</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="tools.html">Open source tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 </ul>
@@ -136,12 +142,14 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Index</li>
+      <li>Standard Signal Names</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
+            <a href="_sources/signals.rst.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
     
@@ -153,49 +161,80 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
 
-<h1 id="index">Index</h1>
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
 
-<div class="genindex-jumpbox">
- <a href="#A"><strong>A</strong></a>
- | <a href="#E"><strong>E</strong></a>
- | <a href="#G"><strong>G</strong></a>
- 
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="standard-signal-names">
+<h1>Standard Signal Names<a class="headerlink" href="#standard-signal-names" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="numerics">
+<h2>Numerics<a class="headerlink" href="#numerics" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>HR</p></li>
+<li><p>ABP-S</p></li>
+<li><p>ABP-M</p></li>
+<li><p>ABP-D</p></li>
+<li><p>NIBP-S</p></li>
+<li><p>NIBP-M</p></li>
+<li><p>NIBP-D</p></li>
+<li><p>CVP</p></li>
+<li><p>RR</p></li>
+<li><p>SPO2</p></li>
+</ul>
 </div>
-<h2 id="A">A</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="groups.html#admit_dx">admit_dx (built-in variable)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="groups.html#age">age (built-in variable)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="E">E</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="groups.html#expired">expired (built-in variable)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="G">G</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="groups.html#gender">gender (built-in variable)</a>
-</li>
-  </ul></td>
-</tr></table>
-
+<div class="section" id="waveforms">
+<h2>Waveforms<a class="headerlink" href="#waveforms" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>ABP</p></li>
+<li><p>PLETH</p></li>
+<li><p>CVP</p></li>
+<li><p>ECG-I</p></li>
+<li><p>ECG-II</p></li>
+<li><p>ECG-III</p></li>
+<li><p>ECG-V</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Additional standard signals may be added in future versions of the standard.
+In particular, we are very interested in acquiring ventilator waveforms and parameters.</p>
+</div>
+</div>
+</div>
 
 
            </div>
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tools.html" class="btn btn-neutral float-right" title="Open source tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="derived.html" class="btn btn-neutral float-left" title="Derived Data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

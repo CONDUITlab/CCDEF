@@ -26,7 +26,7 @@ comp_type = np.dtype([('parameter', dt), ('loinc', dt), ('source_name', dt),
 
 
 #%% reading functions
-
+'''
 def numerics (names = '', loincs = '', time = 'relative'):
     
     #read mapping df
@@ -53,7 +53,7 @@ def waveforms (name = '', loinc='', time='relative'):
 
     """Waveforms"""
     return
-
+'''
 #%% Writing/Encoding Functions
 
 

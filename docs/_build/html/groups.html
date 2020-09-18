@@ -105,11 +105,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#waveform-datasets">Waveform Datasets</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#clinical-datasets">Clinical datasets</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#datasets">Datasets</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#clinical-timestamps">Clinical Timestamps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clinical-group">Clinical Group</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#clinical-group-metadata">Clinical Group Metadata</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#demographics">Demographics</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#clinical-timestamps">Clinical Timestamps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clinical-datasets">Clinical Datasets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#clinical-dataset-metadata">Clinical Dataset Metadata</a></li>
 </ul>
 </li>
 </ul>
@@ -243,8 +246,6 @@ The root group is obviously mandatory but valid files can be created with physio
 <p>One of the key issues in data sharing is the ability to seamlessly ingest data from multiple sites into the end users’ application without having to develop site specific pipelines.
 This is complicated by the fact that collect sites will have various local factors that influence the way they store data, based on equipment, etc.
 The data model is self-describing so it is fairly straight forward for end users to locate and extract the data that they need, but to add an additional level of interoperability we provide a mapping table for common key <a class="reference internal" href="signals.html#standard-signal-names"><span class="std std-ref">signal names</span></a> that allow a user to directly (or using library functions) search and access the information they require.</p>
-<p>The mapping table describes parameters in terms of LOINC (link) to provide further standardization and clarity as to the nature of the information.
-The mapping table also provides the group, dataset and column (if the dataset is tabular)</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -295,40 +296,25 @@ The mapping table also provides the group, dataset and column (if the dataset is
 </div>
 <div class="section" id="mapping-table-field-descriptions">
 <h4>Mapping Table Field Descriptions<a class="headerlink" href="#mapping-table-field-descriptions" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt id="signal">
-<code class="sig-name descname">signal</code><em class="property">: string</em><em class="property"> = The CCDEF standard signal name</em><a class="headerlink" href="#signal" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py data">
-<dt id="dataset">
-<code class="sig-name descname">dataset</code><em class="property">: string</em><em class="property"> = the name of the dataset containing the signal (can be accessed directly as f['/Group/'+dataset])</em><a class="headerlink" href="#dataset" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py data">
-<dt id="local_name">
-<code class="sig-name descname">local_name</code><em class="property">: string</em><em class="property"> = The original name of the signal in the datafile. This will generally be the dataset name if multiple datasets are used or it will be the column name in a tabular dataset.</em><a class="headerlink" href="#local_name" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py data">
-<dt id="column">
-<code class="sig-name descname">column</code><em class="property">: int</em><em class="property"> = The number of the column in *dataset* containing the signal (default is 1 for a single column dataset)</em><a class="headerlink" href="#column" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py data">
-<dt id="category">
-<code class="sig-name descname">category</code><em class="property">: string</em><em class="property"> = {waveform, numeric}</em><a class="headerlink" href="#category" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py data">
-<dt id="LOINC">
-<code class="sig-name descname">LOINC</code><em class="property">: string</em><em class="property"> = The LOINC for the signal of interest.</em><a class="headerlink" href="#LOINC" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py data">
-<dt id="loinc_name">
-<code class="sig-name descname">loinc_name</code><em class="property">: string</em><em class="property"> = This is the LOINC short name (if it exists) for the signal</em><a class="headerlink" href="#loinc_name" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dl class="py function">
+<dt>
+<code class="sig-name descname">mapping dataset</code></dt>
+<dd><p>The mapping table describes parameters in terms of LOINC (link) to provide further standardization and clarity as to the nature of the information.
+The mapping table also provides the group, dataset and column (if the dataset is tabular)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>signal</strong> (<em>str</em>) – The CCDEF standard signal name (see <a class="reference internal" href="signals.html#standard-signal-names"><span class="std std-ref">signal names</span></a>)</p></li>
+<li><p><strong>dataset</strong> (<em>str</em>) – The name of the dataset containing the signal (can be accessed directly as f[‘/Group/’+dataset])</p></li>
+<li><p><strong>local_name</strong> (<em>str</em>) – The original name of the signal in the datafile. This will generally be the dataset name if multiple datasets are used or it will be the column name in a tabular dataset.</p></li>
+<li><p><strong>column</strong> (<em>int</em>) – The number of the column in <em>dataset</em> containing the signal (default is 1 for a single column dataset)</p></li>
+<li><p><strong>category</strong> (<em>str</em>) – {waveform, numeric}</p></li>
+<li><p><strong>LOINC</strong> (<em>str</em>) – The LOINC for the signal of interest</p></li>
+<li><p><strong>loinc_name</strong> (<em>str</em>) – The LOINC short name (if it exists) for the signal</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -374,28 +360,12 @@ There is generally more variabiltiy in the sample rates for different waveform s
 <p>Once again, these can be tabular or single channel as described in detail <a class="reference internal" href="datasets.html#dataset-details"><span class="std std-ref">here</span></a>.</p>
 </div>
 </div>
-<div class="section" id="clinical-datasets">
-<h2>Clinical datasets<a class="headerlink" href="#clinical-datasets" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="clinical-group">
+<h2>Clinical Group<a class="headerlink" href="#clinical-group" title="Permalink to this headline">¶</a></h2>
 <p>The clinical group contains a variety of information extracted from the EMR and other sources, generally excluding monitor data.
 As there are a wide range of EMR data extraction pipelines, it is difficulty to completely standardize this group but we provide some high level guidance.
 Perhaps the greatest challenge within the clinical data is mapping concepts such as interventions and clinical observations.
 This is an active area of research and is one of the goals of the OMOP-CDM.</p>
-<div class="section" id="datasets">
-<h3>Datasets<a class="headerlink" href="#datasets" title="Permalink to this headline">¶</a></h3>
-<p>Suggested Clinical Datasets Include:</p>
-<ul class="simple">
-<li><p>labs</p></li>
-<li><p>micro</p></li>
-<li><p>notes (EMR notes)</p></li>
-<li><p>diagnosis</p></li>
-</ul>
-<p>Imaging if available would be in a separate group <em>/Clinical/Imaging</em></p>
-</div>
-<div class="section" id="clinical-timestamps">
-<h3>Clinical Timestamps<a class="headerlink" href="#clinical-timestamps" title="Permalink to this headline">¶</a></h3>
-<p>Clinical data tend to be much sparser than physiologic data and therefore timestamps will typically be included in these datasets.
-The prefered method is a time column with seconds from the orgin or <em>base_datetime</em>.</p>
-</div>
 <div class="section" id="clinical-group-metadata">
 <h3>Clinical Group Metadata<a class="headerlink" href="#clinical-group-metadata" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="demographics">
@@ -429,6 +399,150 @@ The prefered method is a time column with seconds from the orgin or <em>base_dat
         <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mf">40.1</span><span class="p">,</span>
         <span class="s2">&quot;gender&quot;</span><span class="p">:</span> <span class="s2">&quot;M&quot;</span><span class="p">,</span>
         <span class="s2">&quot;expired&quot;</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="clinical-timestamps">
+<h3>Clinical Timestamps<a class="headerlink" href="#clinical-timestamps" title="Permalink to this headline">¶</a></h3>
+<p>Clinical data tend to be much sparser than physiologic data and therefore timestamps will typically be included in these datasets.
+The prefered method is a time column with seconds from the orgin or <em>base_datetime</em>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If no base_datetime is specified in the clinical datasets, the time orgin for the file in the root group metadata will be used <em>(/.meta)</em>.</p>
+</div>
+</div>
+<div class="section" id="clinical-datasets">
+<h3>Clinical Datasets<a class="headerlink" href="#clinical-datasets" title="Permalink to this headline">¶</a></h3>
+<p>Suggested Clinical Datasets Include:</p>
+<ul class="simple">
+<li><p>labs</p></li>
+<li><p>micro</p></li>
+<li><p>notes (EMR notes)</p></li>
+<li><p>diagnosis</p></li>
+</ul>
+<p>Imaging if available would be in a separate group <em>/Clinical/Imaging</em></p>
+<dl class="py function">
+<dt>
+<code class="sig-name descname">labs dataset</code></dt>
+<dd><p>The labs dataset contains time stamped laboratory data such as chemistry, hematology, etc</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<em>int</em>) – seconds elapsed from base_datetime</p></li>
+<li><p><strong>test_id</strong> (<em>int</em>) – the test identifier (this may link to the .test_info attribute)</p></li>
+<li><p><strong>value</strong> (<em>str</em>) – the value of the test as a string</p></li>
+<li><p><strong>test_name</strong> (<em>str</em><em> ,</em><em>optional</em>) – the name of the test</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt>
+<code class="sig-name descname">micro dataset</code></dt>
+<dd><p>The micro dataset contains time stamped microbiolgy data from a variety of sources (eg blood, urine, CSF, tissue)
+Note that there may be multiple time fields with relevant information as the time from sample collection to result can be clinicaly relevant.
+Caution is advised however in that these values may not always be entirely accurate as they often result from manual data entry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<em>int</em>) – seconds elapsed from base_datetime</p></li>
+<li><p><strong>test_id</strong> (<em>int</em>) – the test identifier (this may link to the .test_info attribute)</p></li>
+<li><p><strong>value</strong> (<em>str</em>) – the value of the test as a string</p></li>
+<li><p><strong>test_name</strong> (<em>str</em><em> ,</em><em>optional</em>) – the name of the test</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt>
+<code class="sig-name descname">notes dataset</code></dt>
+<dd><p>The notes dataset includes clinical notes from the EMR.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<em>int</em>) – seconds elapsed from base_datetime</p></li>
+<li><p><strong>test_id</strong> (<em>int</em>) – the test identifier (this may link to the .test_info attribute)</p></li>
+<li><p><strong>value</strong> (<em>str</em>) – the value of the test as a string</p></li>
+<li><p><strong>test_name</strong> (<em>str</em><em> ,</em><em>optional</em>) – the name of the test</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="section" id="clinical-dataset-metadata">
+<h4>Clinical Dataset Metadata<a class="headerlink" href="#clinical-dataset-metadata" title="Permalink to this headline">¶</a></h4>
+<p>Information about tests can be stored in <em>.test_info</em>,</p>
+<dl class="py function">
+<dt>
+<code class="sig-name descname">.test_info metadata attribute</code></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>label</strong> (<em>str</em>) – name of the test</p>
+</dd>
+</dl>
+<p>** To finish **</p>
+</dd></dl>
+
+<p>Files converted from MIMIC III will have a JSON formatted string like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">clinical</span><span class="o">/</span><span class="n">labs</span><span class="o">.</span><span class="n">test_info</span>
+    <span class="p">{</span><span class="s1">&#39;50809&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Glucose&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="s1">&#39;Blood Gas&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;fluid&#39;</span><span class="p">:</span> <span class="s1">&#39;Blood&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;valueuom&#39;</span><span class="p">:</span> <span class="s1">&#39;mg/dL&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;loinc_code&#39;</span><span class="p">:</span> <span class="s1">&#39;2339-0&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;50810&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Hematocrit, Calculated&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="s1">&#39;Blood Gas&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;fluid&#39;</span><span class="p">:</span> <span class="s1">&#39;Blood&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;valueuom&#39;</span><span class="p">:</span> <span class="s1">&#39;%&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;loinc_code&#39;</span><span class="p">:</span> <span class="s1">&#39;20570-8&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;50811&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Hemoglobin&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="s1">&#39;Blood Gas&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;fluid&#39;</span><span class="p">:</span> <span class="s1">&#39;Blood&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;valueuom&#39;</span><span class="p">:</span> <span class="s1">&#39;g/dL&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;loinc_code&#39;</span><span class="p">:</span> <span class="s1">&#39;718-7&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;50813&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Lactate&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="s1">&#39;Blood Gas&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;fluid&#39;</span><span class="p">:</span> <span class="s1">&#39;Blood&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;valueuom&#39;</span><span class="p">:</span> <span class="s1">&#39;mmol/L&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;loinc_code&#39;</span><span class="p">:</span> <span class="s1">&#39;32693-4&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;50816&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Oxygen&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="s1">&#39;Blood Gas&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;fluid&#39;</span><span class="p">:</span> <span class="s1">&#39;Blood&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;valueuom&#39;</span><span class="p">:</span> <span class="s1">&#39;%&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;loinc_code&#39;</span><span class="p">:</span> <span class="s1">&#39;19994-3&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;50817&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Oxygen Saturation&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="s1">&#39;Blood Gas&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;fluid&#39;</span><span class="p">:</span> <span class="s1">&#39;Blood&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;valueuom&#39;</span><span class="p">:</span> <span class="s1">&#39;%&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;loinc_code&#39;</span><span class="p">:</span> <span class="s1">&#39;20564-1&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;50818&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;pCO2&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="s1">&#39;Blood Gas&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;fluid&#39;</span><span class="p">:</span> <span class="s1">&#39;Blood&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;valueuom&#39;</span><span class="p">:</span> <span class="s1">&#39;mm Hg&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;loinc_code&#39;</span><span class="p">:</span> <span class="s1">&#39;11557-6&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;50819&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;PEEP&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="s1">&#39;Blood Gas&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;fluid&#39;</span><span class="p">:</span> <span class="s1">&#39;Blood&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;valueuom&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">&#39;loinc_code&#39;</span><span class="p">:</span> <span class="s1">&#39;20077-4&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;50820&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;pH&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="s1">&#39;Blood Gas&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;fluid&#39;</span><span class="p">:</span> <span class="s1">&#39;Blood&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;valueuom&#39;</span><span class="p">:</span> <span class="s1">&#39;units&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;loinc_code&#39;</span><span class="p">:</span> <span class="s1">&#39;11558-4&#39;</span><span class="p">},</span>
     <span class="p">}</span>
 </pre></div>
 </div>

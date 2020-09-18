@@ -24,12 +24,21 @@ def patient_id_from_file(filename):
     return (filename.split('/')[-1].split('-')[0][1:].strip("0"))
 
 def extract_notes(infile):
+"""
+    extract_notes(infile)
 
-    ''' 
-    Currently this takes all lab values in the mimic3 db for each waveform file
-    Will need to build option to include only labs/notes in the period where there is waveform/numeric data
+    Take all lab values in the mimic3 db for infile
+    
+    TODO: Will need to build option to include only labs/notes in the period where there is waveform/numeric data
     but for now we include everything so it is available for context (eg echo reports)
-    '''
+
+    Parameters
+    ----------
+
+    infile: string
+        filename of a wfdb file from the MIMIC3 matched dataset
+
+"""
 
     # get patient ID
     subj_id = patient_id_from_file(infile)

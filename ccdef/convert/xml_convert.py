@@ -14,32 +14,29 @@ import audata
 import mmap
 import pandas as pd
 from lxml import etree
-
+import audata
 #%% helper functions
+def get_file_info(infile):
 
-def get_file_info (filename):
-""" get start and end time from a bedmaster xml file """
+    _, elem = next(etree.iterparse(infile, tag='VitalSigns', huge_tree=True, recover=True))
+    start_str = elem.attrib['CollectionTime']
 
-_, elem = next(etree.iterparse(infile, tag='VitalSigns', 
-   huge_tree=True, recover=True))
-start_str = elem.attrib['CollectionTime']
+    start = pd.to_datetime(start_str, infer_datetime_format=True)
 
-start = pd.to_datetime(start_str, infer_datetime_format=True)
+    for _, element in etree.iterparse(infile, tag='VitalSigns',
+        huge_tree=True, recover=True):
+        time = element.attrib['CollectionTime']
+        element.clear(keep_tail=True)
+    end_str = time
+    end = pd.to_datetime(end_str, infer_datetime_format=True)
+    duration = end-start
 
-for _, element in etree.iterparse(infile, tag='VitalSigns',
-    huge_tree=True, recover=True):
-    time = element.attrib['CollectionTime']
-    element.clear(keep_tail=True)
-end_str = time
-end = pd.to_datetime(end_str, infer_datetime_format=True)
-duration = end-start
+    """ Examine the file header """
+    _, elem = next(etree.iterparse(infile, tag='FileInfo'))
+    bed = elem.findtext('Bed')
+    monitor_type = elem.findtext('FamilyType')
 
-""" Examine the file header """
-_, elem = next(etree.iterparse(infile, tag='FileInfo'))
-bed = elem.findtext('Bed')
-monitor_type = elem.findtext('FamilyType')
-
-print('File runs {} to {}, duration is '.format(start, end, duration))
+    print('File runs {} to {}, duration is {}'.format(start, end, duration))
 
     return [start, end, duration, bed, monitor_type] 
 
@@ -48,8 +45,12 @@ print('File runs {} to {}, duration is '.format(start, end, duration))
 def convert_xml(infile, outfile, numerics=True, Waveforms=True):
     print('Converting {} to {}'.format(infile, outfile))
 
-    for _, element in etree.iterparse(infile, events=("start", "end"), tag='VitalSigns',
-        huge_tree=True, recover=True)):
+    """ get file info """
+    start, end, duration, bed, monitor_type = get_file_info(infile)
+
+    """ Convert Numerics as a single tabular dataset """
+
+    for _, element in etree.iterparse(infile, events=("start", "end"), tag='VitalSigns', huge_tree=True, recover=True):
         element.findtext('Time')
         vitals = element.getchildren()
         for i in vitals:
@@ -59,6 +60,9 @@ def convert_xml(infile, outfile, numerics=True, Waveforms=True):
             uom = i.findtext('UOM')
             print(time, chan, value)
         element.clear(keep_tail=True)
+
+    """ create column metadata """
+
 
 
 #when creating new dataset, use total duration, sample rate, number of samples, to create dset

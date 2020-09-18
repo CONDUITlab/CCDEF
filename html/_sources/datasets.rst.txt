@@ -13,19 +13,19 @@ The file structure would be:
 
  | / (root)
  |      .mapping
- |      /Numerics
+ |      /numerics
  |          HR
  |          ABP-S
  |          ABP-D
  |          ABP-M
  |          SPO2
  |
- |      /Waveforms
+ |      /waveforms
  |          ECG-II
  |          ABP
  |          CVP
  |  
- |      /Clinial
+ |      /clinial
  |          Notes
  |          Labs
  |          Micro
@@ -39,16 +39,16 @@ The resulting file structure looks like:
 
  | / (root)
  |      .mapping
- |      /Numerics
- |          Vitals
+ |      /numerics
+ |          vitals
  |
- |      /Waveforms
- |          Hemodynamics
+ |      /wwaveforms
+ |          hemodynamics
  |  
- |      /Clinial
- |          Notes
- |          Labs
- |          Micro
+ |      /clinial
+ |          notes
+ |          labs
+ |          micro
 
 Monitor Dataset Metadata
 --------------------------

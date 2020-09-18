@@ -38,9 +38,6 @@ This is complicated by the fact that collect sites will have various local facto
 The data model is self-describing so it is fairly straight forward for end users to locate and extract the data that they need, but to add an additional level of interoperability we provide a mapping table for common key :ref:`signal names<Standard Signal Names>` that allow a user to directly (or using library functions) search and access the information they require.
 
 
-The mapping table describes parameters in terms of LOINC (link) to provide further standardization and clarity as to the nature of the information. 
-The mapping table also provides the group, dataset and column (if the dataset is tabular)
-
 +---------+---------------------------+------------+--------+----------+---------+-------------------+
 | signal  | dataset                   | local_name | column | category | LOINC   | loinc_name        |
 +=========+===========================+============+========+==========+=========+===================+
@@ -54,33 +51,18 @@ The mapping table also provides the group, dataset and column (if the dataset is
 Mapping Table Field Descriptions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. py:data:: signal
-   :type: string
-   :value: The CCDEF standard signal name
+.. py:function:: mapping dataset
 
-.. py:data:: dataset
-   :type: string
-   :value: the name of the dataset containing the signal (can be accessed directly as f['/Group/'+dataset])
+    The mapping table describes parameters in terms of LOINC (link) to provide further standardization and clarity as to the nature of the information. 
+    The mapping table also provides the group, dataset and column (if the dataset is tabular)
 
-.. py:data:: local_name
-   :type: string
-   :value: The original name of the signal in the datafile. This will generally be the dataset name if multiple datasets are used or it will be the column name in a tabular dataset.
-
-.. py:data:: column
-   :type: int
-   :value: The number of the column in *dataset* containing the signal (default is 1 for a single column dataset)
-
-.. py:data:: category
-   :type: string
-   :value: {waveform, numeric}
-
-.. py:data:: LOINC
-   :type: string
-   :value:  The LOINC for the signal of interest. 
-
-.. py:data:: loinc_name
-   :type: string
-   :value: This is the LOINC short name (if it exists) for the signal
+    :param str signal: The CCDEF standard signal name (see :ref:`signal names<Standard Signal Names>`)
+    :param str dataset: The name of the dataset containing the signal (can be accessed directly as f['/Group/'+dataset])
+    :param str local_name: The original name of the signal in the datafile. This will generally be the dataset name if multiple datasets are used or it will be the column name in a tabular dataset.
+    :param int column: The number of the column in *dataset* containing the signal (default is 1 for a single column dataset)
+    :param str category: {waveform, numeric}
+    :param str LOINC: The LOINC for the signal of interest
+    :param str loinc_name: The LOINC short name (if it exists) for the signal
 
 
 .. note::
@@ -133,7 +115,7 @@ The most common datasets will be cardiorespiratory measurements conisting of:
 
 Once again, these can be tabular or single channel as described in detail :ref:`here<Dataset_details>`.
 
-Clinical datasets
+Clinical Group
 ==================
 
 The clinical group contains a variety of information extracted from the EMR and other sources, generally excluding monitor data.
@@ -141,22 +123,6 @@ As there are a wide range of EMR data extraction pipelines, it is difficulty to 
 Perhaps the greatest challenge within the clinical data is mapping concepts such as interventions and clinical observations. 
 This is an active area of research and is one of the goals of the OMOP-CDM.
 
-Datasets
---------
-Suggested Clinical Datasets Include:
-
-- labs
-- micro
-- notes (EMR notes)
-- diagnosis
-
-Imaging if available would be in a separate group */Clinical/Imaging*
-
-Clinical Timestamps
--------------------
-
-Clinical data tend to be much sparser than physiologic data and therefore timestamps will typically be included in these datasets.
-The prefered method is a time column with seconds from the orgin or *base_datetime*. 
 
 Clinical Group Metadata
 ------------------------
@@ -194,6 +160,131 @@ The result is a JSON formatted attribute like this:
             "gender": "M",
             "expired": 0
         }
+
+Clinical Timestamps
+--------------------
+
+Clinical data tend to be much sparser than physiologic data and therefore timestamps will typically be included in these datasets.
+The prefered method is a time column with seconds from the orgin or *base_datetime*. 
+
+.. note::
+
+    If no base_datetime is specified in the clinical datasets, the time orgin for the file in the root group metadata will be used *(/.meta)*.
+
+Clinical Datasets
+------------------
+Suggested Clinical Datasets Include:
+
+- labs
+- micro
+- notes (EMR notes)
+- diagnosis
+
+Imaging if available would be in a separate group */Clinical/Imaging*
+
+.. py:function:: labs dataset
+
+    The labs dataset contains time stamped laboratory data such as chemistry, hematology, etc
+
+    :param int time: seconds elapsed from base_datetime
+    :param int test_id: the test identifier (this may link to the .test_info attribute)
+    :param str value: the value of the test as a string
+    :param test_name: the name of the test
+    :type test_name: str ,optional
+
+.. py:function:: micro dataset
+
+    The micro dataset contains time stamped microbiolgy data from a variety of sources (eg blood, urine, CSF, tissue)
+    Note that there may be multiple time fields with relevant information as the time from sample collection to result can be clinicaly relevant. 
+    Caution is advised however in that these values may not always be entirely accurate as they often result from manual data entry.
+
+    :param int time: seconds elapsed from base_datetime
+    :param int test_id: the test identifier (this may link to the .test_info attribute)
+    :param str value: the value of the test as a string
+    :param test_name: the name of the test
+    :type test_name: str ,optional
+
+.. py:function:: notes dataset
+
+    The notes dataset includes clinical notes from the EMR.
+
+    :param int time: seconds elapsed from base_datetime
+    :param int test_id: the test identifier (this may link to the .test_info attribute)
+    :param str value: the value of the test as a string
+    :param test_name: the name of the test
+    :type test_name: str ,optional
+
+Clinical Dataset Metadata
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Information about tests can be stored in *.test_info*, 
+
+.. py:function:: .test_info metadata attribute
+
+    :param str label: name of the test
+
+    ** To finish **
+
+
+Files converted from MIMIC III will have a JSON formatted string like this: ::
+
+    /clinical/labs.test_info
+        {'50809': {
+            'label': 'Glucose',
+            'category': 'Blood Gas',
+            'fluid': 'Blood',
+            'valueuom': 'mg/dL',
+            'loinc_code': '2339-0'},
+        '50810': {
+            'label': 'Hematocrit, Calculated',
+            'category': 'Blood Gas',
+            'fluid': 'Blood',
+            'valueuom': '%',
+            'loinc_code': '20570-8'},
+        '50811': {
+            'label': 'Hemoglobin',
+            'category': 'Blood Gas',
+            'fluid': 'Blood',
+            'valueuom': 'g/dL',
+            'loinc_code': '718-7'},
+        '50813': {
+            'label': 'Lactate',
+            'category': 'Blood Gas',
+            'fluid': 'Blood',
+            'valueuom': 'mmol/L',
+            'loinc_code': '32693-4'},
+        '50816': {
+            'label': 'Oxygen',
+            'category': 'Blood Gas',
+            'fluid': 'Blood',
+            'valueuom': '%',
+            'loinc_code': '19994-3'},
+        '50817': {
+            'label': 'Oxygen Saturation',
+            'category': 'Blood Gas',
+            'fluid': 'Blood',
+            'valueuom': '%',
+            'loinc_code': '20564-1'},
+        '50818': {
+            'label': 'pCO2',
+            'category': 'Blood Gas',
+            'fluid': 'Blood',
+            'valueuom': 'mm Hg',
+            'loinc_code': '11557-6'},
+        '50819': {
+            'label': 'PEEP',
+            'category': 'Blood Gas',
+            'fluid': 'Blood',
+            'valueuom': None,
+            'loinc_code': '20077-4'},
+        '50820': {
+            'label': 'pH',
+            'category': 'Blood Gas',
+            'fluid': 'Blood',
+            'valueuom': 'units',
+            'loinc_code': '11558-4'},
+        }
+
 
 
 Research

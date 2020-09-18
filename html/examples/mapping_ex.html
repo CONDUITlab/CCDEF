@@ -26,11 +26,11 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -87,6 +87,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../groups.html">Core CCDEF Groups</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../datasets.html">Monitor/Physiologic Datasets (Waveform and Numerics)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../derived.html">Derived Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../signals.html">Standard Signal Names</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools.html">Open source tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 </ul>
@@ -420,7 +421,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">hdf</span><span class="p">[</span><span class="s1">&#39;Mapping&#39;</span><span class="p">][:])</span>
+<span></span>pd.DataFrame(f.hdf[&#39;Mapping&#39;][:])
 </pre></div>
 </div>
 </div>
@@ -537,7 +538,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;Numerics/Vitals&#39;</span><span class="p">][:]</span>
+<span></span>f[&#39;Numerics/Vitals&#39;][:]
 </pre></div>
 </div>
 </div>
@@ -754,7 +755,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">f</span> <span class="o">=</span> <span class="n">audata</span><span class="o">.</span><span class="n">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;/Volumes/ExternalPL/Data/hdf5/test/&#39;</span><span class="o">+</span><span class="n">fname</span><span class="p">,</span><span class="n">readonly</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span></span>f = audata.File.open(&#39;/Volumes/ExternalPL/Data/hdf5/test/&#39;+fname,readonly=False)
 </pre></div>
 </div>
 </div>
@@ -763,7 +764,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">hdf</span><span class="p">[</span><span class="s1">&#39;Mapping&#39;</span><span class="p">][:])</span>
+<span></span>pd.DataFrame(f.hdf[&#39;Mapping&#39;][:])
 </pre></div>
 </div>
 </div>
@@ -925,7 +926,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">show_map</span><span class="p">(</span><span class="s1">&#39;p010061-2107-01-20-12-33.h5&#39;</span><span class="p">)</span>
+<span></span>show_map(&#39;p010061-2107-01-20-12-33.h5&#39;)
 </pre></div>
 </div>
 </div>
@@ -955,7 +956,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">show_map</span><span class="p">(</span><span class="s1">&#39;p010075-2184-10-04-12-30.h5&#39;</span><span class="p">)</span>
+<span></span>show_map(&#39;p010075-2184-10-04-12-30.h5&#39;)
 </pre></div>
 </div>
 </div>

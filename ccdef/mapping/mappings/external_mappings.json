@@ -1,6 +1,0 @@
-{
-    "MIMICIII": "https://raw.githubusercontent.com/CONDUITlab/ccdef/master/ccdef/mapping/mappings/MIMICIII.csv", 
-    "MIMICIII_CLINICAL": "https://raw.githubusercontent.com/CONDUITlab/ccdef/master/ccdef/mapping/mappings/MIMICIII_CLINICAL.csv", 
-    "KHSC": "https://raw.githubusercontent.com/CONDUITlab/ccdef/master/ccdef/mapping/mappings/khsc.csv",
-    "KHSC_CLINICAL": "https://raw.githubusercontent.com/CONDUITlab/ccdef/master/ccdef/mapping/mappings/khsc_clinical.csv"
-}

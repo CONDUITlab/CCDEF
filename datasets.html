@@ -307,6 +307,33 @@ The resulting file structure looks like:</p>
 </div>
 <div class="section" id="dataset-metadata-fields">
 <h3>Dataset Metadata Fields<a class="headerlink" href="#dataset-metadata-fields" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt>
+<code class="sig-name descname">monitor dataset metadata (eg: /waveforms/ABP.meta)</code></dt>
+<dd><p>These datasets can be single or multicolumn but the metadata attribute will be similar in both cases.
+Timestamps may be stored as a number of seconds from the origin (base_datetime) or they may be implied.
+In the case of implied timestamps, the timeseries is reconstructed using the sample_rate and the row number.
+Single signal datasets can be further divided into two types:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>with timestamps (compound type)</p></li>
+<li><p>with implied timestamps (float type)</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type</strong> – column type {time or real}</p></li>
+<li><p><strong>LOINC</strong> – LOINC identifier for a signal column</p></li>
+<li><p><strong>LOINC</strong> – LOINC identifier for a signal column</p></li>
+</ul>
+</dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="field-list simple">
 <dt class="field-odd">type</dt>
 <dd class="field-odd"><p>will be “real” for a data column and “time” for a timestamp column</p>

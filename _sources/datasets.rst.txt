@@ -102,6 +102,25 @@ Metadata for datasets derived from bedside monitors (numerics and waveforms) is 
 
 Dataset Metadata Fields
 ^^^^^^^^^^^^^^^^^^^^^^^
+
+.. py:function:: monitor dataset metadata (eg: /waveforms/ABP.meta)
+
+    These datasets can be single or multicolumn but the metadata attribute will be similar in both cases.
+    Timestamps may be stored as a number of seconds from the origin (base_datetime) or they may be implied.
+    In the case of implied timestamps, the timeseries is reconstructed using the sample_rate and the row number.
+    Single signal datasets can be further divided into two types:
+    
+        - with timestamps (compound type)
+        - with implied timestamps (float type)
+
+    :param type: column type {time or real}
+    :type: str
+    :param LOINC: LOINC identifier for a signal column
+    :type test_name: str, optional
+    :param LOINC: LOINC identifier for a signal column
+    :type test_name: str, optional
+    
+
 :type: 
     will be "real" for a data column and "time" for a timestamp column 
 

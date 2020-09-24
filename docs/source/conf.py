@@ -19,8 +19,8 @@ import sphinx_rtd_theme
 # -- Project information -----------------------------------------------------
 
 project = 'CCDEF'
-copyright = '2020, Phil Laird'
-author = 'Phil Laird'
+copyright = '2020, The CCDEF Group'
+authors = 'Phil Laird; Gus Welter, Anthony Wertz, Alexander Hamilton'
 
 # The full version, including alpha/beta/rc tags
 release = '1.0.0'

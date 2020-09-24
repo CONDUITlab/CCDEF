@@ -1,8 +1,11 @@
-Open source tools
+Tools
 =================
 
 File Viewers
 ------------
+- h5dump, h5stat, h5ls, and h5diff from the `HDF5 CLI tools`_
+
+.. _`HDF5 CLI tools`: https://portal.hdfgroup.org/display/HDF5/HDF5+Command-line+Tools
 
 - HDFView_
 

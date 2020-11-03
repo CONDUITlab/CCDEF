@@ -26,9 +26,10 @@ The file structure would be:
  |          CVP
  |  
  |      /clinial
- |          Notes
- |          Labs
- |          Micro
+ |          notes
+ |          labs
+ |          micro
+ |          infusions
  
 
 Tabular Format
@@ -49,6 +50,7 @@ The resulting file structure looks like:
  |          notes
  |          labs
  |          micro
+ |          infusions
 
 Monitor Dataset Metadata
 --------------------------

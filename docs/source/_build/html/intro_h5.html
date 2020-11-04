@@ -99,7 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="datasets.html">Monitor/Physiologic Datasets (Waveform and Numerics)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="derived.html">Derived Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="signals.html">Standard Signal Names</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tools.html">Open source tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 </ul>
 
@@ -199,23 +199,25 @@ To that end, we are sharing here a proposed data model and are simultaneously pu
 <h2>HDF5<a class="headerlink" href="#hdf5" title="Permalink to this headline">¶</a></h2>
 <p>HDF5 is an open-source file format which encodes numerical data efficiently and therefore is suitable for large datasets but also allows for heterogeneous data such as variable-length strings to be stored.
 HDF5 supports advanced features including data-streaming and compression. For streaming support, chunked datasets are used, and gzip compression is used for portability.</p>
-<p>HDF5 is built around groups, datasets, and attributes. Datasets hold tabular data and may be stored in an arbitrary hierarchy of groups, like folders on a file system.
+<p>HDF5 is built around groups, datasets, and attributes.
+Datasets hold tabular data and may be stored in an arbitrary hierarchy of groups, like folders on a file system.
 Both groups and datasets may have attributes attached to them, and attributes are key/value pairs of variable-length strings.
-In the sense that groups and datasets have attributes, HDF has been characterized as a self-describing data format.</p>
+In the sense that groups and datasets have attributes, HDF has been characterized as a self-describing data format and is</p>
 </div>
 <div class="section" id="data-format">
 <h2>Data Format<a class="headerlink" href="#data-format" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="design-philosophy">
 <h3>Design Philosophy<a class="headerlink" href="#design-philosophy" title="Permalink to this headline">¶</a></h3>
-<p>HDF5 permits a great deal of flexibility.
-- tabular or single parameter datasets
-- variable time column formats</p>
+<p>HDF5 permits a great deal of flexibility, and the aim of the CCDEF was to strike a balance between allowing users the flexibility to maintain local data acquisition pipelines as much as possible while also enabling the main objective of seamless data sharing.</p>
+<p>Our intention is to provide a wide range of tools for easy analysis of CCDEF formated physiologic and clinical data but at the same time provide a format that can be read natively with existing HDF5 libraries for tools such as MATLAB, python, C, etc.</p>
 </div>
 <div class="section" id="signal-storage">
 <h3>Signal storage<a class="headerlink" href="#signal-storage" title="Permalink to this headline">¶</a></h3>
+<p>We have allowed both tabular datasets containing multiple simultaneously recorded signals (eg multiple ECG leads) or single parameter datasets. Becuase the format is self-describing, any of the tools used to read the underlying HDF5 file can accomodate either schema.</p>
 </div>
 <div class="section" id="timestamp-storage">
 <h3>Timestamp storage<a class="headerlink" href="#timestamp-storage" title="Permalink to this headline">¶</a></h3>
+<p>The specification allows for different time column formats depending on the nature of the data and the need to optimize storage space. Once again, these formats are clearly identified and allow for seamless reading of the file.</p>
 <ul class="simple">
 <li><p>relative</p></li>
 <li><p>absolute</p></li>

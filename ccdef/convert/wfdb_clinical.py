@@ -310,6 +310,8 @@ def convert_mimic_matched (filename, samp_end = None, all_labs=True, all_notes=T
         
         
         grp_numerics = f.require_group('numerics')
+        root = f['/']
+
         print('Converting numerics')
         record = wfdb.rdrecord(filename+'n', sampfrom = 0, sampto = samp_end )
         df = pd.DataFrame(data = record.p_signal, columns = record.sig_name)
@@ -338,7 +340,7 @@ def convert_mimic_matched (filename, samp_end = None, all_labs=True, all_notes=T
             'Death_time': death_time
         }
         
-        grp_clinical.attrs['demographics'] = json.dumps(demographics, indent = 4)
+        root.attrs['demographics'] = json.dumps(demographics, indent = 4)
         grp_clinical.attrs['admit_diagnosis'] = json.dumps(diagnosis)  # add additional codes from dianosis table
         
         #get additional diagnoses - save as dict
@@ -356,8 +358,8 @@ def convert_mimic_matched (filename, samp_end = None, all_labs=True, all_notes=T
     write_labs(labs, outfile)
     
     print ('Extracting notes')
-    notes = extract_notes(filename))
+    notes = extract_notes(filename)
     write_notes(notes, outfile)      
 
     #micro
-        
+    

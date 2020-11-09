@@ -11,9 +11,14 @@ add to mapping table
 import pandas as pd
 import h5py
 import numpy as np
+import os.path
 import audata
+from tabulate import tabulate
+from typing import Union
 from ccdef._utils import df_to_sarray
 from ccdef.mapping.loinc import LoincMapper
+from ccdef import __DEBUG__, __VERSION__
+
 
 std_signals = ['HR', 'ABP-S', 'ABP-M', 'ABP-D', 'NIBP-S', 'NIBP-M', 'NIBP-D', 'CVP', 'RR', 'SPO2',
                'ABP', 'PLETH', 'ECG-I','ECG-II','ECG-II','ECG-III','ECG-V']
@@ -134,5 +139,32 @@ def make_mapping (filename, mapper=None, overwrite=True):
     f.close()
     
     
+#show map
+
+def show_mapping (source: Union[h5py.File, str]):
+    if isinstance(source, h5py.File):
+        if __DEBUG__:
+            print('H5 file type supplied')
+        f = source
+        # test for existance of map
+            
+    elif isinstance(source, str):
+        if __DEBUG__:
+            print('Filename supplied')
+        if not os.path.exists(source):
+            raise Exception(f'File not found: {source}')
+        else:
+            f = h5py.File(source, 'r')
     
+    if 'Mapping' in f.keys():
+        mapping = pd.DataFrame(f['Mapping'][:])
+    else:
+        raise Exception('No mapping dataset located')
+    
+    print(tabulate(mapping,headers='keys', tablefmt='psql', showindex=False))
+
+    return mapping
+
+#use map
+
             

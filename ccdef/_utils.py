@@ -6,17 +6,14 @@ Created on Wed Sep  2 21:40:29 2020
 @author: Phil
 """
 
-
-"""
-
-hd5 helper functions
-
-"""
-
 import pandas as pd
 import numpy as np
 import h5py
+import os.path
+from typing import Union
+from ccdef import __DEBUG__, __VERSION__
 
+#%% file helper functions
 
 def slice_hd5 (infile, outfile, start_time, duration):
     # get dataset names
@@ -41,6 +38,8 @@ def hdf_stats (infile):
         duration = key_end-key_start
         print ('Starts at {:%Y-%m-%d %H:%M:%S}\nEnds at {:%Y-%m-%d %H:%M:%S}\nDuration: {}\n'.format(key_start, key_end, duration))
 
+#%% Dataset helper functions
+
 def df_to_sarray(df):
     """
     Convert a pandas DataFrame object to a numpy structured array.
@@ -56,7 +55,7 @@ def df_to_sarray(df):
             if 'numpy.object_' in str(col_type.type):
                 maxlens = col.dropna().str.len()
                 if maxlens.any():
-                    maxlen = maxlens.max().astype(int) 
+                    # maxlen = maxlens.max().astype(int) 
                     col_type = dt
                 else:
                     col_type = 'f2'
@@ -82,3 +81,95 @@ def df_to_sarray(df):
             raise
 
     return z, dtype
+    
+def traverse_datasets(hdf_group):
+    def h5py_dataset_iterator(g, prefix=''):
+        for key in g.keys():
+            item = g[key]
+            path = f'{prefix}/{key}'
+            if isinstance(item, h5py.Dataset): # test for dataset
+                yield (path, item)
+            elif isinstance(item, h5py.Group): # test for group (go down)
+                yield from h5py_dataset_iterator(item, path)
+
+    for path, _ in h5py_dataset_iterator(hdf_group):
+        yield path
+
+def scan_file (source: Union[h5py.File, str], verbose=False):
+    """
+    Convert a pandas DataFrame object to a numpy structured array.
+    Also, for every column of a str type, convert it into 
+    a 'bytes' str literal of length = max(len(col)).
+
+    :param filename: the file to scan
+    :return: [top level groups, top level datasets]
+    """
+    # todo: test to see if file is hdf5
+    if isinstance(source, h5py.File):
+        if __DEBUG__:
+            print('H5 file type supplied')
+        f = source
+            
+    elif isinstance(source, str):
+        if __DEBUG__:
+            print('Filename supplied')
+        if not os.path.exists(source):
+            raise Exception(f'File not found: {source}')
+        else:
+            f = h5py.File(source, 'r')
+
+    root = f['/']
+    #get top level
+    top_groups = []
+    top_dsets = []
+    for key in root.keys():
+        if isinstance(f[key], h5py.Group):
+            top_groups.append(f[key])
+        if isinstance(f[key], h5py.Dataset):
+            top_dsets.append(f[key])
+
+
+    print ('Top level attributes and metadata:')        
+    for key, val in root.attrs.items():
+        print ("{} : {}".format(key, val))
+
+    print('\nTop level groups')
+    for g in top_groups:
+        print (g.name)
+#        g.visititems(iterate_group)
+
+    print('\nTop level datasets')
+    for dset in top_dsets:
+        print (dset.name)
+#        print(dset.dtype)
+        dt = dset.dtype.fields
+#        print(dt)
+        if dt is not None:
+            d = dict (dt)
+            for key,value in d.items():
+                print ('\t{} : {}'.format(key, str(value).split(("'"))[1]))
+        else:
+            print ('\tDtype: {}'.format(root[dset].dtype))
+
+
+    print('\nRecursing top level groups')
+    for g in top_groups:
+        print('\nGroup: {}'.format(g.name))
+        for dset in traverse_datasets(g):
+            print ('\t{}'.format(dset))
+            if verbose:
+                dt = f[g.name+dset].dtype.fields
+                if dt is not None:
+                    d = dict (dt)
+                    for key,value in d.items():
+                        print ('\t\t{} : {}'.format(key, str(value).split(("'"))[1]))
+                else:
+                    print ('\t\tDtype: {}'.format(f[g.name+dset].dtype))
+
+    tg_names = [x.name for x in top_groups]
+    td_names = [x.name for x in top_dsets]
+    
+    if isinstance(source, h5py.File):
+        f.close()
+        
+    return [tg_names, td_names]  

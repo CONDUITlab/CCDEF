@@ -89,6 +89,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#hdf5">HDF5</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#data-format">Data Format</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#design-philosophy">Design Philosophy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#core-groups">Core groups</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#signal-storage">Signal storage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#timestamp-storage">Timestamp storage</a></li>
 </ul>
@@ -210,6 +211,45 @@ In the sense that groups and datasets have attributes, HDF has been characterize
 <h3>Design Philosophy<a class="headerlink" href="#design-philosophy" title="Permalink to this headline">¶</a></h3>
 <p>HDF5 permits a great deal of flexibility, and the aim of the CCDEF was to strike a balance between allowing users the flexibility to maintain local data acquisition pipelines as much as possible while also enabling the main objective of seamless data sharing.</p>
 <p>Our intention is to provide a wide range of tools for easy analysis of CCDEF formated physiologic and clinical data but at the same time provide a format that can be read natively with existing HDF5 libraries for tools such as MATLAB, python, C, etc.</p>
+</div>
+<div class="section" id="core-groups">
+<h3>Core groups<a class="headerlink" href="#core-groups" title="Permalink to this headline">¶</a></h3>
+<p>CCDEF specifies a high level structure to ensure that data can be consistently located. Once again, the goal is to facilitate automated data acquisition and analysis pipelines as much as possible.</p>
+<p>Data are segregated broadly into monitor or physiologic data which are continuously recorded and clinical information such as laboratory tests, microbiology, clinical notes, etc.
+Physiologic data are further divided based on acquisition speed into numerics and waveforms.</p>
+<p>The overall structure of a CCDEF file would look like this:</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">/ (<strong>root</strong> group)</div>
+<div class="line">.meta (metadata)</div>
+<div class="line">.demographics</div>
+</div>
+<div class="line-block">
+<div class="line">/ <strong>numerics</strong></div>
+<div class="line"><br /></div>
+<div class="line-block">
+<div class="line">/vitals</div>
+<div class="line"><br /></div>
+</div>
+<div class="line">/ <strong>waveforms</strong></div>
+<div class="line"><br /></div>
+<div class="line-block">
+<div class="line">/hemodynamics</div>
+<div class="line">/ventilator</div>
+<div class="line"><br /></div>
+</div>
+<div class="line">/ <strong>clinical</strong></div>
+<div class="line"><br /></div>
+<div class="line-block">
+<div class="line">/labs</div>
+<div class="line">/micro</div>
+<div class="line">/notes</div>
+<div class="line"><br /></div>
+</div>
+<div class="line">/ <strong>research</strong></div>
+</div>
+</div></blockquote>
+<p>Further details of the groups structure are provided <a class="reference internal" href="groups.html#core-ccdef-groups"><span class="std std-ref">here</span></a></p>
 </div>
 <div class="section" id="signal-storage">
 <h3>Signal storage<a class="headerlink" href="#signal-storage" title="Permalink to this headline">¶</a></h3>

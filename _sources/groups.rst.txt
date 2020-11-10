@@ -105,7 +105,7 @@ Generally data in this group will be in a single tabular dataset called *Vitals*
 Numerics Datasets
 -----------------
 
-These can be tabular or single channel as described in detail :ref:`here<Dataset_details>`.
+These can be tabular or single channel as described in detail :ref:`here<_Dataset_details>`.
 
 Typical parameters include:
 
@@ -206,9 +206,9 @@ Imaging if available would be in a separate group */Clinical/Imaging*
 
 .. note::
 
-The default coding scheme is ICD 9 but this will be specified in the meta data for the diagnostic dataset as shown here ::
+    The default coding scheme is ICD 9 but this will be specified in the meta data for the diagnostic dataset as shown here ::
 
-/clinical/diagnosis/.coding = "ICD 9"
+    /clinical/diagnosis/.coding = "ICD 9"
 
 Clinical Dataset Metadata
 ^^^^^^^^^^^^^^^^^^^^^^^^^^

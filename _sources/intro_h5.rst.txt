@@ -15,7 +15,10 @@ HDF5 supports advanced features including data-streaming and compression. For st
 HDF5 is built around groups, datasets, and attributes. 
 Datasets hold tabular data and may be stored in an arbitrary hierarchy of groups, like folders on a file system. 
 Both groups and datasets may have attributes attached to them, and attributes are key/value pairs of variable-length strings. 
-In the sense that groups and datasets have attributes, HDF has been characterized as a self-describing data format and is 
+
+In the sense that groups and datasets have attributes, HDF has been characterized as a self-describing data format as the any supplemental information required to contextualize or interpret the data stored in the datasets is provided in the attributes. 
+
+HDF5 is widely supported by the broader data science community and there are a wide range of tools available for reading and manipuating generic HDF5 files which are also useful for handling ccdef files. Some of these tools are listed :ref:`here<Tools>`.
 
 Data Format
 -----------------

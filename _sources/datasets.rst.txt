@@ -1,6 +1,6 @@
 .. _Dataset_details:
 
-Monitor/Physiologic Datasets (Waveform and Numerics)
+Physiologic Datasets (Waveform and Numerics)
 ====================================================
 
 Datasets can be single channels or they can be a table of multiple channels. 
@@ -58,7 +58,7 @@ Monitor Dataset Metadata
 Dataset Metadata Fields
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-.. py:function:: monitor dataset metadata (eg: /waveforms/ABP/.meta)
+.. py:function:: physiologic dataset metadata (eg: /waveforms/ABP/.meta)
 
     These datasets can be single or multicolumn but the metadata attribute will be similar in both cases.
     Timestamps may be stored as a number of seconds from the origin (base_datetime) or they may be implied.

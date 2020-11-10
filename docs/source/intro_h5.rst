@@ -29,7 +29,3 @@ HDF5 permits a great deal of flexibility, and the aim of the CCDEF was to strike
 Our intention is to provide a wide range of tools for easy analysis of CCDEF formated physiologic and clinical data but at the same time provide a format that can be read natively with existing HDF5 libraries for tools such as MATLAB, python, C, etc.
 
 
-
-
-
-

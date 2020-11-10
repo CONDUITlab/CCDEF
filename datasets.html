@@ -200,7 +200,7 @@ The file structure would be:</p>
 <div><div class="line-block">
 <div class="line">/ (root)</div>
 <div class="line-block">
-<div class="line">.mapping</div>
+<div class="line">mapping</div>
 <div class="line">/numerics</div>
 <div class="line-block">
 <div class="line">HR</div>
@@ -236,13 +236,13 @@ The resulting file structure looks like:</p>
 <div><div class="line-block">
 <div class="line">/ (root)</div>
 <div class="line-block">
-<div class="line">.mapping</div>
+<div class="line">mapping</div>
 <div class="line">/numerics</div>
 <div class="line-block">
 <div class="line">vitals</div>
 <div class="line"><br /></div>
 </div>
-<div class="line">/wwaveforms</div>
+<div class="line">/waveforms</div>
 <div class="line-block">
 <div class="line">hemodynamics</div>
 <div class="line"><br /></div>
@@ -260,102 +260,91 @@ The resulting file structure looks like:</p>
 </div>
 <div class="section" id="monitor-dataset-metadata">
 <h2>Monitor Dataset Metadata<a class="headerlink" href="#monitor-dataset-metadata" title="Permalink to this headline">¶</a></h2>
-<p>Metadata for datasets derived from bedside monitors (numerics and waveforms) is stored JSON formatted attribute as shown below.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span><span class="o">/.</span><span class="n">meta</span>
-    <span class="p">{</span>
-         <span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="p">{</span>
-             <span class="s2">&quot;HR&quot;</span><span class="p">:</span> <span class="p">{</span>
-             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;real&quot;</span><span class="p">,</span>
-             <span class="s2">&quot;LOINC&quot;</span><span class="p">:</span> <span class="s2">&quot;8867-4&quot;</span><span class="p">,</span>
-             <span class="s2">&quot;uom&quot;</span><span class="p">:</span> <span class="s2">&quot;bpm&quot;</span><span class="p">,</span>
-             <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-             <span class="s2">&quot;sample_rate&quot;</span><span class="p">:</span> <span class="mf">0.0166666666667</span><span class="p">,</span>
-             <span class="s2">&quot;fmt&quot;</span><span class="p">:</span> <span class="s2">&quot;16&quot;</span><span class="p">,</span>
-             <span class="s2">&quot;baseline&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-             <span class="s2">&quot;base_datetime&quot;</span><span class="p">:</span> <span class="s2">&quot;2116-12-24 12:35:06.147000&quot;</span>
-            <span class="p">},</span>
-             <span class="s2">&quot;CVP&quot;</span><span class="p">:</span> <span class="p">{</span>
-                 <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;real&quot;</span><span class="p">,</span>
-                 <span class="s2">&quot;LOINC&quot;</span><span class="p">:</span> <span class="s2">&quot;60985-9&quot;</span><span class="p">,</span>
-                 <span class="s2">&quot;uom&quot;</span><span class="p">:</span> <span class="s2">&quot;mmHg&quot;</span><span class="p">,</span>
-                 <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-                 <span class="s2">&quot;sample_rate&quot;</span><span class="p">:</span> <span class="mf">0.0166666666667</span><span class="p">,</span>
-                 <span class="s2">&quot;fmt&quot;</span><span class="p">:</span> <span class="s2">&quot;16&quot;</span><span class="p">,</span>
-                 <span class="s2">&quot;baseline&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                 <span class="s2">&quot;base_datetime&quot;</span><span class="p">:</span> <span class="s2">&quot;2116-12-24 12:35:06.147000&quot;</span>
-            <span class="p">},</span>
-             <span class="s2">&quot;SpO2&quot;</span><span class="p">:</span> <span class="p">{</span>
-             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;real&quot;</span><span class="p">,</span>
-             <span class="s2">&quot;LOINC&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-             <span class="s2">&quot;uom&quot;</span><span class="p">:</span> <span class="s2">&quot;%&quot;</span><span class="p">,</span>
-             <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-             <span class="s2">&quot;sample_rate&quot;</span><span class="p">:</span> <span class="mf">0.0166666666667</span><span class="p">,</span>
-             <span class="s2">&quot;fmt&quot;</span><span class="p">:</span> <span class="s2">&quot;16&quot;</span><span class="p">,</span>
-             <span class="s2">&quot;baseline&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-             <span class="s2">&quot;base_datetime&quot;</span><span class="p">:</span> <span class="s2">&quot;2116-12-24 12:35:06.147000&quot;</span>
-            <span class="p">},</span>
-        <span class="s2">&quot;NBPSys&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;real&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;LOINC&quot;</span><span class="p">:</span> <span class="s2">&quot;76534-7&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;uom&quot;</span><span class="p">:</span> <span class="s2">&quot;mmHg&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="s2">&quot;sample_rate&quot;</span><span class="p">:</span> <span class="mf">0.0166666666667</span><span class="p">,</span>
-            <span class="s2">&quot;fmt&quot;</span><span class="p">:</span> <span class="s2">&quot;16&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;baseline&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">&quot;base_ddatetime&quot;</span><span class="p">:</span> <span class="s2">&quot;2116-12-24 12:35:06.147000&quot;</span>
-            <span class="p">},</span>
-        <span class="p">}</span>
-</pre></div>
-</div>
 <div class="section" id="dataset-metadata-fields">
 <h3>Dataset Metadata Fields<a class="headerlink" href="#dataset-metadata-fields" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt>
-<code class="sig-name descname">monitor dataset metadata (eg: /waveforms/ABP.meta)</code></dt>
+<code class="sig-name descname">monitor dataset metadata (eg: /waveforms/ABP/.meta)</code></dt>
 <dd><p>These datasets can be single or multicolumn but the metadata attribute will be similar in both cases.
 Timestamps may be stored as a number of seconds from the origin (base_datetime) or they may be implied.
 In the case of implied timestamps, the timeseries is reconstructed using the sample_rate and the row number.
 Single signal datasets can be further divided into two types:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>with timestamps (compound type)</p></li>
-<li><p>with implied timestamps (float type)</p></li>
+<li><p>with timestamps (compound dtype)</p></li>
+<li><p>with implied timestamps (float dtype)</p></li>
 </ul>
 </div></blockquote>
+<p>All datasets should include at at least a .meta attribute containing time orign and sample rate fields.
+If the datasets do not have this information in the .meta attribue then the time_origin will be assumed to be that stored in the metadata for the containing group (eg waveforms or numerics) or in the root group.</p>
+</dd></dl>
+
 <dl class="field-list simple">
+<dt class="field-odd">sample_rate</dt>
+<dd class="field-odd"><p>sample rate in Hz</p>
+</dd>
+<dt class="field-even">time_origin</dt>
+<dd class="field-even"><p>the time origin of the dataset formatted as “YYYY-MM-DD HH:MM:SS.ssss”</p>
+</dd>
+</dl>
+<p>Additional information (particularly for tabular datasets) is included in the column field:</p>
+<dl class="function">
+<dt>
+<code class="sig-name descname">dataset column metadata (eg: /waveforms/ABP/.meta)</code></dt>
+<dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>type</strong> – column type {time or real}</p></li>
-<li><p><strong>LOINC</strong> – LOINC identifier for a signal column</p></li>
-<li><p><strong>LOINC</strong> – LOINC identifier for a signal column</p></li>
+<li><p><strong>type</strong> (<em>str</em>) – column type {time or real}</p></li>
+<li><p><strong>LOINC</strong> (<em>str</em>) – LOINC identifier for a signal column</p></li>
+<li><p><strong>uom</strong> (<em>str</em>) – units of measurement</p></li>
+<li><p><strong>scale</strong> (<em>float</em>) – scale factor [optional] - used to convert raw data stored as int in the dataset to physical units (this will be set to 1 or omitted entirely if the data is already stored as float)</p></li>
+<li><p><strong>fmt</strong> – format [optional]</p></li>
 </ul>
-</dd>
-<dt class="field-even">Type</dt>
-<dd class="field-even"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="field-list simple">
-<dt class="field-odd">type</dt>
-<dd class="field-odd"><p>will be “real” for a data column and “time” for a timestamp column</p>
-</dd>
-<dt class="field-even">LONIC</dt>
-<dd class="field-even"><p>Loinc code</p>
-</dd>
-<dt class="field-odd">uom</dt>
-<dd class="field-odd"><p>units of measurement</p>
-</dd>
-<dt class="field-even">scale</dt>
-<dd class="field-even"><p>scale factor for storing raw output from data acquisiting systems as integer values (this will be set to 1 for data stored as floats)</p>
-</dd>
-<dt class="field-odd">sample_rate</dt>
-<dd class="field-odd"><p>sample rate in Hz</p>
-</dd>
-<dt class="field-even">base_datetime</dt>
-<dd class="field-even"><p>the time origin of the dataset formatted as “YYYY-MM-DD HH:MM:SS.ssss”</p>
-</dd>
-</dl>
+<p>Sample dataset metadata stored as JSON formatted attribute as shown below.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">group</span><span class="o">/</span><span class="n">dataset</span><span class="o">/.</span><span class="n">meta</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;time_origin&quot;</span><span class="p">:</span> <span class="s2">&quot;2116-12-24 12:35:06.147000&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;sample_rate&quot;</span><span class="p">:</span> <span class="mf">0.0166666666667</span><span class="p">,</span>
+         <span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="p">{</span>
+             <span class="s2">&quot;HR&quot;</span><span class="p">:</span> <span class="p">{</span>
+             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;real&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;LOINC&quot;</span><span class="p">:</span> <span class="s2">&quot;8867-4&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;uom&quot;</span><span class="p">:</span> <span class="s2">&quot;bpm&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+             <span class="s2">&quot;fmt&quot;</span><span class="p">:</span> <span class="s2">&quot;16&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;baseline&quot;</span><span class="p">:</span> <span class="mi">0</span>
+            <span class="p">},</span>
+             <span class="s2">&quot;CVP&quot;</span><span class="p">:</span> <span class="p">{</span>
+                 <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;real&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;LOINC&quot;</span><span class="p">:</span> <span class="s2">&quot;60985-9&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;uom&quot;</span><span class="p">:</span> <span class="s2">&quot;mmHg&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                 <span class="s2">&quot;fmt&quot;</span><span class="p">:</span> <span class="s2">&quot;16&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;baseline&quot;</span><span class="p">:</span> <span class="mi">0</span>
+            <span class="p">},</span>
+             <span class="s2">&quot;SpO2&quot;</span><span class="p">:</span> <span class="p">{</span>
+             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;real&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;LOINC&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;uom&quot;</span><span class="p">:</span> <span class="s2">&quot;%&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+             <span class="s2">&quot;fmt&quot;</span><span class="p">:</span> <span class="s2">&quot;16&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;baseline&quot;</span><span class="p">:</span> <span class="mi">0</span>
+            <span class="p">},</span>
+        <span class="s2">&quot;NBPSys&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;real&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LOINC&quot;</span><span class="p">:</span> <span class="s2">&quot;76534-7&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;uom&quot;</span><span class="p">:</span> <span class="s2">&quot;mmHg&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;fmt&quot;</span><span class="p">:</span> <span class="s2">&quot;16&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;baseline&quot;</span><span class="p">:</span> <span class="mi">0</span>
+            <span class="p">},</span>
+        <span class="p">}</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>

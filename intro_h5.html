@@ -218,10 +218,34 @@ In the sense that groups and datasets have attributes, HDF has been characterize
 <div class="section" id="timestamp-storage">
 <h3>Timestamp storage<a class="headerlink" href="#timestamp-storage" title="Permalink to this headline">¶</a></h3>
 <p>The specification allows for different time column formats depending on the nature of the data and the need to optimize storage space. Once again, these formats are clearly identified and allow for seamless reading of the file.</p>
-<p>Timestamps can be:
-- relative (stored as float number of seconds starting from 0)
-- absolute (stored as a float number of seconds starting from 0 with a time_origin included in the metadata for the dataset)
-- implied (no time column in the data, time is reconstructed at readtime based on the sample_rate +/- time_origin)</p>
+<p>Timestamps can be:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>Relative</dt><dd><ul class="simple">
+<li><p>time stored as float number of seconds starting from 0</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Absolute</dt><dd><ul class="simple">
+<li><p>time stored as a float number of seconds starting from time_origin</p></li>
+<li><p>time_origin stored in the metadata as Datetime formatted string</p></li>
+<li><p>DatetimeIndex reconstructed from time_origin and offsets stored in dataset</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Implied</dt><dd><ul class="simple">
+<li><p>no time column in the dataset</p></li>
+<li><p>data points must be at fixed period</p></li>
+<li><p>DatetimeIndex ot Timedelta index reconstructed from time_origin and sample rate</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
 </div>
 </div>
 </div>

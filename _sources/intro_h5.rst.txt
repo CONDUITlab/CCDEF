@@ -38,9 +38,19 @@ Timestamp storage
 The specification allows for different time column formats depending on the nature of the data and the need to optimize storage space. Once again, these formats are clearly identified and allow for seamless reading of the file.
 
 Timestamps can be:
-- relative (stored as float number of seconds starting from 0)
-- absolute (stored as a float number of seconds starting from 0 with a time_origin included in the metadata for the dataset)
-- implied (no time column in the data, time is reconstructed at readtime based on the sample_rate +/- time_origin)
+
+#. Relative
+    * time stored as float number of seconds starting from 0
+
+#. Absolute
+    * time stored as a float number of seconds starting from time_origin
+    * time_origin stored in the metadata as Datetime formatted string
+    * DatetimeIndex reconstructed from time_origin and offsets stored in dataset 
+
+#. Implied
+    * no time column in the dataset
+    * data points must be at fixed period
+    * DatetimeIndex ot Timedelta index reconstructed from time_origin and sample rate
 
 
 

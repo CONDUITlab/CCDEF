@@ -231,17 +231,29 @@ The root group is obviously mandatory but valid files can be created with physio
         <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
         <span class="s2">&quot;organization&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
         <span class="s2">&quot;time_origin&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-41-17 15:41:22.306880 EST&quot;</span><span class="p">,</span>
-        <span class="n">ccdef_version</span><span class="p">:</span> <span class="mf">1.0</span>
+        <span class="s2">&quot;ccdef_version&quot;</span><span class="p">:</span> <span class="mf">1.0</span>
     <span class="p">}</span>
 </pre></div>
 </div>
-<p>The optional demographics attribute contains basic patient demographic details</p>
 <div class="section" id="demographics">
 <h4>Demographics<a class="headerlink" href="#demographics" title="Permalink to this headline">¶</a></h4>
-<p>Demographic information about the patient is stored as an <em>optional</em> root group attribute.
-Acceptable demographics fields are:</p>
-<p>The result is a JSON formatted attribute like this:
-.</p>
+<p>Demographic information about the patient is stored as an <em>optional</em> root group attribute.</p>
+<dl class="function">
+<dt>
+<code class="sig-name descname">demographics attribute (/.demographics)</code></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>age</strong> (<em>float</em>) – Patient age in years (fractional years allowed)</p></li>
+<li><p><strong>gender</strong> (<em>str</em>) – patient gender {M,F}</p></li>
+<li><p><strong>expired</strong> (<em>int</em>) – value: {0,1} 0 indicating that the patient did not die during the period covered by the file</p></li>
+<li><p><strong>admit_dx</strong> (<em>str</em>) – admission ICD 9 code (note that a full list of diagnostic codes can also be specified in /clinical/diagnosis</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>The resulting JSON formatted attribute looks like this:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/.</span><span class="n">demographics</span>
     <span class="p">{</span>
         <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mf">40.1</span><span class="p">,</span>

@@ -274,13 +274,13 @@ This is complicated by the fact that collect sites will have various local facto
 The data model is self-describing so it is fairly straight forward for end users to locate and extract the data that they need, but to add an additional level of interoperability we provide a mapping table for common key <a class="reference internal" href="signals.html#standard-signal-names"><span class="std std-ref">signal names</span></a> that allow a user to directly (or using library functions) search and access the information they require.</p>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 10%" />
-<col style="width: 29%" />
-<col style="width: 13%" />
 <col style="width: 9%" />
+<col style="width: 23%" />
+<col style="width: 13%" />
+<col style="width: 7%" />
 <col style="width: 11%" />
-<col style="width: 10%" />
-<col style="width: 20%" />
+<col style="width: 8%" />
+<col style="width: 27%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>signal</p></th>
@@ -288,37 +288,94 @@ The data model is self-describing so it is fairly straight forward for end users
 <th class="head"><p>local_name</p></th>
 <th class="head"><p>column</p></th>
 <th class="head"><p>category</p></th>
-<th class="head"><p>LOINC</p></th>
+<th class="head"><p>loinc</p></th>
 <th class="head"><p>loinc_name</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>HR</p></td>
-<td><p>/numerics/vitals/</p></td>
+<td><p>/numerics/vitals</p></td>
 <td><p>HR</p></td>
 <td><p>1</p></td>
 <td><p>numerics</p></td>
 <td><p>8867-4</p></td>
-<td><p>Heart Rate</p></td>
+<td><p>Heart rate</p></td>
 </tr>
-<tr class="row-odd"><td><p>ABP-S</p></td>
-<td><p>/numerics/vitals/</p></td>
-<td><p>ABPSys</p></td>
-<td><p>2</p></td>
+<tr class="row-odd"><td><p>NIBP-S</p></td>
+<td><p>/numerics/vitals</p></td>
+<td><p>NBP Sys</p></td>
+<td><p>3</p></td>
 <td><p>numerics</p></td>
-<td><p>76215-3</p></td>
-<td><p>Invasive sys BP</p></td>
+<td><p>76534-7</p></td>
+<td><p>BP sys by Noninvasive</p></td>
 </tr>
-<tr class="row-even"><td><p>ECG-I</p></td>
+<tr class="row-even"><td><p>NIBP-D</p></td>
+<td><p>/numerics/vitals</p></td>
+<td><p>NBP Dias</p></td>
+<td><p>4</p></td>
+<td><p>numerics</p></td>
+<td><p>76535-4</p></td>
+<td><p>BP dias by Noninvasive</p></td>
+</tr>
+<tr class="row-odd"><td><p>NIBP-M</p></td>
+<td><p>/numerics/vitals</p></td>
+<td><p>NBP Mean</p></td>
+<td><p>5</p></td>
+<td><p>numerics</p></td>
+<td><p>76536-2</p></td>
+<td><p>BP mean by Noninvasive</p></td>
+</tr>
+<tr class="row-even"><td><p>RR</p></td>
+<td><p>/numerics/vitals</p></td>
+<td><p>RESP</p></td>
+<td><p>6</p></td>
+<td><p>numerics</p></td>
+<td><p>76174-2</p></td>
+<td><p>Resp rate PulseOx.pleth</p></td>
+</tr>
+<tr class="row-odd"><td><p>SPO2</p></td>
+<td><p>/numerics/vitals</p></td>
+<td><p>SpO2</p></td>
+<td><p>7</p></td>
+<td><p>numerics</p></td>
+<td><p>76522-2</p></td>
+<td><p>Transmission % BldA PulseOx</p></td>
+</tr>
+<tr class="row-even"><td><p>ECG-II</p></td>
 <td><p>/waveforms/hemodynamics</p></td>
-<td><p>I</p></td>
+<td><p>II</p></td>
 <td><p>1</p></td>
 <td><p>waveforms</p></td>
-<td></td>
-<td></td>
+<td><p>None</p></td>
+<td><p>ECG Lead II</p></td>
+</tr>
+<tr class="row-odd"><td><p>ECG-III</p></td>
+<td><p>/waveforms/hemodynamics</p></td>
+<td><p>III</p></td>
+<td><p>2</p></td>
+<td><p>waveforms</p></td>
+<td><p>None</p></td>
+<td><p>ECG Lead III</p></td>
+</tr>
+<tr class="row-even"><td><p>ECG-V</p></td>
+<td><p>/waveforms/hemodynamics</p></td>
+<td><p>V</p></td>
+<td><p>4</p></td>
+<td><p>waveforms</p></td>
+<td><p>None</p></td>
+<td><p>ECG Lead V</p></td>
+</tr>
+<tr class="row-odd"><td><p>RR</p></td>
+<td><p>/waveforms/hemodynamics</p></td>
+<td><p>RESP</p></td>
+<td><p>5</p></td>
+<td><p>waveforms</p></td>
+<td><p>76174-2</p></td>
+<td><p>Resp rate PulseOx.pleth</p></td>
 </tr>
 </tbody>
 </table>
+<p>Additonal examples of the mapping functionality are shown <a class="reference internal" href="#mapping"><span class="std std-ref">here</span></a>.</p>
 </div>
 <div class="section" id="mapping-table-field-descriptions">
 <h4>Mapping Table Field Descriptions<a class="headerlink" href="#mapping-table-field-descriptions" title="Permalink to this headline">¶</a></h4>
@@ -349,18 +406,20 @@ The mapping table also provides the group, dataset and column (if the dataset is
 </div>
 <div class="section" id="future-mapping-possibilities">
 <h4>Future Mapping Possibilities<a class="headerlink" href="#future-mapping-possibilities" title="Permalink to this headline">¶</a></h4>
-<p>Future versions of CCDEF may include additional ontologies such as OMOP in the mapping table.
-This is an area of active development.</p>
+<p>Future versions of CCDEF may include additional ontologies such as OMOP in the mapping table.</p>
 </div>
 </div>
 </div>
 <div class="section" id="numerics">
 <h2>Numerics<a class="headerlink" href="#numerics" title="Permalink to this headline">¶</a></h2>
 <p>The numerics group contains signals at a sample rate of less than 50 Hz.
-Generally data in this group will be in a single tabular dataset called <em>Vitals</em></p>
+In cases where the numeric data consist primarily of vitals signs as recorded simultaneously from the bedside monitor,
+these data can be stored in a single tabular dataset called <em>Vitals</em>.
+In cases where there are multiple datasources (eg a ventilator, telemetry modules, etc), some combination of tabular and single datasets may be more apppropriate.
+In all cases, the mapping dataset is the recommended way to ensure that key parameters are easily located by end users.</p>
 <div class="section" id="numerics-datasets">
 <h3>Numerics Datasets<a class="headerlink" href="#numerics-datasets" title="Permalink to this headline">¶</a></h3>
-<p>These can be tabular or single channel as described in detail <span class="xref std std-ref">here</span>.</p>
+<p>These can be tabular, single channel or a combination of both as described in detail <span class="xref std std-ref">here</span>.</p>
 <p>Typical parameters include:</p>
 <ul class="simple">
 <li><p>Invasive BP (ABP)</p></li>
@@ -382,7 +441,7 @@ There is generally more variabiltiy in the sample rates for different waveform s
 <li><p>SpO2</p></li>
 <li><p>ABP</p></li>
 </ul>
-<p>Once again, these can be tabular or single channel as described in detail <a class="reference internal" href="datasets.html#dataset-details"><span class="std std-ref">here</span></a>.</p>
+<p>Once again, these can be tabular, single channel or a combination as described in detail <a class="reference internal" href="datasets.html#dataset-details"><span class="std std-ref">here</span></a>.</p>
 </div>
 </div>
 <div class="section" id="clinical">
@@ -390,7 +449,7 @@ There is generally more variabiltiy in the sample rates for different waveform s
 <p>The clinical group contains a variety of information extracted from the EMR and other sources, generally excluding monitor data.</p>
 <p>As there are a wide range of EMR data extraction pipelines, it is difficulty to completely standardize this group but we provide some high level guidance.
 Perhaps the greatest challenge within the clinical data is mapping concepts such as interventions and clinical observations.</p>
-<p>This is an active area of research and is one of the goals of the OMOP-CDM.</p>
+<p>Common ontologies for clinical concepts is an active area of research and is one of the goals of the OMOP-CDM and we aim to support this within the ccdef standard as it evolves.</p>
 <div class="section" id="clinical-timestamps">
 <h3>Clinical Timestamps<a class="headerlink" href="#clinical-timestamps" title="Permalink to this headline">¶</a></h3>
 <p>Clinical data tend to be much sparser than physiologic data and therefore timestamps will typically be included in these datasets.
@@ -569,8 +628,7 @@ It is intended primarily to support files used in trials and can contain trial s
 </div>
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
-<p>The reference group is also optional and is included for future development.
-The main purpose of this group is to include links (refered to as references in HDF5) to regions of interest within files or external links to other files.</p>
+<p>The reference group is also optional.  The main purpose of this group is to include links (refered to as references in HDF5) to regions of interest within files or external links to other files.</p>
 </div>
 </div>
 

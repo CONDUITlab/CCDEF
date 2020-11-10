@@ -55,16 +55,31 @@ One of the key issues in data sharing is the ability to seamlessly ingest data f
 This is complicated by the fact that collect sites will have various local factors that influence the way they store data, based on equipment, etc. 
 The data model is self-describing so it is fairly straight forward for end users to locate and extract the data that they need, but to add an additional level of interoperability we provide a mapping table for common key :ref:`signal names<Standard Signal Names>` that allow a user to directly (or using library functions) search and access the information they require.
 
++----------+-------------------------+--------------+--------+------------+---------+-----------------------------+
+| signal   | dataset                 | local_name   | column | category   | loinc   | loinc_name                  |
++==========+=========================+==============+========+============+=========+=============================+
+| HR       | /numerics/vitals        | HR           |      1 | numerics   | 8867-4  | Heart rate                  |
++----------+-------------------------+--------------+--------+------------+---------+-----------------------------+
+| NIBP-S   | /numerics/vitals        | NBP Sys      |      3 | numerics   | 76534-7 | BP sys by Noninvasive       |
++----------+-------------------------+--------------+--------+------------+---------+-----------------------------+
+| NIBP-D   | /numerics/vitals        | NBP Dias     |      4 | numerics   | 76535-4 | BP dias by Noninvasive      |
++----------+-------------------------+--------------+--------+------------+---------+-----------------------------+
+| NIBP-M   | /numerics/vitals        | NBP Mean     |      5 | numerics   | 76536-2 | BP mean by Noninvasive      |
++----------+-------------------------+--------------+--------+------------+---------+-----------------------------+
+| RR       | /numerics/vitals        | RESP         |      6 | numerics   | 76174-2 | Resp rate PulseOx.pleth     |
++----------+-------------------------+--------------+--------+------------+---------+-----------------------------+
+| SPO2     | /numerics/vitals        | SpO2         |      7 | numerics   | 76522-2 | Transmission % BldA PulseOx |
++----------+-------------------------+--------------+--------+------------+---------+-----------------------------+
+| ECG-II   | /waveforms/hemodynamics | II           |      1 | waveforms  | None    | ECG Lead II                 |
++----------+-------------------------+--------------+--------+------------+---------+-----------------------------+
+| ECG-III  | /waveforms/hemodynamics | III          |      2 | waveforms  | None    | ECG Lead III                |
++----------+-------------------------+--------------+--------+------------+---------+-----------------------------+
+| ECG-V    | /waveforms/hemodynamics | V            |      4 | waveforms  | None    | ECG Lead V                  |
++----------+-------------------------+--------------+--------+------------+---------+-----------------------------+
+| RR       | /waveforms/hemodynamics | RESP         |      5 | waveforms  | 76174-2 | Resp rate PulseOx.pleth     |
++----------+-------------------------+--------------+--------+------------+---------+-----------------------------+
 
-+---------+---------------------------+------------+--------+----------+---------+-------------------+
-| signal  | dataset                   | local_name | column | category | LOINC   | loinc_name        |
-+=========+===========================+============+========+==========+=========+===================+
-| HR      | /numerics/vitals/         |    HR      |  1     | numerics | 8867-4  | Heart Rate        | 
-+---------+---------------------------+------------+--------+----------+---------+-------------------+
-| ABP-S   | /numerics/vitals/         |   ABPSys   |  2     | numerics | 76215-3 | Invasive sys BP   | 
-+---------+---------------------------+------------+--------+----------+---------+-------------------+
-| ECG-I   | /waveforms/hemodynamics   |    I       |  1     | waveforms|         |                   | 
-+---------+---------------------------+------------+--------+----------+---------+-------------------+
+Additonal examples of the mapping functionality are shown :ref:`here<Mapping>`.
 
 Mapping Table Field Descriptions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -87,25 +102,24 @@ Mapping Table Field Descriptions
 
     A number of waveform signals do not currently have assigned LOINC identifiers but additions are being proposed to address this.
 
-
-
 Future Mapping Possibilities
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Future versions of CCDEF may include additional ontologies such as OMOP in the mapping table. 
-This is an area of active development. 
-
 
 Numerics
 ========
 
 The numerics group contains signals at a sample rate of less than 50 Hz. 
-Generally data in this group will be in a single tabular dataset called *Vitals*
+In cases where the numeric data consist primarily of vitals signs as recorded simultaneously from the bedside monitor,
+these data can be stored in a single tabular dataset called *Vitals*. 
+In cases where there are multiple datasources (eg a ventilator, telemetry modules, etc), some combination of tabular and single datasets may be more apppropriate. 
+In all cases, the mapping dataset is the recommended way to ensure that key parameters are easily located by end users. 
 
 Numerics Datasets
 -----------------
 
-These can be tabular or single channel as described in detail :ref:`here<_Dataset_details>`.
+These can be tabular, single channel or a combination of both as described in detail :ref:`here<_Dataset_details>`.
 
 Typical parameters include:
 
@@ -130,7 +144,7 @@ The most common datasets will be cardiorespiratory measurements conisting of:
 - SpO2
 - ABP
 
-Once again, these can be tabular or single channel as described in detail :ref:`here<Dataset_details>`.
+Once again, these can be tabular, single channel or a combination as described in detail :ref:`here<Dataset_details>`.
 
 Clinical
 ==================
@@ -140,8 +154,7 @@ The clinical group contains a variety of information extracted from the EMR and 
 As there are a wide range of EMR data extraction pipelines, it is difficulty to completely standardize this group but we provide some high level guidance.
 Perhaps the greatest challenge within the clinical data is mapping concepts such as interventions and clinical observations. 
 
-This is an active area of research and is one of the goals of the OMOP-CDM.
-
+Common ontologies for clinical concepts is an active area of research and is one of the goals of the OMOP-CDM and we aim to support this within the ccdef standard as it evolves.
 
 
 Clinical Timestamps
@@ -294,5 +307,4 @@ It is intended primarily to support files used in trials and can contain trial s
 References
 ==========
 
-The reference group is also optional and is included for future development.
-The main purpose of this group is to include links (refered to as references in HDF5) to regions of interest within files or external links to other files.
+The reference group is also optional.  The main purpose of this group is to include links (refered to as references in HDF5) to regions of interest within files or external links to other files.

@@ -106,16 +106,16 @@ def make_mapping (filename, mapper=None, overwrite=True):
     """Numerics"""
     signals = []
 
-    for dset_name in f['Numerics'].list()['datasets']:
-        dset = f['Numerics/'+dset_name]
-        columns = build_col_dict(dset, 'Numerics', std_signals, mapper)
+    for dset_name in f['numerics'].list()['datasets']:
+        dset = f['numerics/'+dset_name]
+        columns = build_col_dict(dset, 'numerics', std_signals, mapper)
         df=pd.DataFrame.from_dict(columns, orient='index')
         signals.append(df)
     """Waveforms - if present"""
     
-    for dset_name in f['Waveforms'].list()['datasets']:
-        dset = f['Waveforms/'+dset_name]
-        columns = build_col_dict(dset, 'Waveforms', std_signals, mapper)
+    for dset_name in f['waveforms'].list()['datasets']:
+        dset = f['waveforms/'+dset_name]
+        columns = build_col_dict(dset, 'waveforms', std_signals, mapper)
         df=pd.DataFrame.from_dict(columns, orient='index')
         signals.append(df)
     
@@ -126,15 +126,15 @@ def make_mapping (filename, mapper=None, overwrite=True):
     signals = pd.concat(signals)
     sarray, saType =  df_to_sarray(signals)
     # test for existance
-    if 'Mapping' in f['/'].list()['datasets']:
+    if 'mapping' in f['/'].list()['datasets']:
         print('Mapping table exists')
         if overwrite:
-            del f.hdf['Mapping']
-            f.hdf.create_dataset('Mapping', data=sarray, dtype=saType)
+            del f.hdf['mapping']
+            f.hdf.create_dataset('mapping', data=sarray, dtype=saType)
         else:
             print('Not overwritten')
     else:
-        f.hdf.create_dataset('Mapping', data=sarray, dtype=saType)
+        f.hdf.create_dataset('mapping', data=sarray, dtype=saType)
             
     f.close()
     
@@ -156,8 +156,8 @@ def show_mapping (source: Union[h5py.File, str]):
         else:
             f = h5py.File(source, 'r')
     
-    if 'Mapping' in f.keys():
-        mapping = pd.DataFrame(f['Mapping'][:])
+    if 'mapping' in f.keys():
+        mapping = pd.DataFrame(f['mapping'][:])
     else:
         raise Exception('No mapping dataset located')
     

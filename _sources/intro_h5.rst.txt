@@ -36,7 +36,9 @@ Core groups
 CCDEF specifies a high level structure to ensure that data can be consistently located. Once again, the goal is to facilitate automated data acquisition and analysis pipelines as much as possible.
 
 Data are segregated broadly into monitor or physiologic data which are continuously recorded and clinical information such as laboratory tests, microbiology, clinical notes, etc.
-Physiologic data are further divided based on acquisition speed into numerics and waveforms. 
+Physiologic data are further divided based on acquisition speed into numerics and waveforms with numerics typically being classified as periodic signals with sample rates of 50 Hz and below.
+
+Derived or secondary variables can optionally be stored in ccdef files. These are nested below their source group. More details on secondary variables/datasets are provided :ref:`here<Derived Data>`
 
 .. note:: 
 
@@ -53,6 +55,8 @@ Physiologic data are further divided based on acquisition speed into numerics an
  | / **waveforms**
  |
  |       /hemodynamics
+ |           /derived
+ |           /annotations
  |       /ventilator
  |
  | / **clinical**
@@ -60,6 +64,7 @@ Physiologic data are further divided based on acquisition speed into numerics an
  |       /labs
  |       /micro
  |       /notes
+ |       /diagnosis
  |
  | / **research**
 

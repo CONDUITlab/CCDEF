@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Introduction &mdash; CCDEF 1.0.0 documentation</title>
+  <title>Data Format &mdash; CCDEF 1.0.0 documentation</title>
   
 
   
@@ -37,8 +37,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Data Format" href="format.html" />
-    <link rel="prev" title="The Critical Care Data Format (CCDEF) Specification" href="index.html" /> 
+    <link rel="next" title="Core CCDEF Groups" href="groups.html" />
+    <link rel="prev" title="Introduction" href="intro_h5.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -85,18 +85,13 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#hdf5">HDF5</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data-format">Data Format</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#design-philosophy">Design Philosophy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#core-groups">Core groups</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#signal-storage">Signal storage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#timestamp-storage">Timestamp storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_h5.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data Format</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#signal-storage">Signal storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#timestamp-storage">Timestamp storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#core-groups">Core groups</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="format.html">Data Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="groups.html">Core CCDEF Groups</a></li>
 <li class="toctree-l1"><a class="reference internal" href="datasets.html">Physiologic Datasets (Waveform and Numerics)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="derived.html">Derived Data</a></li>
@@ -149,13 +144,13 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Introduction</li>
+      <li>Data Format</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/intro_h5.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/format.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -192,30 +187,46 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="introduction">
-<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
-<p>Across our collective clinical research activities, the authors have observed an unmet need for standardized, widely available data models and tooling to enable review, analysis, and learning from large, high-density patient datasets in critical care medicine.
-To that end, we are sharing here a proposed data model and are simultaneously publishing a set of open-source tools for data conversion, review, analysis and annotation using this standard.</p>
-<p>The Critical Care Data Exchange Format (CCDEF) is a data model and file encoding standard for storing, analyzing, and exchanging physiologic and clinical data collected over the course of a patient stay. The data model is designed to be lightweight &amp; flexible while still being sufficiently standardized to allow for seamless data exchange. The file encoding standard is designed for efficient storage and performant interaction with multimodal data. It is based on Hierarchical Data Format version 5 (HDF5), an open source file format which is widely supported across operating systems &amp; programming languages and supports advanced features like data-streaming and compression out of the box.</p>
-<div class="section" id="hdf5">
-<h2>HDF5<a class="headerlink" href="#hdf5" title="Permalink to this headline">¶</a></h2>
-<p>HDF5 is an open-source file format which encodes numerical data efficiently and therefore is suitable for large datasets but also allows for heterogeneous data such as variable-length strings to be stored.
-HDF5 supports advanced features including data-streaming and compression. For streaming support, chunked datasets are used, and gzip compression is used for portability.</p>
-<p>HDF5 is built around groups, datasets, and attributes.
-Datasets hold tabular data and may be stored in an arbitrary hierarchy of groups, like folders on a file system.
-Both groups and datasets may have attributes attached to them, and attributes are key/value pairs of variable-length strings.</p>
-<p>In the sense that groups and datasets have attributes, HDF has been characterized as a self-describing data format as the any supplemental information required to contextualize or interpret the data stored in the datasets is provided in the attributes.</p>
-<p>HDF5 is widely supported by the broader data science community and there are a wide range of tools available for reading and manipuating generic HDF5 files which are also useful for handling ccdef files. Some of these tools are listed <a class="reference internal" href="tools.html#tools"><span class="std std-ref">here</span></a>.</p>
-</div>
 <div class="section" id="data-format">
-<h2>Data Format<a class="headerlink" href="#data-format" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="design-philosophy">
-<h3>Design Philosophy<a class="headerlink" href="#design-philosophy" title="Permalink to this headline">¶</a></h3>
-<p>HDF5 permits a great deal of flexibility, and the aim of the CCDEF was to strike a balance between allowing users the flexibility to maintain local data acquisition pipelines as much as possible while also enabling the main objective of seamless data sharing.</p>
-<p>Our intention is to provide a wide range of tools for easy analysis of CCDEF formated physiologic and clinical data but at the same time provide a format that can be read natively with existing HDF5 libraries for tools such as MATLAB, python, C, etc.</p>
+<h1>Data Format<a class="headerlink" href="#data-format" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="signal-storage">
+<h2>Signal storage<a class="headerlink" href="#signal-storage" title="Permalink to this headline">¶</a></h2>
+<p>We have allowed both tabular datasets containing multiple simultaneously recorded signals (eg multiple ECG leads) or single parameter datasets. Becuase the format is self-describing, any of the tools used to read the underlying HDF5 file can accomodate either schema.</p>
+</div>
+<div class="section" id="timestamp-storage">
+<h2>Timestamp storage<a class="headerlink" href="#timestamp-storage" title="Permalink to this headline">¶</a></h2>
+<p>The specification allows for different time column formats depending on the nature of the data and the need to optimize storage space. Once again, these formats are clearly identified and allow for seamless reading of the file.</p>
+<p>Timestamps can be:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>Relative</dt><dd><ul class="simple">
+<li><p>time stored as float number of seconds starting from 0</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Absolute</dt><dd><ul class="simple">
+<li><p>time stored as a float number of seconds starting from time_origin</p></li>
+<li><p>time_origin stored in the metadata as Datetime formatted string</p></li>
+<li><p>DatetimeIndex reconstructed from time_origin and offsets stored in dataset</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Implied</dt><dd><ul class="simple">
+<li><p>no time column in the dataset</p></li>
+<li><p>data points must be at fixed period</p></li>
+<li><p>DatetimeIndex ot Timedelta index reconstructed from time_origin and sample rate</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
 </div>
 <div class="section" id="core-groups">
-<h3>Core groups<a class="headerlink" href="#core-groups" title="Permalink to this headline">¶</a></h3>
+<h2>Core groups<a class="headerlink" href="#core-groups" title="Permalink to this headline">¶</a></h2>
 <p>CCDEF specifies a high level structure to ensure that data can be consistently located. Once again, the goal is to facilitate automated data acquisition and analysis pipelines as much as possible.</p>
 <p>Data are segregated broadly into monitor or physiologic data which are continuously recorded and clinical information such as laboratory tests, microbiology, clinical notes, etc.
 Physiologic data are further divided based on acquisition speed into numerics and waveforms with numerics typically being classified as periodic signals with sample rates of 50 Hz and below.</p>
@@ -262,43 +273,6 @@ Physiologic data are further divided based on acquisition speed into numerics an
 </div>
 <p>Further details of the groups structure are provided <a class="reference internal" href="groups.html#core-ccdef-groups"><span class="std std-ref">here</span></a></p>
 </div>
-<div class="section" id="signal-storage">
-<h3>Signal storage<a class="headerlink" href="#signal-storage" title="Permalink to this headline">¶</a></h3>
-<p>We have allowed both tabular datasets containing multiple simultaneously recorded signals (eg multiple ECG leads) or single parameter datasets. Becuase the format is self-describing, any of the tools used to read the underlying HDF5 file can accomodate either schema.</p>
-</div>
-<div class="section" id="timestamp-storage">
-<h3>Timestamp storage<a class="headerlink" href="#timestamp-storage" title="Permalink to this headline">¶</a></h3>
-<p>The specification allows for different time column formats depending on the nature of the data and the need to optimize storage space. Once again, these formats are clearly identified and allow for seamless reading of the file.</p>
-<p>Timestamps can be:</p>
-<ol class="arabic simple">
-<li><dl class="simple">
-<dt>Relative</dt><dd><ul class="simple">
-<li><p>time stored as float number of seconds starting from 0</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Absolute</dt><dd><ul class="simple">
-<li><p>time stored as a float number of seconds starting from time_origin</p></li>
-<li><p>time_origin stored in the metadata as Datetime formatted string</p></li>
-<li><p>DatetimeIndex reconstructed from time_origin and offsets stored in dataset</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Implied</dt><dd><ul class="simple">
-<li><p>no time column in the dataset</p></li>
-<li><p>data points must be at fixed period</p></li>
-<li><p>DatetimeIndex ot Timedelta index reconstructed from time_origin and sample rate</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-</ol>
-</div>
-</div>
 </div>
 
 
@@ -309,10 +283,10 @@ Physiologic data are further divided based on acquisition speed into numerics an
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="format.html" class="btn btn-neutral float-right" title="Data Format" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="groups.html" class="btn btn-neutral float-right" title="Core CCDEF Groups" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral float-left" title="The Critical Care Data Format (CCDEF) Specification" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="intro_h5.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

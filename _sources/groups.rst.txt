@@ -132,12 +132,14 @@ The most common datasets will be cardiorespiratory measurements conisting of:
 
 Once again, these can be tabular or single channel as described in detail :ref:`here<Dataset_details>`.
 
-Clinical Group
+Clinical
 ==================
 
 The clinical group contains a variety of information extracted from the EMR and other sources, generally excluding monitor data.
+
 As there are a wide range of EMR data extraction pipelines, it is difficulty to completely standardize this group but we provide some high level guidance.
 Perhaps the greatest challenge within the clinical data is mapping concepts such as interventions and clinical observations. 
+
 This is an active area of research and is one of the goals of the OMOP-CDM.
 
 

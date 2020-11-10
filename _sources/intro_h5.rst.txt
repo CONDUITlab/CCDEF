@@ -35,7 +35,9 @@ CCDEF specifies a high level structure to ensure that data can be consistently l
 Data are segregated broadly into monitor or physiologic data which are continuously recorded and clinical information such as laboratory tests, microbiology, clinical notes, etc.
 Physiologic data are further divided based on acquisition speed into numerics and waveforms. 
 
-The overall structure of a CCDEF file would look like this:
+.. note:: 
+
+ | The overall structure of a CCDEF file looks like this: 
 
  | / (**root** group) 
  | .meta (metadata)

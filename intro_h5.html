@@ -217,9 +217,12 @@ In the sense that groups and datasets have attributes, HDF has been characterize
 <p>CCDEF specifies a high level structure to ensure that data can be consistently located. Once again, the goal is to facilitate automated data acquisition and analysis pipelines as much as possible.</p>
 <p>Data are segregated broadly into monitor or physiologic data which are continuously recorded and clinical information such as laboratory tests, microbiology, clinical notes, etc.
 Physiologic data are further divided based on acquisition speed into numerics and waveforms.</p>
-<p>The overall structure of a CCDEF file would look like this:</p>
-<blockquote>
-<div><div class="line-block">
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<div class="line-block">
+<div class="line">The overall structure of a CCDEF file looks like this:</div>
+</div>
+<div class="line-block">
 <div class="line">/ (<strong>root</strong> group)</div>
 <div class="line">.meta (metadata)</div>
 <div class="line">.demographics</div>
@@ -248,7 +251,7 @@ Physiologic data are further divided based on acquisition speed into numerics an
 </div>
 <div class="line">/ <strong>research</strong></div>
 </div>
-</div></blockquote>
+</div>
 <p>Further details of the groups structure are provided <a class="reference internal" href="groups.html#core-ccdef-groups"><span class="std std-ref">here</span></a></p>
 </div>
 <div class="section" id="signal-storage">

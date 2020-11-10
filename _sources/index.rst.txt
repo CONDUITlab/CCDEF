@@ -6,6 +6,9 @@
 The Critical Care Data Format (CCDEF) Specification
 ====================================================
 
+Version: 1.0
+Release Date: November 2020
+
 .. toctree::
    :maxdepth: 3
    :caption: Contents:

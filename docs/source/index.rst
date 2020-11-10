@@ -3,13 +3,13 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+===================================================
 The Critical Care Data Format (CCDEF) Specification
 ====================================================
 
-Version: 1.0
-
-
-Release Date: November 2020
+| Version: 1.0
+|
+| Release Date: 10 November 2020
 
 .. toctree::
    :maxdepth: 3

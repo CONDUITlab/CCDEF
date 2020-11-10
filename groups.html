@@ -88,9 +88,12 @@
 <li class="toctree-l1"><a class="reference internal" href="intro_h5.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Core CCDEF Groups</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#root">Root (/)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#root-group-metadata">Root Group Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#root-group-metadata">Root Group Metadata</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#demographics">Demographics</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#root-group-datasets">Root Group Datasets</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#mapping">.mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mapping">mapping</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mapping-table-field-descriptions">Mapping Table Field Descriptions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#future-mapping-possibilities">Future Mapping Possibilities</a></li>
 </ul>
@@ -106,10 +109,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#clinical-group">Clinical Group</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#clinical-group-metadata">Clinical Group Metadata</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#demographics">Demographics</a></li>
-</ul>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="#clinical-timestamps">Clinical Timestamps</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#clinical-datasets">Clinical Datasets</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#clinical-dataset-metadata">Clinical Dataset Metadata</a></li>
@@ -225,24 +224,38 @@ The root group is obviously mandatory but valid files can be created with physio
 <p>The root group is the top level of the file, it contains a series of other high level groups with physiologic and clinical data.</p>
 <div class="section" id="root-group-metadata">
 <h3>Root Group Metadata<a class="headerlink" href="#root-group-metadata" title="Permalink to this headline">¶</a></h3>
-<p>The .metadata attribute contains information about the file.</p>
+<p>The .meta attribute contains information about the file.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/.</span><span class="n">meta</span>
     <span class="p">{</span>
         <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
         <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
         <span class="s2">&quot;organization&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;origin&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-41-17 15:41:22.306880 EST&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="s2">&quot;seconds&quot;</span>
-        <span class="p">}</span>
+        <span class="s2">&quot;time_origin&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-41-17 15:41:22.306880 EST&quot;</span><span class="p">,</span>
+        <span class="n">ccdef_version</span><span class="p">:</span> <span class="mf">1.0</span>
     <span class="p">}</span>
 </pre></div>
+</div>
+<p>The optional demographics attribute contains basic patient demographic details</p>
+<div class="section" id="demographics">
+<h4>Demographics<a class="headerlink" href="#demographics" title="Permalink to this headline">¶</a></h4>
+<p>Demographic information about the patient is stored as an <em>optional</em> root group attribute.
+Acceptable demographics fields are:</p>
+<p>The result is a JSON formatted attribute like this:
+.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/.</span><span class="n">demographics</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mf">40.1</span><span class="p">,</span>
+        <span class="s2">&quot;gender&quot;</span><span class="p">:</span> <span class="s2">&quot;M&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;expired&quot;</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="root-group-datasets">
 <h3>Root Group Datasets<a class="headerlink" href="#root-group-datasets" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="mapping">
-<h4>.mapping<a class="headerlink" href="#mapping" title="Permalink to this headline">¶</a></h4>
+<h4>mapping<a class="headerlink" href="#mapping" title="Permalink to this headline">¶</a></h4>
 <p>One of the key issues in data sharing is the ability to seamlessly ingest data from multiple sites into the end users’ application without having to develop site specific pipelines.
 This is complicated by the fact that collect sites will have various local factors that influence the way they store data, based on equipment, etc.
 The data model is self-describing so it is fairly straight forward for end users to locate and extract the data that they need, but to add an additional level of interoperability we provide a mapping table for common key <a class="reference internal" href="signals.html#standard-signal-names"><span class="std std-ref">signal names</span></a> that allow a user to directly (or using library functions) search and access the information they require.</p>
@@ -320,7 +333,6 @@ The mapping table also provides the group, dataset and column (if the dataset is
 <p class="admonition-title">Note</p>
 <p>A number of waveform signals do not currently have assigned LOINC identifiers but additions are being proposed to address this.</p>
 </div>
-<p>** example dataframe from MIMIC **</p>
 </div>
 <div class="section" id="future-mapping-possibilities">
 <h4>Future Mapping Possibilities<a class="headerlink" href="#future-mapping-possibilities" title="Permalink to this headline">¶</a></h4>
@@ -366,28 +378,10 @@ There is generally more variabiltiy in the sample rates for different waveform s
 As there are a wide range of EMR data extraction pipelines, it is difficulty to completely standardize this group but we provide some high level guidance.
 Perhaps the greatest challenge within the clinical data is mapping concepts such as interventions and clinical observations.
 This is an active area of research and is one of the goals of the OMOP-CDM.</p>
-<div class="section" id="clinical-group-metadata">
-<h3>Clinical Group Metadata<a class="headerlink" href="#clinical-group-metadata" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="demographics">
-<h4>Demographics<a class="headerlink" href="#demographics" title="Permalink to this headline">¶</a></h4>
-<p>Demographic information about the patient is stored as a group attribute “.Demographics” Acceptable demographics fields are:</p>
-<p>** should we make the admission dx a separate attribute? should it be a list of possible dx codes, eg ICD9, ICD10 **</p>
-<p>The result is a JSON formatted attribute like this:
-.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">clinical</span><span class="o">.</span><span class="n">demographics</span>
-    <span class="p">{</span>
-        <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mf">40.1</span><span class="p">,</span>
-        <span class="s2">&quot;gender&quot;</span><span class="p">:</span> <span class="s2">&quot;M&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;expired&quot;</span><span class="p">:</span> <span class="mi">0</span>
-    <span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
 <div class="section" id="clinical-timestamps">
 <h3>Clinical Timestamps<a class="headerlink" href="#clinical-timestamps" title="Permalink to this headline">¶</a></h3>
 <p>Clinical data tend to be much sparser than physiologic data and therefore timestamps will typically be included in these datasets.
-The prefered method is a time column with seconds from the orgin or <em>base_datetime</em>.</p>
+The prefered method is a time column with seconds from the <em>time_orgin</em>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If no base_datetime is specified in the clinical datasets, the time orgin for the file in the root group metadata will be used <em>(/.meta)</em>.</p>
@@ -453,6 +447,24 @@ Caution is advised however in that these values may not always be entirely accur
 </dl>
 </dd></dl>
 
+<dl class="function">
+<dt>
+<code class="sig-name descname">diagnosis dataset</code></dt>
+<dd><p>The diagnosis dataset is a list of diagnostic codes applicable to the patient stay described by the file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dxcode</strong> (<em>str</em>) – diagnostic code</p></li>
+<li><p><strong>dxname</strong> (<em>str</em>) – diagnosis text (optional)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>The default coding scheme is ICD 9 but this will be specified in the meta data for the diagnostic dataset as shown here</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">clinical</span><span class="o">/</span><span class="n">diagnosis</span><span class="o">/.</span><span class="n">coding</span> <span class="o">=</span> <span class="s2">&quot;ICD 9&quot;</span>
+</pre></div>
+</div>
 <div class="section" id="clinical-dataset-metadata">
 <h4>Clinical Dataset Metadata<a class="headerlink" href="#clinical-dataset-metadata" title="Permalink to this headline">¶</a></h4>
 <p>Information about tests can be stored in <em>.test_info</em>,</p>
@@ -461,10 +473,15 @@ Caution is advised however in that these values may not always be entirely accur
 <code class="sig-name descname">.test_info metadata attribute</code></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>label</strong> (<em>str</em>) – name of the test</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label</strong> (<em>str</em>) – name of the test</p></li>
+<li><p><strong>category</strong> (<em>str</em>) – type of test (eg chemistry, blood gas)</p></li>
+<li><p><strong>fluid</strong> (<em>str</em>) – fluid used for test (eg: blood, urine, CSF)</p></li>
+<li><p><strong>valueuom</strong> (<em>str</em>) – units of measurement for the test</p></li>
+<li><p><strong>loinc_code</strong> (<em>str</em>) – the loinc for the test (eg ‘718-8’)</p></li>
+</ul>
 </dd>
 </dl>
-<p>** To finish **</p>
 </dd></dl>
 
 <p>Files converted from MIMIC III will have a JSON formatted string like this:</p>

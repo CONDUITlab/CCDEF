@@ -218,12 +218,10 @@ In the sense that groups and datasets have attributes, HDF has been characterize
 <div class="section" id="timestamp-storage">
 <h3>Timestamp storage<a class="headerlink" href="#timestamp-storage" title="Permalink to this headline">¶</a></h3>
 <p>The specification allows for different time column formats depending on the nature of the data and the need to optimize storage space. Once again, these formats are clearly identified and allow for seamless reading of the file.</p>
-<ul class="simple">
-<li><p>relative</p></li>
-<li><p>absolute</p></li>
-<li><p>implied</p></li>
-</ul>
-<p>Ability to reconstruct at readtime for implied timestamps</p>
+<p>Timestamps can be:
+- relative (stored as float number of seconds starting from 0)
+- absolute (stored as a float number of seconds starting from 0 with a time_origin included in the metadata for the dataset)
+- implied (no time column in the data, time is reconstructed at readtime based on the sample_rate +/- time_origin)</p>
 </div>
 </div>
 </div>

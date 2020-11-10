@@ -22,36 +22,21 @@ The .meta attribute contains information about the file. ::
             "author": "...",
             "organization": "...",
             "time_origin": "2020-41-17 15:41:22.306880 EST",
-            ccdef_version: 1.0
+            "ccdef_version": 1.0
         }
-
-The optional demographics attribute contains basic patient demographic details ::
 
 Demographics
 ^^^^^^^^^^^^
-
 Demographic information about the patient is stored as an *optional* root group attribute. 
-Acceptable demographics fields are:
 
-.. py:data:: age
-   :type: float
-   :value: the patient's age in years
+.. py:function:: demographics attribute (/.demographics)
 
-.. py:data:: gender 
-    :type: string
-    :value: {M,F}
+ :param float age: Patient age in years (fractional years allowed)
+ :param str gender: patient gender {M,F}
+ :param int expired: value: {0,1} 0 indicating that the patient did not die during the period covered by the file
+ :param str admit_dx: admission ICD 9 code (note that a full list of diagnostic codes can also be specified in /clinical/diagnosis
 
-.. py:data:: expired 
-    :type: int
-    :value: {0,1} 0 indicating that the patient did not die during the period covered by the file 
-
-.. py:data:: admit_dx 
-    :type: string
-    :value: admission ICD 9 code  
-
-
-The result is a JSON formatted attribute like this:
-. ::
+The resulting JSON formatted attribute looks like this: ::
 
     /.demographics
         {

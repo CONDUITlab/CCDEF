@@ -14,23 +14,56 @@ The root group is the top level of the file, it contains a series of other high 
 Root Group Metadata
 -------------------
 
-The .metadata attribute contains information about the file. ::
+The .meta attribute contains information about the file. ::
 
     /.meta
         {
             "title": "...",
             "author": "...",
             "organization": "...",
-            "time": {
-                "origin": "2020-41-17 15:41:22.306880 EST",
-                "units": "seconds"
-            }
+            "time_origin": "2020-41-17 15:41:22.306880 EST",
+            ccdef_version: 1.0
+        }
+
+The optional demographics attribute contains basic patient demographic details ::
+
+Demographics
+^^^^^^^^^^^^
+
+Demographic information about the patient is stored as an *optional* root group attribute. 
+Acceptable demographics fields are:
+
+.. py:data:: age
+   :type: float
+   :value: the patient's age in years
+
+.. py:data:: gender 
+    :type: string
+    :value: {M,F}
+
+.. py:data:: expired 
+    :type: int
+    :value: {0,1} 0 indicating that the patient did not die during the period covered by the file 
+
+.. py:data:: admit_dx 
+    :type: string
+    :value: admission ICD 9 code  
+
+
+The result is a JSON formatted attribute like this:
+. ::
+
+    /.demographics
+        {
+            "age": 40.1,
+            "gender": "M",
+            "expired": 0
         }
 
 Root Group Datasets
 -------------------
 
-.mapping
+mapping
 ^^^^^^^^
 
 One of the key issues in data sharing is the ability to seamlessly ingest data from multiple sites into the end users' application without having to develop site specific pipelines. 
@@ -69,7 +102,6 @@ Mapping Table Field Descriptions
 
     A number of waveform signals do not currently have assigned LOINC identifiers but additions are being proposed to address this.
 
-** example dataframe from MIMIC **
 
 
 Future Mapping Possibilities
@@ -124,48 +156,12 @@ Perhaps the greatest challenge within the clinical data is mapping concepts such
 This is an active area of research and is one of the goals of the OMOP-CDM.
 
 
-Clinical Group Metadata
-------------------------
-
-Demographics
-^^^^^^^^^^^^
-
-Demographic information about the patient is stored as a group attribute ".Demographics" Acceptable demographics fields are:
-
-.. py:data:: age
-   :type: float
-   :value: the patient's age in years
-
-.. py:data:: gender 
-    :type: string
-    :value: {M,F}
-
-.. py:data:: expired 
-    :type: int
-    :value: {0,1} 0 indicating that the patient did not die during the period covered by the file 
-
-.. py:data:: admit_dx 
-    :type: string
-    :value: admission ICD 9 code  
-
-** should we make the admission dx a separate attribute? should it be a list of possible dx codes, eg ICD9, ICD10 **
-
-
-The result is a JSON formatted attribute like this:
-. ::
-
-    /clinical.demographics
-        {
-            "age": 40.1,
-            "gender": "M",
-            "expired": 0
-        }
 
 Clinical Timestamps
 --------------------
 
 Clinical data tend to be much sparser than physiologic data and therefore timestamps will typically be included in these datasets.
-The prefered method is a time column with seconds from the orgin or *base_datetime*. 
+The prefered method is a time column with seconds from the *time_orgin*. 
 
 .. note::
 
@@ -214,6 +210,19 @@ Imaging if available would be in a separate group */Clinical/Imaging*
     :param test_name: the name of the test
     :type test_name: str ,optional
 
+.. py:function:: diagnosis dataset
+
+    The diagnosis dataset is a list of diagnostic codes applicable to the patient stay described by the file.
+
+    :param str dxcode: diagnostic code
+    :param str dxname: diagnosis text (optional)
+
+.. note::
+
+The default coding scheme is ICD 9 but this will be specified in the meta data for the diagnostic dataset as shown here ::
+
+/clinical/diagnosis/.coding = "ICD 9"
+
 Clinical Dataset Metadata
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -222,9 +231,11 @@ Information about tests can be stored in *.test_info*,
 .. py:function:: .test_info metadata attribute
 
     :param str label: name of the test
-
-    ** To finish **
-
+    :param str category: type of test (eg chemistry, blood gas)
+    :param str fluid: fluid used for test (eg: blood, urine, CSF)
+    :param str valueuom: units of measurement for the test
+    :param str loinc_code: the loinc for the test (eg '718-8')
+    
 
 Files converted from MIMIC III will have a JSON formatted string like this: ::
 

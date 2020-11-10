@@ -37,11 +37,10 @@ Timestamp storage
 
 The specification allows for different time column formats depending on the nature of the data and the need to optimize storage space. Once again, these formats are clearly identified and allow for seamless reading of the file.
 
-- relative
-- absolute
-- implied
-
-Ability to reconstruct at readtime for implied timestamps
+Timestamps can be:
+- relative (stored as float number of seconds starting from 0)
+- absolute (stored as a float number of seconds starting from 0 with a time_origin included in the metadata for the dataset)
+- implied (no time column in the data, time is reconstructed at readtime based on the sample_rate +/- time_origin)
 
 
 

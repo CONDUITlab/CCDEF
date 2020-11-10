@@ -8,6 +8,7 @@ Created on Wed Sep  2 21:40:29 2020
 
 import pandas as pd
 import numpy as np
+import json
 import h5py
 import os.path
 from typing import Union
@@ -173,3 +174,64 @@ def scan_file (source: Union[h5py.File, str], verbose=False):
         f.close()
         
     return [tg_names, td_names]  
+
+
+def _fix_meta(filename):
+    """ Fix metadata formatting
+
+    May need to use json.loads and json.dumps
+    """
+
+    f = h5py.File(filename,'r+')
+
+    #move metadata from group to root attribute
+
+    for item in list(f['/.meta'].attrs):
+        f['/'].attrs[item] = f['/.meta'].attrs[item]
+
+    #remove .meta group
+    del f['.meta']
+
+
+def make_ts_dset (dset, time_type = 'abs'):
+    pass
+    return
+
+def make_ts_wfdb_rec (record, time_type = 'abs'):
+    pass
+    return
+
+
+def make_ts (dset, time_type='abs'):
+    """
+    make a time series for dset using the sample rate and basetime/origin from the dataset metadata
+
+
+    returns:
+        TimeDeltaIndex if time_type is rel
+        DateTimeIndex if time_type is abs
+
+    """
+    
+    ds_meta = json.loads(dset.attrs['.meta'])
+    key = list(ds_meta['columns'].keys())[0]
+    meta_keys = ds_meta['columns'][key].keys()
+    if 'base_datetime' in meta_keys:
+        origin = pd.to_datetime(ds_meta['columns'][key]['base_datetime'])
+    elif 'time_origin' in meta_keys:
+        origin = pd.to_datetime(ds_meta['columns'][key]['time_origin'])
+    else:
+        raise Exception('No time origin located in dataset metadata')
+        
+    fs = ds_meta['columns'][key]['sample_rate']
+    dt = round(1 / fs,6) # time step
+    end = len(dset)
+    
+    if time_type == 'rel':
+        ts = pd.TimedeltaIndex( np.arange (0, end*dt, dt ), unit = 's', name = 'Timedelta' )
+        return origin, ts
+
+    else:
+        ts = (pd.TimedeltaIndex( np.arange (0, end*dt, dt ), unit = 's', 
+            name = 'Datetime' ) + origin).tz_localize(tz='EST')
+        return origin, ts

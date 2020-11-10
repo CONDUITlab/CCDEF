@@ -90,7 +90,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Physiologic Datasets (Waveform and Numerics)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#single-channel-format">Single Channel Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#tabular-format">Tabular Format</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#monitor-dataset-metadata">Monitor Dataset Metadata</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#physiologic-dataset-metadata">Physiologic Dataset Metadata</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#dataset-metadata-fields">Dataset Metadata Fields</a></li>
 </ul>
 </li>
@@ -195,34 +195,48 @@
 <div class="section" id="single-channel-format">
 <h2>Single Channel Format<a class="headerlink" href="#single-channel-format" title="Permalink to this headline">¶</a></h2>
 <p>In this case, each signal is stored in a separate dataset in its respective group.
-The file structure would be:</p>
+The file structure is:</p>
 <blockquote>
 <div><div class="line-block">
-<div class="line">/ (root)</div>
+<div class="line">/ (<strong>root</strong>)</div>
+<div class="line"><em>.meta</em></div>
+<div class="line"><em>.demographics</em></div>
+<div class="line"><br /></div>
+<div class="line"><strong>mapping</strong></div>
+<div class="line"><br /></div>
+<div class="line">/ <strong>numerics</strong></div>
+<div class="line"><em>.meta</em></div>
 <div class="line-block">
-<div class="line">mapping</div>
-<div class="line">/numerics</div>
-<div class="line-block">
-<div class="line">HR</div>
-<div class="line">ABP-S</div>
-<div class="line">ABP-D</div>
-<div class="line">ABP-M</div>
-<div class="line">SPO2</div>
+<div class="line">/HR</div>
+<div class="line">/ABP-S</div>
+<div class="line">/ABP-D</div>
+<div class="line">/ABP-M</div>
+<div class="line">/SPO2</div>
 <div class="line"><br /></div>
 </div>
-<div class="line">/waveforms</div>
+<div class="line">/ <strong>waveforms</strong></div>
+<div class="line"><em>.meta</em></div>
 <div class="line-block">
-<div class="line">ECG-II</div>
-<div class="line">ABP</div>
-<div class="line">CVP</div>
+<div class="line">/ECG-II</div>
+<div class="line">/ABP</div>
+<div class="line">/CVP</div>
 <div class="line"><br /></div>
 </div>
-<div class="line">/clinial</div>
+<div class="line">/ <strong>clinial</strong></div>
 <div class="line-block">
-<div class="line">notes</div>
-<div class="line">labs</div>
-<div class="line">micro</div>
-<div class="line">infusions</div>
+<div class="line">/notes</div>
+<div class="line">/labs</div>
+<div class="line-block">
+<div class="line"><em>.test_info</em></div>
+</div>
+<div class="line">/micro</div>
+<div class="line-block">
+<div class="line"><em>.test_info</em></div>
+</div>
+<div class="line">/infusions</div>
+<div class="line">/diagnosis</div>
+<div class="line-block">
+<div class="line"><em>.coding</em></div>
 </div>
 </div>
 </div>
@@ -234,32 +248,52 @@ The file structure would be:</p>
 The resulting file structure looks like:</p>
 <blockquote>
 <div><div class="line-block">
-<div class="line">/ (root)</div>
+<div class="line">/ (<strong>root</strong>)</div>
+<div class="line"><em>.meta</em></div>
+<div class="line"><em>.demographics</em></div>
+<div class="line"><br /></div>
+<div class="line"><strong>mapping</strong></div>
+<div class="line"><br /></div>
 <div class="line-block">
-<div class="line">mapping</div>
-<div class="line">/numerics</div>
+<div class="line">/ <strong>numerics</strong></div>
 <div class="line-block">
-<div class="line">vitals</div>
+<div class="line">/vitals</div>
+<div class="line-block">
+<div class="line"><em>.meta</em></div>
 <div class="line"><br /></div>
 </div>
-<div class="line">/waveforms</div>
+</div>
+<div class="line">/ <strong>waveforms</strong></div>
 <div class="line-block">
-<div class="line">hemodynamics</div>
+<div class="line">/hemodynamics</div>
+<div class="line-block">
+<div class="line"><em>.meta</em></div>
 <div class="line"><br /></div>
 </div>
-<div class="line">/clinial</div>
+</div>
+<div class="line">/ <strong>clinial</strong></div>
 <div class="line-block">
-<div class="line">notes</div>
-<div class="line">labs</div>
-<div class="line">micro</div>
-<div class="line">infusions</div>
+<div class="line">/notes</div>
+<div class="line">/labs</div>
+<div class="line-block">
+<div class="line"><em>.test_info</em></div>
+</div>
+<div class="line">/micro</div>
+<div class="line-block">
+<div class="line"><em>.test_info</em></div>
+</div>
+<div class="line">/infusions</div>
+<div class="line">/diagnosis</div>
+<div class="line-block">
+<div class="line"><em>.coding</em></div>
+</div>
 </div>
 </div>
 </div>
 </div></blockquote>
 </div>
-<div class="section" id="monitor-dataset-metadata">
-<h2>Monitor Dataset Metadata<a class="headerlink" href="#monitor-dataset-metadata" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="physiologic-dataset-metadata">
+<h2>Physiologic Dataset Metadata<a class="headerlink" href="#physiologic-dataset-metadata" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="dataset-metadata-fields">
 <h3>Dataset Metadata Fields<a class="headerlink" href="#dataset-metadata-fields" title="Permalink to this headline">¶</a></h3>
 <dl class="function">

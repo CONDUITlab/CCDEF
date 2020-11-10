@@ -7,7 +7,8 @@ import pandas as pd
 import wfdb
 from ccdef.mapping.loinc import LoincMapper
 import ccdef.mapping.mapping
-from ccdef._utils import make_ts as make_ts
+import ccdef._utils as utils
+from ccdef import __DATA_VERSION__, __DEBUG__, __VERSION__
 
 
 '''Todo:
@@ -18,7 +19,6 @@ from ccdef._utils import make_ts as make_ts
     - integrate clinical values from MIMIC III DB (requires DB credentials and DUA) 
     - rebuild time index from sample rate and basetime
 '''
-# FIXME #15 where is best entry point for LoincMapper to avoid setting as a global
 
 
 def convert_wfdb_numerics (h5f, num_head, mapper, add_time_col=True):
@@ -27,15 +27,16 @@ def convert_wfdb_numerics (h5f, num_head, mapper, add_time_col=True):
     '''
     record = wfdb.rdrecord(num_head, sampfrom = 0, sampto = None )
     df = pd.DataFrame(data = record.p_signal, columns = record.sig_name)
-    h5f['Numerics/Vitals'] = df
-    if add_time_col:
-        _, ts = make_ts()
-        df['time'] = 
-    
 
+    if add_time_col:
+        ts = utils.wfdb_ts(record, time_type='abs')
+        df['time'] = ts 
+        h5f['numerics/vitals'] = df
+    else:
+        h5f['numerics/vitals'] = df
 
     cols = list(record.sig_name)
-    old_meta = h5f['Numerics/Vitals'].meta['columns']
+    old_meta = h5f['numerics/vitals'].meta['columns']
     columns = {}
    
     for idx, col in enumerate(cols):
@@ -53,18 +54,24 @@ def convert_wfdb_numerics (h5f, num_head, mapper, add_time_col=True):
         columns[col] = col_meta
 
     new_meta = {'columns': columns}
-    h5f['Numerics/Vitals'].meta = new_meta
+    h5f['numerics/vitals'].meta = new_meta
 
 
-def convert_wfdb_waveforms (h5f, wave_head, mapper):
+def convert_wfdb_waveforms (h5f, wave_head, mapper, add_time_col=True):
     ''' Convert waveforms using wfdb library '''
     
     wave_record = wfdb.rdrecord(wave_head, sampfrom = 0, sampto = None )
     wave_df = pd.DataFrame(data = wave_record.p_signal, columns = wave_record.sig_name)
-    h5f['Waveforms/Hemodynamics'] = wave_df
+
+    if add_time_col:
+        ts = utils.wfdb_ts(wave_record, time_type='abs')
+        wave_df['time'] = ts 
+        h5f['waveforms/hemodynamics'] = wave_df
+    else:
+        h5f['waveforms/hemodynamics'] = wave_df
 
     cols = list(wave_record.sig_name)
-    old_meta = h5f['Waveforms/Hemodynamics'].meta['columns']
+    old_meta = h5f['waveforms/hemodynamics'].meta['columns']
     
     columns = {}
     for idx, col in enumerate(cols):
@@ -82,7 +89,7 @@ def convert_wfdb_waveforms (h5f, wave_head, mapper):
         columns[col] = col_meta
     new_meta = {'columns': columns}
 
-    h5f['Waveforms/Hemodynamics'].meta = new_meta
+    h5f['waveforms/hemodynamics'].meta = new_meta
 
 def scantree(path):
     """Recursively yield DirEntry objects for given directory."""
@@ -157,12 +164,18 @@ def ccdef_from_wfdb(name, dest_path='', numerics=True, waveforms=True, clinical=
     if mapper is None:    
         mapper = LoincMapper(external_mapping_table="MIMICIII")
     
-    with audata.File.new(out_name, time_reference=base_dt, title=record.record_name, 
-                   author='Mimic III matched dataset', organization = 'PhysioNet', overwrite=True) as f:
+    file_meta = {'source:':'Mimic III matched dataset',
+                'organization': 'PhysioNet',
+                'record': record.record_name,
+                'ccdef version': ccdef.__DATA_VERSION__,
+                'ccdef package version': ccdef.__VERSION__
+                }
+
+    with audata.File.new(out_name, time_reference=base_dt, metadata=file_meta, overwrite=True) as f:
     
-        f.hdf.create_group('Waveforms')
-        f.hdf.create_group('Numerics')
-        f.hdf.create_group('Clinical')
+        f.hdf.create_group('waveforms')
+        f.hdf.create_group('numerics')
+        f.hdf.create_group('clinical')
 
         ''' Extract data from the wfdb numerics record if present and numerics=True'''
         if (num_exists & numerics):

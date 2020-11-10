@@ -12,7 +12,7 @@ import json
 import h5py
 import os.path
 from typing import Union
-from ccdef import __DEBUG__, __VERSION__
+from ccdef import __DEBUG__, __VERSION__, __DATA_VERSION__
 
 #%% file helper functions
 
@@ -193,45 +193,97 @@ def _fix_meta(filename):
     del f['.meta']
 
 
-def make_ts_dset (dset, time_type = 'abs'):
-    pass
-    return
+def ts_dset (dset, time_type = 'abs'):
+    """
+    Generate time series for a dset
 
-def make_ts_wfdb_rec (record, time_type = 'abs'):
-    pass
-    return
+    Parameters
+    ----------
+    dset: dataset
+    time_type: {'rel', 'abs'}
+        specifies relative or absolute time format 
+    
+    Returns
+    -------
+        TimeDeltaIndex if time_type is rel
+        DateTimeIndex if time_type is abs
+ 
+    Raises
+    ------
+    Exception when the required metadata (time origin/sample rate) are not in the dataset attributes
 
+    #TODO: automatically go up to parent group if required metadata missing
 
-def make_ts (dset, time_type='abs'):
+    """
+    ds_meta = json.loads(dset.attrs['.meta'])
+    meta_keys = ds_meta.keys()
+    if 'base_datetime' in meta_keys:
+        origin = pd.to_datetime(ds_meta['base_datetime'])
+    elif 'time_origin' in meta_keys:
+        origin = pd.to_datetime(ds_meta['time_origin'])
+    else:
+        raise Exception('No time origin located in dataset metadata')
+    
+    if 'sample_rate' in meta_keys:
+        fs = meta_keys['sample_rate']
+    else:
+        raise Exception('No sample rate located in dataset metadata')
+
+    end = len(dset)
+    ts = make_ts(end, fs, time_type=time_type, origin = origin)
+
+    return ts
+
+def wfdb_ts (record, time_type = 'abs'):
+    """
+    Generate time series for wfdb record
+
+    Parameters
+    ----------
+    record: dataset
+    time_type: {'rel', 'abs'}
+    #TODO: add relative, absolute, etc
+        specifies relative or absolute time format 
+    
+    Returns
+    -------
+        TimeDeltaIndex if time_type is rel
+        DateTimeIndex if time_type is abs
+
+    Raises
+    ------
+    Exception when the required metadata (time origin/sample rate) are not in the dataset attributes
+
+    #TODO: automatically go up to parent group if required metadata missing
+
+    """
+    fs = record.fs
+    origin = record.base_datetime
+    end = record.sig_len
+
+    ts = make_ts(end, fs, time_type=time_type, origin = origin)
+    return ts
+
+def make_ts (end, fs, time_type='abs', origin = None):
+
     """
     make a time series for dset using the sample rate and basetime/origin from the dataset metadata
 
+    Parameters
+    ----------
+    end: end of the dataset
 
     returns:
         TimeDeltaIndex if time_type is rel
         DateTimeIndex if time_type is abs
-
     """
-    
-    ds_meta = json.loads(dset.attrs['.meta'])
-    key = list(ds_meta['columns'].keys())[0]
-    meta_keys = ds_meta['columns'][key].keys()
-    if 'base_datetime' in meta_keys:
-        origin = pd.to_datetime(ds_meta['columns'][key]['base_datetime'])
-    elif 'time_origin' in meta_keys:
-        origin = pd.to_datetime(ds_meta['columns'][key]['time_origin'])
-    else:
-        raise Exception('No time origin located in dataset metadata')
-        
-    fs = ds_meta['columns'][key]['sample_rate']
     dt = round(1 / fs,6) # time step
-    end = len(dset)
     
     if time_type == 'rel':
         ts = pd.TimedeltaIndex( np.arange (0, end*dt, dt ), unit = 's', name = 'Timedelta' )
-        return origin, ts
+        return ts
 
     else:
         ts = (pd.TimedeltaIndex( np.arange (0, end*dt, dt ), unit = 's', 
             name = 'Datetime' ) + origin).tz_localize(tz='EST')
-        return origin, ts
+        return ts

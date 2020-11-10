@@ -7,6 +7,4 @@
       khsc    converts csv lab data from KHSC PCS and adds it to ccdef waveform/numeric data files
 """
 
-__VERSION = 0.5
-__DEBUG = False
 

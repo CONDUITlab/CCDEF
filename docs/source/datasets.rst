@@ -9,27 +9,37 @@ Single Channel Format
 ---------------------
 
 In this case, each signal is stored in a separate dataset in its respective group.
-The file structure would be:
+The file structure is:
 
- | / (root)
- |      mapping
- |      /numerics
- |          HR
- |          ABP-S
- |          ABP-D
- |          ABP-M
- |          SPO2
+ | / (**root**)
+ | *.meta*
+ | *.demographics* 
  |
- |      /waveforms
- |          ECG-II
- |          ABP
- |          CVP
+ | **mapping**
+ |
+ | / **numerics**
+ | *.meta*
+ |    /HR
+ |    /ABP-S
+ |    /ABP-D
+ |    /ABP-M
+ |    /SPO2
+ |
+ | / **waveforms**  
+ | *.meta*
+ |    /ECG-II
+ |    /ABP
+ |    /CVP
  |  
- |      /clinial
- |          notes
- |          labs
- |          micro
- |          infusions
+ | / **clinial**
+ |     /notes
+ |     /labs           
+ |          *.test_info*
+ |     /micro
+ |          *.test_info*
+ |     /infusions
+ |     /diagnosis
+ |          *.coding*
  
 
 Tabular Format
@@ -38,22 +48,32 @@ Tabular Format
 In a tabular dataset, multiple similar signals (generally same sample rate and source) are stored together.
 The resulting file structure looks like:
 
- | / (root)
- |      mapping
- |      /numerics
- |          vitals
+ | / (**root**)
+ | *.meta*
+ | *.demographics* 
  |
- |      /waveforms
- |          hemodynamics
+ | **mapping**
+ |
+ |  / **numerics**
+ |       /vitals     
+ |        *.meta* 
+ |
+ |  / **waveforms**
+ |       /hemodynamics  
+ |        *.meta* 
  |  
- |      /clinial
- |          notes
- |          labs
- |          micro
- |          infusions
+ |  / **clinial**
+ |        /notes
+ |        /labs
+ |              *.test_info*
+ |        /micro        
+ |              *.test_info*
+ |        /infusions
+ |        /diagnosis
+ |               *.coding*
 
-Monitor Dataset Metadata
---------------------------
+Physiologic Dataset Metadata
+------------------------------
 
 Dataset Metadata Fields
 ^^^^^^^^^^^^^^^^^^^^^^^

@@ -7,6 +7,7 @@ import pandas as pd
 import wfdb
 from ccdef.mapping.loinc import LoincMapper
 import ccdef.mapping.mapping
+from ccdef._utils import make_ts as make_ts
 
 
 '''Todo:
@@ -20,13 +21,18 @@ import ccdef.mapping.mapping
 # FIXME #15 where is best entry point for LoincMapper to avoid setting as a global
 
 
-def convert_wfdb_numerics (h5f, num_head, mapper):
+def convert_wfdb_numerics (h5f, num_head, mapper, add_time_col=True):
     '''
     Convert numerics using wfdb library
     '''
     record = wfdb.rdrecord(num_head, sampfrom = 0, sampto = None )
     df = pd.DataFrame(data = record.p_signal, columns = record.sig_name)
     h5f['Numerics/Vitals'] = df
+    if add_time_col:
+        _, ts = make_ts()
+        df['time'] = 
+    
+
 
     cols = list(record.sig_name)
     old_meta = h5f['Numerics/Vitals'].meta['columns']

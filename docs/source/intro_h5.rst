@@ -27,6 +27,39 @@ HDF5 permits a great deal of flexibility, and the aim of the CCDEF was to strike
 
 Our intention is to provide a wide range of tools for easy analysis of CCDEF formated physiologic and clinical data but at the same time provide a format that can be read natively with existing HDF5 libraries for tools such as MATLAB, python, C, etc.
 
+Core groups
+^^^^^^^^^^^
+
+CCDEF specifies a high level structure to ensure that data can be consistently located. Once again, the goal is to facilitate automated data acquisition and analysis pipelines as much as possible.
+
+Data are segregated broadly into monitor or physiologic data which are continuously recorded and clinical information such as laboratory tests, microbiology, clinical notes, etc.
+Physiologic data are further divided based on acquisition speed into numerics and waveforms. 
+
+The overall structure of a CCDEF file would look like this:
+
+ | / (**root** group) 
+ | .meta (metadata)
+ | .demographics
+
+ | / **numerics**
+ |
+ |      /vitals
+ |
+ | / **waveforms**
+ |
+ |       /hemodynamics
+ |       /ventilator
+ |
+ | / **clinical**
+ |
+ |       /labs
+ |       /micro
+ |       /notes
+ |
+ | / **research**
+
+Further details of the groups structure are provided :ref:`here<Core CCDEF Groups>`
+
 Signal storage
 ^^^^^^^^^^^^^^
 

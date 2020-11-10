@@ -15,6 +15,7 @@ The Critical Care Data Format (CCDEF) Specification
    :caption: Contents:
 
    intro_h5
+   format
    groups
    datasets
    derived

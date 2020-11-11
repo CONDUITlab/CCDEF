@@ -3,20 +3,12 @@ Convert MIMIC III data to CCDEF (hdf5 based)
 """
 import numpy as np
 import pandas as pd
-import psycopg2 
 #import sqlite3
 import h5py
 import json
 import wfdb
 from ccdef._utils import df_to_sarray
 
-def open_db():
-    schema = 'mimiciii'
-    con = psycopg2.connect(dbname='mimic', user='queryuser', host='10.100.3.150', password='conduit')
-    cur = con.cursor()
-    cur.execute('SET search_path to {}'.format(schema))
-    
-    return (con)
 
 def patient_id_from_file(filename):
     return (filename.split('/')[-1].split('-')[0][1:].strip("0"))
@@ -363,3 +355,119 @@ def convert_mimic_matched (filename, samp_end = None, all_labs=True, all_notes=T
 
     #micro
     
+    # process clinical - file or list of files
+    # read csv file
+    # process files in sequence
+    # use a class?
+
+def _limit_time(df, start=pd.Timestamp.min, end=pd.Timestamp.max):
+"""
+selects rows in DataFrame that have Datetime value between start and end
+if start and end are not specified then the default is all rows
+
+"""
+
+    new_df = df.loc[ (df['Datetime'] >= start) & (df['Datetime'] <= end)]
+    
+    return new_df
+
+class LabData ():
+    """
+    """
+    
+    def __init__ (self, path):
+        self.load(path)
+
+    def load (self, path):
+        print('Loading MIMIC lab data from {}'.format(path))
+        self.data = pd.read_csv(os.path.join(path, 'LABEVENTS.csv'), 
+                usecols=['SUBJECT_ID', 'HADM_ID', 'ITEMID', 'CHARTTIME', 'VALUE', 'VALUENUM', 'VALUEUOM', 'FLAG'])
+        self.data['HADM_ID'] = self.data['HADM_ID'].fillna(0)
+        self.data['HADM_ID'] = self.data['HADM_ID'].astype({'HADM_ID':int})
+        
+        self.info = pd.read_csv(os.path.join(path, 'D_LABITEMS.csv'), 
+                usecols=['ITEMID', 'LABEL', 'FLUID', 'CATEGORY', 'LOINC_CODE'])
+
+    def for_subj (self, subj_id, admissions = 'ALL', start=pd.Timestamp.min, end=pd.Timestamp.max):
+        """
+        Add clinical data to MIMIC files that have been converted from wfdb to hdf5
+
+
+        Parameters
+        ----------
+
+        filenames: string
+            filename of a wfdb file from the MIMIC3 matched dataset
+        origin: datetime
+            the base datetime for the file
+        start: datetime
+        end: datetime
+
+        return: 
+            dataframe of lab tests for subject
+            - optionally limited to specified admission
+            - optionally limited to datetime between start and end
+
+        """
+        if admissions == 'ALL':
+            pt_labs = self.data[self.data['SUBJECT_ID']==subj_id]
+        else:
+            pt_labs = self.data[self.data['SUBJECT_ID']==subj_id]
+            pt_labs = pt_labs.loc[(pt_labs['HADM_ID'].isin(admissions))]
+        
+        #apply time limits
+        pt_labs['Datetime']=pd.to_datetime(pt_labs['CHARTTIME'])
+        pt_labs = _limit_time(pt_labs, start, end)
+        
+        #merge lab info
+        pt_labs = pd.merge(pt_labs, self.info, on='ITEMID')
+        
+        #cleanup columns
+        del pt_labs['SUBJECT_ID']
+        del pt_labs['CHARTTIME']
+
+        #set index
+        pt_labs = pt_labs.set_index(keys='Datetime')
+        
+        # then change to float for write..
+        # option to generate test info metadata
+        
+        return pt_labs
+    
+    @staticmethod
+    def write_labs(lab_df, filename):
+        """
+        
+        """
+        pass
+
+
+
+
+
+def add_clinical_to_files(filenames: Union [str, list], labs=True, micro=False, notes=True, demo=True):
+    """
+    Add clinical data to MIMIC files that have been converted from wfdb to hdf5
+
+
+    Parameters
+    ----------
+
+    filenames: string
+        filename of a wfdb file from the MIMIC3 matched dataset
+    origin: datetime
+        the base datetime for the file
+    labs
+    micro
+    notes
+    demo
+        demographics
+
+    return: 
+        something
+    """
+
+    pass
+
+
+

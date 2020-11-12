@@ -36,7 +36,8 @@
 
     
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Examples" href="examples.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -82,7 +83,7 @@
             
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro_h5.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="format.html">Data Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="groups.html">Core CCDEF Groups</a></li>
@@ -91,6 +92,14 @@
 <li class="toctree-l1"><a class="reference internal" href="signals.html">Standard Signal Names</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Future Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ontological-mapping">Ontological mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#genomics">Genomics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#imaging">Imaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#file-linking">File linking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-federation">Data Federation</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -182,6 +191,31 @@
 </style>
 <div class="section" id="future-development">
 <h1>Future Development<a class="headerlink" href="#future-development" title="Permalink to this headline">¶</a></h1>
+<p>CCDEF is intended to be an evolving standard. The nature of HDF5 makes it relatively easy to add functionality to the data model without adversely effecting tools and pipelines developed to work with earlier versions.
+This provides an excellent pathway for growth but also preserves “backwards compatibility” which is essential as large datasets are accumulated.</p>
+<p>Some of the short and medium term goals of the project are outlined below.</p>
+<div class="section" id="ontological-mapping">
+<h2>Ontological mapping<a class="headerlink" href="#ontological-mapping" title="Permalink to this headline">¶</a></h2>
+<p>Future versions of CCDEF will likely include additional common ontology mapping such as OMOP-CDM.
+This will help standardize terms for clinical concepts such as procedures and investigations other than lab tests described by LOINC.</p>
+</div>
+<div class="section" id="genomics">
+<h2>Genomics<a class="headerlink" href="#genomics" title="Permalink to this headline">¶</a></h2>
+<p>Schemas for genomic data using HDF5 such as BIOHDF have been proposed.
+As sequencing technologies improve, the ability to combine clincal/physiological data with genomic information will also increase.</p>
+</div>
+<div class="section" id="imaging">
+<h2>Imaging<a class="headerlink" href="#imaging" title="Permalink to this headline">¶</a></h2>
+<p>Conversion tools from DICOM to HDF5 have been developed. The new MINC format (Medical Imaging NetCDF) is based on HDF5. We plan to develop guidelines for importing or linking imaging data with the clinical/physiological data already described in CCDEF.</p>
+</div>
+<div class="section" id="file-linking">
+<h2>File linking<a class="headerlink" href="#file-linking" title="Permalink to this headline">¶</a></h2>
+<p>HDF5 supports inter-file linking (referencing). Future CCDEF versions will explicitly address preferred usage for this feature. This will most likely be in the setting of extremely large datasets or data containing large amounts of imaging and/or genomic data which may only be occasionally analysed with the clinical data.</p>
+</div>
+<div class="section" id="data-federation">
+<h2>Data Federation<a class="headerlink" href="#data-federation" title="Permalink to this headline">¶</a></h2>
+<p>A major goal of the project is to develop tools for sharing information between multiple sites.</p>
+</div>
 </div>
 
 
@@ -189,6 +223,13 @@
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="examples.html" class="btn btn-neutral float-left" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

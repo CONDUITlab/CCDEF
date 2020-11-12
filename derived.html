@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Derived Data &mdash; CCDEF 1.0.0 documentation</title>
+  <title>Derived Data &amp; Annotations &mdash; CCDEF 1.0.0 documentation</title>
   
 
   
@@ -89,9 +89,10 @@
 <li class="toctree-l1"><a class="reference internal" href="format.html">Data Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="groups.html">Core CCDEF Groups</a></li>
 <li class="toctree-l1"><a class="reference internal" href="datasets.html">Physiologic Datasets (Waveform and Numerics)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Derived Data</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#secondary-variables">Secondary Variables</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Derived Data &amp; Annotations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#secondary-variables">Secondary variables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#annotations">Annotations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#metadata">Metadata</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="signals.html">Standard Signal Names</a></li>
@@ -144,7 +145,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Derived Data</li>
+      <li>Derived Data &amp; Annotations</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -187,16 +188,28 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="derived-data">
-<h1>Derived Data<a class="headerlink" href="#derived-data" title="Permalink to this headline">¶</a></h1>
-<p>This type of information results from the analysis of the primary data stored in the file (typically the physiologic data in Waveforms and Numerics).</p>
+<div class="section" id="derived-data-annotations">
+<h1>Derived Data &amp; Annotations<a class="headerlink" href="#derived-data-annotations" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="secondary-variables">
-<h2>Secondary Variables<a class="headerlink" href="#secondary-variables" title="Permalink to this headline">¶</a></h2>
+<h2>Secondary variables<a class="headerlink" href="#secondary-variables" title="Permalink to this headline">¶</a></h2>
+<p>Derived or secondary variables result from the analysis of the primary data stored in the file (typically the physiologic data in waveforms and numerics).</p>
+<p>Examples include:</p>
+<ul class="simple">
+<li><p>heart rate variability</p></li>
+<li><p>pulse pressure variability</p></li>
+</ul>
+<blockquote>
+<div><p>Derived variables should be stored in the /derived subgroup of the source group, in either a single column or tabular dataset.</p>
+</div></blockquote>
 </div>
 <div class="section" id="annotations">
 <h2>Annotations<a class="headerlink" href="#annotations" title="Permalink to this headline">¶</a></h2>
-<p>Annotations - attribute linking to source
-dset.source</p>
+<p>Annotations (human or algorithmically generated) are also nested with their source data, in an /annotations subgroup.</p>
+</div>
+<div class="section" id="metadata">
+<h2>Metadata<a class="headerlink" href="#metadata" title="Permalink to this headline">¶</a></h2>
+<p>Annotations and derived variable datasets will have the usual .meta attibute which will include specific information about the source dataset(s).</p>
+<p>These datasets should also have a .source attribute with an h5 references to the source dataset.</p>
 </div>
 </div>
 

@@ -34,3 +34,39 @@ path = '/mnt/data04/Conduit/pcsdata/latest/'
         ldf['Time'].iloc[idx]=((base_datetime-pd.to_datetime(row['Order_datetime'])).total_seconds())
 """
 
+"""
+fs = fold['/Numerics/Vitals'].attrs['sample_rate']
+origin = pd.to_datetime(fold['/Numerics/Vitals'].attrs['base_datetime'])
+filemeta = {'ccdef version' : 1.0, 'source':'Conduit Labs/KHSC'}
+fnew = audata.File.new('KHSC.h5', time_reference=origin, metadata = filemeta, overwrite=True)
+fnew.hdf['/'].attrs['.demographics'] = json.dumps({'age':67, 'gender':'M'})
+vitals = list(fold['/Numerics/Vitals'].keys())
+for name in vitals:
+    dset_name = '/Numerics/Vitals/'+name
+    dset = fold[dset_name]
+    end = len(dset)
+    ts = make_ts(end, fs, time_type=abs, origin=origin)
+    df = pd.DataFrame(data=dset[:],columns=[name])
+    df.insert(loc=0, column='time', value=ts)
+    fnew['/numerics/'+name] = df
+
+wfs = list(fold['/Waveforms/Hemodynamics/'].keys())
+fs = fold['/Waveforms/Hemodynamics'].attrs['sample_rate']
+origin = pd.to_datetime(fold['/Waveforms/Hemodynamics'].attrs['base_datetime'])
+
+for name in wfs:
+    if name in ['PA2', 'V']:
+        continue
+    dset_name = '/Waveforms/Hemodynamics/'+name
+    dset = fold[dset_name]
+    end = len(dset)
+    ts = make_ts(end, fs, time_type=abs, origin=origin)
+    df = pd.DataFrame(data=dset[:],columns=[name])
+    df.insert(loc=0, column='time', value=ts)
+    fnew['/waveforms/'+name] = df
+
+
+fnew.close()
+# add metadata
+
+"""

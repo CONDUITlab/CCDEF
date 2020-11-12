@@ -12,154 +12,6 @@ from ccdef._utils import df_to_sarray
 
 def patient_id_from_file(filename):
     return (filename.split('/')[-1].split('-')[0][1:].strip("0"))
-
-def extract_notes(infile):
-    """
-    extract_notes(infile)
-
-    Take all notes in the mimic3 db for infile
-    
-    TODO: Will need to build option to include only labs/notes in the period where there is waveform/numeric data
-    but for now we include everything so it is available for context (eg echo reports)
-
-    Parameters
-    ----------
-
-    infile: string
-        filename of a wfdb file from the MIMIC3 matched dataset
-    origin: datetime
-        the base datetime for the file
-
-    return: notes
-        DataFrame containing notes, times, etc
-    """
-
-    # get patient ID
-    subj_id = patient_id_from_file(infile)
-    
-    #get lab_events for this patient
-    con = open_db()
-    
-    query = \
-    """
-    SELECT i.chartdate, i.charttime, i.description, i.category, i.text
-    FROM noteevents i
-    WHERE subject_id = {};
-    """.format(subj_id)
-
-    notes = pd.read_sql_query(query,con)
-    """ change time stamp to seconds from origin """
-    
-    origin = pd.to_datetime(wfdb.rdheader(infile).base_datetime)
-    notes.insert(0, 'time', '')
-    for idx, row in notes.iterrows():
-        notes['time'].iloc[idx]=int((pd.to_datetime(row['charttime'])-origin).total_seconds())
-    del notes['charttime']
-    del notes['chartdate']
-
-    return (notes)
-
-def write_notes(notes_df, outfile):
-    """
-    write_notes(notes_df, infile)
-
-    Write notes from notes_df to infile    
-
-    Parameters
-    ----------
-
-    infile: string
-        filename of a wfdb file from the MIMIC3 matched dataset
-
-    notes_df: notes
-        DataFrame containing notes, times, etc
-    """
-    
-    arr, saType = df_to_sarray(notes_df)
-    
-    with h5py.File(outfile, 'a') as f:
-        clin = f.require_group('/clinical')
-        note_ds = f.create_dataset('clinical/notes', maxshape = (None, ), data = arr, dtype = saType,
-                                 compression="gzip", compression_opts = 9, shuffle = True)
-        
-        
-def extract_labs(infile):
-    """
-    extract_labs(infile)
-
-    Take all lab values in the mimic3 db for infile
-    
-    TODO: Will need to build option to include only labs/notes in the period where there is waveform/numeric data
-    but for now we include everything so it is available for context (eg echo reports)
-
-    Parameters
-    ----------
-
-    infile: string
-        filename of a wfdb file from the MIMIC3 matched dataset
-    origin: datetime
-        the base datetime for the file
-
-    return: notes
-        DataFrame containing notes, times, etc
-    """
-
-    # get patient ID
-    subj_id = patient_id_from_file(infile)
-
-    #get basetime
-    origin = wfdb.rdheader(infile).base_datetime
-    
-    #get lab_events for this patient
-    con = open_db()
-    
-    query = \
-    """
-    SELECT e.charttime, e.itemid, e.value, e.valuenum, e.valueuom, e.flag,
-        i.label, i.fluid, i.category, i.loinc_code
-    FROM labevents e
-    INNER JOIN d_labitems i
-    ON e.itemid = i.itemid
-    WHERE subject_id = {};
-    """.format(subj_id)
-    labs = pd.read_sql_query(query,con)
-
-    #convert time
-    origin = pd.to_datetime(wfdb.rdheader(infile).base_datetime)
-    labs.insert(0, 'time', '')
-
-    for idx, row in labs.iterrows():
-        labs['time'].iloc[idx]=int((pd.to_datetime(row['charttime'])-origin).total_seconds())
-    del labs['charttime']
-
-    return (labs)
-
-def write_labs(labs_df, outfile):
-
-    # TODO: convert flag to category and encode in .flag_info
-    arr, saType = df_to_sarray(labs_df)
-
-
- #   dt = h5py.special_dtype(vlen=str)
- #   comp_type = np.dtype([('time', dt), ('testid', 'i8'), ('value', dt), ('valuenum', 'f8'), ('flag', dt)])
-    # define array for writing to dataset
-#    arr_data = np.empty((0,), dtype=comp_type)
-#    for idx, row in labs_df.iterrows():
-#        arr = np.array([(str(row['charttime']), row['itemid'], row['value'], row['valuenum'], row['flag'])], 
-#                  dtype = comp_type)
-#        arr_data = np.append(arr_data, arr)
-        
-        
-    #create metadata
-    labs_grouped = labs_df.groupby('itemid')['itemid','label','category','fluid','valueuom','loinc_code'].first()
-    labs_grouped = labs_grouped.set_index('itemid')
-    test_info = labs_grouped.T.to_dict('dict')
-    
-    with h5py.File(outfile, 'a') as f:
-        clin = f.require_group('/clinical')
-        lab_ds = f.create_dataset('clinical/labs', maxshape = (None, ), data = arr, dtype=saType,
-                                 compression="gzip", compression_opts = 9, shuffle = True)
-        lab_ds.attrs['.test_info'] = json.dumps(test_info) 
         
 def labs_to_df (dset):
     # extract values from dataset and convert to dataframe
@@ -361,11 +213,11 @@ def convert_mimic_matched (filename, samp_end = None, all_labs=True, all_notes=T
     # use a class?
 
 def _limit_time(df, start=pd.Timestamp.min, end=pd.Timestamp.max):
-"""
-selects rows in DataFrame that have Datetime value between start and end
-if start and end are not specified then the default is all rows
+    """
+    selects rows in DataFrame that have Datetime value between start and end
+    if start and end are not specified then the default is all rows
 
-"""
+    """
 
     new_df = df.loc[ (df['Datetime'] >= start) & (df['Datetime'] <= end)]
     
@@ -390,6 +242,88 @@ class LabData ():
 
     def for_subj (self, subj_id, admissions = 'ALL', start=pd.Timestamp.min, end=pd.Timestamp.max):
         """
+        Return labs for specified subject, optionally limited to specific admission and/or start and end times
+
+        Parameters
+        ----------
+
+        subj_id: int
+            subject_identifier (encoded in the MIMIC3 file name)
+        admissions: int or list
+            optional flag to limit returned labs to particular admission(s)
+            default is not to limit
+        start: datetime
+        end: datetime
+
+        return: 
+            dataframe of lab tests for subject, indexed to datetime derived from CHARTTIME
+            
+        """
+        if admissions == 'ALL':
+            pt_labs = self.data[self.data['SUBJECT_ID']==subj_id]
+        else:
+            pt_labs = self.data[self.data['SUBJECT_ID']==subj_id]
+            pt_labs = pt_labs.loc[(pt_labs['HADM_ID'].isin(admissions))]
+        
+        #apply time limits
+        pt_labs.insert(loc=0, column='Datetime', value=pd.to_datetime(pt_labs['CHARTTIME']))
+        pt_labs = _limit_time(pt_labs, start, end)
+        
+        #merge lab info
+        pt_labs = pd.merge(pt_labs, self.info, on='ITEMID')
+        
+        #cleanup columns
+        del pt_labs['SUBJECT_ID']
+        del pt_labs['CHARTTIME']
+
+        #set index
+        pt_labs = pt_labs.set_index(keys='Datetime')
+        pt_labs.sort_index(inplace=True)
+        
+        # then change to float for write..
+        # option to generate test info metadata
+        
+        return pt_labs
+    
+    @staticmethod
+    def write_labs(df, filename, test_metadata=False):
+        """
+        Parameters
+        ----------
+        df: DataFrame
+            Datetime index
+        filename: String
+        test_metadata
+
+        """
+        with h5py.File(filename, 'a') as f:
+            origin = pd.to_datetime(json.loads(f['/'].attrs['.meta'])['time_origin'])
+            df['time']=(origin-df.index).total_seconds()
+            
+            df.columns = df.columns.str.strip().str.lower()
+            arr, saType = df_to_sarray(df)
+            clin = f.require_group('/clinical')
+            lab_ds = clin.create_dataset('labs', maxshape = (None, ), data = arr, dtype=saType,
+                                 compression="gzip", compression_opts = 9, shuffle = True)
+            lab_ds.attrs['.test_info'] = 'none'
+
+
+
+class Notes ():
+    """
+    """
+    
+    def __init__ (self, path):
+        self.load(path)
+
+    def load(self, path):
+        print('Loading MIMIC note data from {}'.format(path))
+        self.data = pd.read_csv(os.path.join(path, 'NOTEEVENTS.csv'))
+        self.data['HADM_ID'] = self.data['HADM_ID'].fillna(0)
+        self.data['HADM_ID'] = self.data['HADM_ID'].astype({'HADM_ID':int})
+
+    def for_subj (self, subj_id, admissions = 'ALL', start=pd.Timestamp.min, end=pd.Timestamp.max):
+        """
         Add clinical data to MIMIC files that have been converted from wfdb to hdf5
 
 
@@ -410,39 +344,53 @@ class LabData ():
 
         """
         if admissions == 'ALL':
-            pt_labs = self.data[self.data['SUBJECT_ID']==subj_id]
+            pt_notes = self.data[self.data['SUBJECT_ID']==subj_id]
         else:
-            pt_labs = self.data[self.data['SUBJECT_ID']==subj_id]
-            pt_labs = pt_labs.loc[(pt_labs['HADM_ID'].isin(admissions))]
+            pt_notes = self.data[self.data['SUBJECT_ID']==subj_id]
+            pt_notes = pt_notes.loc[(pt_notes['HADM_ID'].isin(admissions))]
         
         #apply time limits
-        pt_labs['Datetime']=pd.to_datetime(pt_labs['CHARTTIME'])
-        pt_labs = _limit_time(pt_labs, start, end)
-        
-        #merge lab info
-        pt_labs = pd.merge(pt_labs, self.info, on='ITEMID')
-        
+        pt_notes['Datetime']=pd.to_datetime(notes['CHARTTIME'])
+        pt_notes = _limit_time(notes, start, end)
+                
         #cleanup columns
-        del pt_labs['SUBJECT_ID']
-        del pt_labs['CHARTTIME']
+        del pt_notes['SUBJECT_ID']
+        del pt_notes['CHARTTIME']
 
         #set index
-        pt_labs = pt_labs.set_index(keys='Datetime')
+        pt_notes = pt_labs.set_index(keys='Datetime')
         
         # then change to float for write..
         # option to generate test info metadata
         
-        return pt_labs
+        return pt_notes
     
     @staticmethod
-    def write_labs(lab_df, filename):
+    def write_notes(notes_df, outfile):
         """
-        
+        write_notes(notes_df, infile)
+
+        Write notes from notes_df to infile    
+
+        Parameters
+        ----------
+
+        infile: string
+            filename of a wfdb file from the MIMIC3 matched dataset
+
+        notes_df: notes
+            DataFrame containing notes, times, etc
         """
-        pass
 
+        arr, saType = df_to_sarray(notes_df)
 
+        with h5py.File(outfile, 'a') as f:
+            clin = f.require_group('/clinical')
+            note_ds = f.create_dataset('clinical/notes', maxshape = (None, ), data = arr, dtype = saType,
+                                     compression="gzip", compression_opts = 9, shuffle = True)
 
+#micro
+#chartevents
 
 
 def add_clinical_to_files(filenames: Union [str, list], labs=True, micro=False, notes=True, demo=True):
@@ -466,6 +414,8 @@ def add_clinical_to_files(filenames: Union [str, list], labs=True, micro=False, 
     return: 
         something
     """
+    #get file origin
+
 
     pass
 

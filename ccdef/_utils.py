@@ -192,6 +192,12 @@ def _fix_meta(filename):
     #remove .meta group
     del f['.meta']
 
+def _meta_append (attr, d):
+    meta = json.loads(attr)
+    for key, value in d.items():
+        meta[key] = value
+    
+    return json.dumps(meta)
 
 def ts_dset (dset, time_type = 'abs'):
     """

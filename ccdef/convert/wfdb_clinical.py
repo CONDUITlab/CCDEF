@@ -9,9 +9,8 @@ import json
 import wfdb
 from ccdef._utils import df_to_sarray
 
-
 def patient_id_from_file(filename):
-    return (filename.split('/')[-1].split('-')[0][1:].strip("0"))
+    return int(os.path.basename(filename).split('p')[1].split('-')[0])
         
 def labs_to_df (dset):
     # extract values from dataset and convert to dataframe
@@ -32,72 +31,64 @@ def labs_to_df (dset):
     
     return (df)
 
-def get_admissions(subj_id):
-    con = open_db()
+class Admissions ():
+
+    def __init__ (self, path):
+        self.load(path)
+
+    def load(self, path):
+        print('Loading MIMIC admission data from {}'.format(path))
+        self.data = pd.read_csv(os.path.join(path, 'ADMISSIONS.csv'))
+        self.data['HADM_ID'] = self.data['HADM_ID'].fillna(0)
+        self.data['HADM_ID'] = self.data['HADM_ID'].astype({'HADM_ID':int})
+        self.data.columns    = self.data.columns.str.strip().str.lower()
     
-    query = \
-    """
-    SELECT *
-    FROM admissions
-    WHERE subject_id = {};
-    """.format(subj_id)
+    def get_admissions(self, subj_id):
+        df = self.data[self.data['subject_id']==subj_id]
 
-    admits = pd.read_sql_query(query,con) 
-    return (admits)
-
-def find_admission (filename):
-    '''
-    Get admission information from MIMIC III filename (contains subj ID)
-    Return demographic information
-    '''
-    subj_id = 0
-    hadm_id = 0
-    diagnosis = ''
-    expired = ''
-    death_time = ''
-    ethnicity = ''
+        return df
     
-    subj_id = patient_id_from_file(filename)
-    print('searching {}'.format(subj_id))
-    
-    # get additional demographics
-    con = open_db()
-    query = \
-    """
-    SELECT i.subject_id, i.gender, i.dob 
-    FROM patients i
-    WHERE subject_id = {};
-    """.format(subj_id)
+    def find_admission (self, filename):
+        """
+        find admission corresponding to the file based on the subject and start time
+        """
+        subj_id = patient_id_from_file(filename)
+        print('searching {}'.format(subj_id))
+        
+        # get additional demographics (gender, DOB) -> demographics class for this?
+        
+        f = h5py.File(filename, 'r')
+        sig_start = pd.to_datetime(json.loads(f['/'].attrs['.meta'])['time_origin'])
+        print('Signal file start {}'.format(sig_start))
 
-    demo = pd.read_sql_query(query,con)
-    gender = demo.gender.values[0]
-    dob = demo.dob.values[0]
-    
-    record = wfdb.rdheader(filename)
-    sig_start = record.base_datetime
-    print('Signal file start {}'.format(sig_start))
+        admits = self.get_admissions(subj_id)
 
-    admits = get_admissions(subj_id)
-    
-    for idx, row in admits.iterrows():
-        adm_time = row['admittime']
-        dsc_time = row['dischtime']
+        for idx, row in admits.iterrows():
+            adm_time = pd.to_datetime(row['admittime']).tz_localize('US/Eastern')
+            dsc_time = pd.to_datetime(row['dischtime']).tz_localize('US/Eastern')
 
-        print('Admission # {}, in at {} out at {}'.format(row['hadm_id'], adm_time, dsc_time))
+            print('Admission # {}, in at {} out at {}'.format(row['hadm_id'], adm_time, dsc_time))
 
-        if (sig_start > adm_time) and (sig_start < dsc_time):
-            print ('Subject {}, record {}, diagnosis: {}. HADM {} '.format(row['subject_id'], 
-                record.record_name, row['diagnosis'], row['hadm_id']))
-            hadm_id = row['hadm_id']
-            diagnosis = row['diagnosis']
-            expired = row['hospital_expire_flag']
-            death_time = row['deathtime']
-            ethnicity = row['ethnicity']
-            age = round( pd.to_timedelta(adm_time-dob)/pd.to_timedelta(365,unit='d'))
-            
-            
-    return(subj_id, hadm_id, age, gender, ethnicity, diagnosis, expired, death_time)
-            
+            if (sig_start > adm_time) and (sig_start < dsc_time):
+                print('Located admission: {}'.format(row['hadm_id']))
+                return row['hadm_id']
+                
+                #age = round( pd.to_timedelta(adm_time-dob)/pd.to_timedelta(365,unit='d'))
+
+            return -1 #no admission located                 
+
+    def admit_dict(self, id):
+        """
+        returns a dict for the specified admission
+        """
+        
+        adm = self.data[self.data['hadm_id']==id]
+        adm = adm.drop(columns = ['row_id', 'hadm_id', 'subject_id'], axis =1)
+        d = adm.iloc[0].to_dict()
+
+        return d
+
+
 def get_diagnoses(hadm_id):
     # get all diagnoses for the admission
     # return as dict including short and long titles
@@ -298,15 +289,18 @@ class LabData ():
         """
         with h5py.File(filename, 'a') as f:
             origin = pd.to_datetime(json.loads(f['/'].attrs['.meta'])['time_origin'])
-            df['time']=(origin-df.index).total_seconds()
+            df.index = df.index.tz_localize('UTC').tz_convert('UTC')
+            df['time']=(df.index - origin).total_seconds()
+
+            del df['HADM_ID']
             
+            #TODO: If test_metadata is True, strip repeated elemebts (loinc, etc) and store in .test_info
             df.columns = df.columns.str.strip().str.lower()
             arr, saType = df_to_sarray(df)
             clin = f.require_group('/clinical')
             lab_ds = clin.create_dataset('labs', maxshape = (None, ), data = arr, dtype=saType,
                                  compression="gzip", compression_opts = 9, shuffle = True)
             lab_ds.attrs['.test_info'] = 'none'
-
 
 
 class Notes ():

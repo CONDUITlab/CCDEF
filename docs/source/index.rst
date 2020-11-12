@@ -22,3 +22,4 @@ The Critical Care Data Format (CCDEF) Specification
    signals
    tools
    examples
+   future

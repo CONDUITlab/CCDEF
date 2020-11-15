@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../audata"
+		}
+	],
+	"settings": {
+		"python.pythonPath": "/Users/phil/anaconda/envs/py38/bin/python"
+	}
+}

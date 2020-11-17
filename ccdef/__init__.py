@@ -8,11 +8,3 @@ __DATA_VERSION__ = 1.0
 from ccdef.file import File
 from ccdef._utils import scan_file as file_info
 from ccdef.mapping.mapping import show_mapping
-
-
-
-
-
-
-
-

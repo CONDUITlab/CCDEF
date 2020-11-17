@@ -3,6 +3,4 @@
 - map common ontology (LOINC) codes to signals in the file
 """
 
-__VERSION = 0.5
-__DEBUG = False
 

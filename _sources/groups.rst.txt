@@ -127,12 +127,16 @@ Typical parameters include:
 - Non-invasive BP (NIBP)
 - SpO2
 - HR
+- ICP
+- CVP
+- Temperature
+- Respiratory Rate
 
 
 Waveforms
 ==========
 
-The Waveforms group contains data that is recorded at frequencies typically 100-500 Hz.
+The Waveforms group contains data that is recorded at frequencies typically 50-500 Hz.
 There is generally more variabiltiy in the sample rates for different waveform signals, particularly if they are derived from different sources (eg bedside monitor, ventilator, etc).
 
 Waveform Datasets

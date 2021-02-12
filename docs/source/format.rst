@@ -37,33 +37,7 @@ Physiologic data are further divided based on acquisition speed into numerics an
 
 Derived or secondary variables can optionally be stored in ccdef files. These are nested below their source group. More details on secondary variables/datasets are provided :ref:`here<Derived Data>`
 
-.. note:: 
 
- | The overall structure of a CCDEF file looks like this: 
-
- | / (**root** group) 
- | .meta (metadata)
-
-
- | / **numerics**
- |
- |      /vitals
- |
- | / **waveforms**
- |
- |       /hemodynamics
- |           /derived
- |           /annotations
- |       /ventilator
- |
- | / **clinical**
- | .demographics
- |       /labs
- |       /micro
- |       /notes
- |       /diagnosis
- |
- | / **research**
 
 .. list-table:: CCDEF File structure
     :widths: 40 40 40 50
@@ -168,6 +142,10 @@ Derived or secondary variables can optionally be stored in ccdef files. These ar
     * -
       - diagnosis
       - .codes
+      -
+    * -
+      - infusions
+      - .meta
       -
     * -
       - annotation

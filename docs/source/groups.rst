@@ -144,7 +144,7 @@ Common ontologies for clinical concepts is an active area of research and is one
 
 
 Demographics
-^^^^^^^^^^^^
+-------------
 Demographic information about the patient is stored as an *optional* attribute to the clinical group. 
 
 .. py:function:: demographics attribute (/.demographics)

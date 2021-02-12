@@ -43,7 +43,7 @@ Derived or secondary variables can optionally be stored in ccdef files. These ar
 
  | / (**root** group) 
  | .meta (metadata)
- | .demographics
+
 
  | / **numerics**
  |
@@ -57,7 +57,7 @@ Derived or secondary variables can optionally be stored in ccdef files. These ar
  |       /ventilator
  |
  | / **clinical**
- |
+ | .demographics
  |       /labs
  |       /micro
  |       /notes
@@ -65,6 +65,122 @@ Derived or secondary variables can optionally be stored in ccdef files. These ar
  |
  | / **research**
 
+.. list-table:: CCDEF File structure
+    :widths: 40 40 40 50
+    :header-rows: 1
+
+    * - Groups
+      - Datasets
+      - Attributes
+      - Comments
+    * - root
+      - 
+      - 
+      - 
+    * -
+      - mapping
+      - .meta
+      - compound array allowing lookup of specific signals based on LOINC
+    * - numerics
+      -
+      - 
+      - 
+    * -
+      - HR
+      - .meta
+      - 
+    * -
+      - ABP-S
+      - .meta
+      -
+    * -
+      - ABP-D
+      - .meta
+      - 
+    * -
+      - ABP-M
+      - .meta
+      -
+    * -
+      - NIBP-S
+      - .meta
+      -
+    * -
+      - NIBP-D
+      - .meta
+      - 
+    * -
+      - NIBP-M
+      - .meta
+      -
+    * -
+      - SPO2
+      - .meta
+      -
+    * -
+      - RR
+      - .meta
+      - 
+    * - waveforms
+      - 
+      - 
+      - 
+    * -
+      - ABP
+      - .meta
+      -
+    * -
+      - ECG-I
+      - .meta
+      -
+    * - waveforms/derived
+      - 
+      - 
+      - 
+    * -
+      - HRV
+      - source, .meta
+      -
+    * - waveforms/annotations
+      - 
+      - 
+      - 
+    * -
+      - beat-type
+      - source, .meta
+      -
+    * - clinical 
+      - 
+      - demographics
+      - 
+    * -
+      - labs
+      - .test_info
+      -
+    * -
+      - micro
+      - .test_info
+      -
+    * -
+      - notes
+      - .test_info
+      -
+    * -
+      - diagnosis
+      - .codes
+      -
+    * -
+      - annotation
+      - .key
+      - clinical annotations/user event markers
+
+    * - research
+      - 
+      - 
+      - optional group with open structure for study specific information
+    * - reference
+      - 
+      - 
+      - optional group for linking related files 
+
 Further details of the groups structure are provided :ref:`here<Core CCDEF Groups>`
-
-

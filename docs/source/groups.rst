@@ -25,25 +25,7 @@ The .meta attribute contains information about the file. ::
             "ccdef_version": 1.0
         }
 
-Demographics
-^^^^^^^^^^^^
-Demographic information about the patient is stored as an *optional* root group attribute. 
 
-.. py:function:: demographics attribute (/.demographics)
-
- :param float age: Patient age in years (fractional years allowed)
- :param str gender: patient gender {M,F}
- :param int expired: value: {0,1} 0 indicating that the patient did not die during the period covered by the file
- :param str admit_dx: admission ICD 9 code (note that a full list of diagnostic codes can also be specified in /clinical/diagnosis
-
-The resulting JSON formatted attribute looks like this: ::
-
-    /.demographics
-        {
-            "age": 40.1,
-            "gender": "M",
-            "expired": 0
-        }
 
 Root Group Datasets
 -------------------

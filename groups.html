@@ -107,6 +107,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#clinical">Clinical</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#demographics">Demographics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#clinical-timestamps">Clinical Timestamps</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#clinical-datasets">Clinical Datasets</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#clinical-dataset-metadata">Clinical Dataset Metadata</a></li>
@@ -424,6 +425,34 @@ There is generally more variabiltiy in the sample rates for different waveform s
 <p>As there are a wide range of EMR data extraction pipelines, it is difficulty to completely standardize this group but we provide some high level guidance.
 Perhaps the greatest challenge within the clinical data is mapping concepts such as interventions and clinical observations.</p>
 <p>Common ontologies for clinical concepts is an active area of research and is one of the goals of the OMOP-CDM and we aim to support this within the ccdef standard as it evolves.</p>
+<div class="section" id="demographics">
+<h3>Demographics<a class="headerlink" href="#demographics" title="Permalink to this headline">¶</a></h3>
+<p>Demographic information about the patient is stored as an <em>optional</em> attribute to the clinical group.</p>
+<dl class="function">
+<dt>
+<code class="sig-name descname">demographics attribute (/.demographics)</code></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>age</strong> (<em>float</em>) – Patient age in years (fractional years allowed)</p></li>
+<li><p><strong>gender</strong> (<em>str</em>) – patient gender {M,F}</p></li>
+<li><p><strong>expired</strong> (<em>int</em>) – value: {0,1} 0 indicating that the patient did not die during the period covered by the file</p></li>
+<li><p><strong>admit_dx</strong> (<em>str</em>) – admission ICD 9 code (note that a full list of diagnostic codes can also be specified in /clinical/diagnosis</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>The resulting JSON formatted attribute looks like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/.</span><span class="n">demographics</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mf">40.1</span><span class="p">,</span>
+        <span class="s2">&quot;gender&quot;</span><span class="p">:</span> <span class="s2">&quot;M&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;expired&quot;</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="clinical-timestamps">
 <h3>Clinical Timestamps<a class="headerlink" href="#clinical-timestamps" title="Permalink to this headline">¶</a></h3>
 <p>Clinical data tend to be much sparser than physiologic data and therefore timestamps will typically be included in these datasets.
@@ -510,7 +539,7 @@ Caution is advised however in that these values may not always be entirely accur
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The default coding scheme is ICD 9 but this will be specified in the meta data for the diagnostic dataset as shown here</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">clinical</span><span class="o">/</span><span class="n">diagnosis</span><span class="o">/.</span><span class="n">coding</span> <span class="o">=</span> <span class="s2">&quot;ICD 9&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">clinical</span><span class="o">/</span><span class="n">diagnosis</span><span class="o">/</span><span class="n">coding</span> <span class="o">=</span> <span class="s2">&quot;ICD 9&quot;</span>
 </pre></div>
 </div>
 </div>

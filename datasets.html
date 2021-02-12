@@ -89,8 +89,8 @@
 <li class="toctree-l1"><a class="reference internal" href="format.html">Data Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="groups.html">Core CCDEF Groups</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Physiologic Datasets (Waveform and Numerics)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#single-channel-format">Single Channel Format</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#tabular-format">Tabular Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#single-column-datasets">Single Column Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tabular-datasets">Tabular Datasets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#physiologic-dataset-metadata">Physiologic Dataset Metadata</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#dataset-metadata-fields">Dataset Metadata Fields</a></li>
 </ul>
@@ -194,15 +194,14 @@
 <div class="section" id="physiologic-datasets-waveform-and-numerics">
 <span id="dataset-details"></span><h1>Physiologic Datasets (Waveform and Numerics)<a class="headerlink" href="#physiologic-datasets-waveform-and-numerics" title="Permalink to this headline">¶</a></h1>
 <p>Datasets can be single channels or they can be a table of multiple channels.</p>
-<div class="section" id="single-channel-format">
-<h2>Single Channel Format<a class="headerlink" href="#single-channel-format" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="single-column-datasets">
+<h2>Single Column Datasets<a class="headerlink" href="#single-column-datasets" title="Permalink to this headline">¶</a></h2>
 <p>In this case, each signal is stored in a separate dataset in its respective group.
 The file structure is:</p>
 <blockquote>
 <div><div class="line-block">
 <div class="line">/ (<strong>root</strong>)</div>
 <div class="line"><em>.meta</em></div>
-<div class="line"><em>.demographics</em></div>
 <div class="line"><br /></div>
 <div class="line"><strong>mapping</strong></div>
 <div class="line"><br /></div>
@@ -244,15 +243,14 @@ The file structure is:</p>
 </div>
 </div></blockquote>
 </div>
-<div class="section" id="tabular-format">
-<h2>Tabular Format<a class="headerlink" href="#tabular-format" title="Permalink to this headline">¶</a></h2>
-<p>In a tabular dataset, multiple similar signals (generally same sample rate and source) are stored together.
+<div class="section" id="tabular-datasets">
+<h2>Tabular Datasets<a class="headerlink" href="#tabular-datasets" title="Permalink to this headline">¶</a></h2>
+<p>Tabular datasets will generally be used when multiple similar signals (generally same sample rate and source) are stored together.
 The resulting file structure looks like:</p>
 <blockquote>
 <div><div class="line-block">
 <div class="line">/ (<strong>root</strong>)</div>
 <div class="line"><em>.meta</em></div>
-<div class="line"><em>.demographics</em></div>
 <div class="line"><br /></div>
 <div class="line"><strong>mapping</strong></div>
 <div class="line"><br /></div>

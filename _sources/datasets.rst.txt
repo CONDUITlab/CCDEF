@@ -5,15 +5,14 @@ Physiologic Datasets (Waveform and Numerics)
 
 Datasets can be single channels or they can be a table of multiple channels. 
 
-Single Channel Format
----------------------
+Single Column Datasets
+-----------------------
 
 In this case, each signal is stored in a separate dataset in its respective group.
 The file structure is:
 
  | / (**root**)
  | *.meta*
- | *.demographics* 
  |
  | **mapping**
  |
@@ -42,15 +41,14 @@ The file structure is:
  |          *.coding*
  
 
-Tabular Format
---------------
+Tabular Datasets
+-----------------
 
-In a tabular dataset, multiple similar signals (generally same sample rate and source) are stored together.
+Tabular datasets will generally be used when multiple similar signals (generally same sample rate and source) are stored together.
 The resulting file structure looks like:
 
  | / (**root**)
  | *.meta*
- | *.demographics* 
  |
  | **mapping**
  |

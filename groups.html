@@ -89,10 +89,7 @@
 <li class="toctree-l1"><a class="reference internal" href="format.html">Data Format</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Core CCDEF Groups</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#root">Root (/)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#root-group-metadata">Root Group Metadata</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#demographics">Demographics</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#root-group-metadata">Root Group Metadata</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#root-group-datasets">Root Group Datasets</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#mapping">mapping</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mapping-table-field-descriptions">Mapping Table Field Descriptions</a></li>
@@ -236,34 +233,6 @@ The root group is obviously mandatory but valid files can be created with physio
         <span class="s2">&quot;ccdef_version&quot;</span><span class="p">:</span> <span class="mf">1.0</span>
     <span class="p">}</span>
 </pre></div>
-</div>
-<div class="section" id="demographics">
-<h4>Demographics<a class="headerlink" href="#demographics" title="Permalink to this headline">¶</a></h4>
-<p>Demographic information about the patient is stored as an <em>optional</em> root group attribute.</p>
-<dl class="function">
-<dt>
-<code class="sig-name descname">demographics attribute (/.demographics)</code></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>age</strong> (<em>float</em>) – Patient age in years (fractional years allowed)</p></li>
-<li><p><strong>gender</strong> (<em>str</em>) – patient gender {M,F}</p></li>
-<li><p><strong>expired</strong> (<em>int</em>) – value: {0,1} 0 indicating that the patient did not die during the period covered by the file</p></li>
-<li><p><strong>admit_dx</strong> (<em>str</em>) – admission ICD 9 code (note that a full list of diagnostic codes can also be specified in /clinical/diagnosis</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<p>The resulting JSON formatted attribute looks like this:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/.</span><span class="n">demographics</span>
-    <span class="p">{</span>
-        <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mf">40.1</span><span class="p">,</span>
-        <span class="s2">&quot;gender&quot;</span><span class="p">:</span> <span class="s2">&quot;M&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;expired&quot;</span><span class="p">:</span> <span class="mi">0</span>
-    <span class="p">}</span>
-</pre></div>
-</div>
 </div>
 </div>
 <div class="section" id="root-group-datasets">

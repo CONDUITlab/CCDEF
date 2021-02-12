@@ -143,6 +143,26 @@ Perhaps the greatest challenge within the clinical data is mapping concepts such
 Common ontologies for clinical concepts is an active area of research and is one of the goals of the OMOP-CDM and we aim to support this within the ccdef standard as it evolves.
 
 
+Demographics
+^^^^^^^^^^^^
+Demographic information about the patient is stored as an *optional* attribute to the clinical group. 
+
+.. py:function:: demographics attribute (/.demographics)
+
+ :param float age: Patient age in years (fractional years allowed)
+ :param str gender: patient gender {M,F}
+ :param int expired: value: {0,1} 0 indicating that the patient did not die during the period covered by the file
+ :param str admit_dx: admission ICD 9 code (note that a full list of diagnostic codes can also be specified in /clinical/diagnosis
+
+The resulting JSON formatted attribute looks like this: ::
+
+    /.demographics
+        {
+            "age": 40.1,
+            "gender": "M",
+            "expired": 0
+        }
+
 Clinical Timestamps
 --------------------
 
@@ -207,7 +227,7 @@ Imaging if available would be in a separate group */Clinical/Imaging*
 
     The default coding scheme is ICD 9 but this will be specified in the meta data for the diagnostic dataset as shown here ::
 
-    /clinical/diagnosis/.coding = "ICD 9"
+    /clinical/diagnosis/coding = "ICD 9"
 
 Clinical Dataset Metadata
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
